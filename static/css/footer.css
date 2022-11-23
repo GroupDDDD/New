@@ -1,0 +1,31 @@
+.footer {
+  background-color: rgb(49, 50, 53);
+}
+
+.content {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  margin: 0 19% 0 10%;
+}
+
+.footer > hr {
+  margin: 0 5% 0 5%;
+  color: white;
+  opacity: 50%;
+}
+
+.footer-content {
+  color: white;
+  opacity: 50%;
+}
+
+.first {
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    display: none;
+  }
+}

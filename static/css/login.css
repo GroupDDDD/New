@@ -1,0 +1,91 @@
+.login-left {
+  display: flex;
+  width: 50vw;
+}
+
+.login-right {
+  width: 50vw;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.block {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.parallelogram {
+  width: 20vw;
+  height: 50vw;
+  transform: skew(-10deg);
+  background: rgb(85, 153, 255);
+  position: absolute;
+  left: 25vw;
+  z-index: 0;
+}
+
+.section1 {
+  width: 30vw;
+  height: 50vw;
+  background-color: rgb(85, 153, 255);
+  z-index: 1;
+}
+
+.login-left-description {
+  position: absolute;
+  left: 5vw;
+  top: 40vh;
+  z-index: 2;
+}
+
+.login-left-description > p {
+  color: white;
+  font-weight: 700;
+  font-size: 4vw;
+}
+
+.green {
+  color: green;
+  font-weight: 700;
+  font-size: 4vw;
+}
+
+.login-form {
+  width: 400px;
+  height: 40px;
+}
+
+.login-button {
+  width: 7vw;
+  height: 3vw;
+  margin: 0 20px 0 0;
+}
+
+.login-button:hover {
+  background-color: rgb(234, 230, 229);
+}
+
+.input-info {
+  width: 400px;
+  height: 40px;
+  margin: 30px 0 0 0;
+}
+
+.form {
+  width: 450px;
+  height: 450px;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+  </head>
+  <body>
+    <%- include('./nav.ejs') %>
+
+    <div class="flex">
+      <div class="login-left">
+        <div class="section1"></div>
+        <div class="parallelogram"></div>
+        <div class="login-left-description">
+          <p>Make</p>
+          <p>your own</p>
+          <div class="green">study group!</div>
+        </div>
+      </div>
+      <div class="login-right flex center column">
+        <div class="login-form flex">
+          <div class="login-button register flex center">회원가입</div>
+          <div class="login-button signIn flex center">로그인</div>
+        </div>
+        <div class="form form-register flex center column hide">
+          <input type="text" placeholder="이름" class="input-info" />
+          <input type="email" placeholder="이메일" class="input-info" />
+          <input type="text" placeholder="주소" class="input-info" />
+          <input type="text" placeholder="아이디" class="input-info" />
+          <input type="password" placeholder="비밀번호" class="input-info" />
+        </div>
+        <div class="form form-login">
+          <input type="text" placeholder="아이디" class="input-info" />
+          <input type="password" placeholder="비밀번호" class="input-info" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
