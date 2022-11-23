@@ -1,6 +1,7 @@
 // TODO: 라우트 설정
 const express = require('express');
 const controllerB = require('../controllers/Cboard');
+
 const router = express.Router();
 
 // *** 스터디 모집글 게시판 관련 기능 ***

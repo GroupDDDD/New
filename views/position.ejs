@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>위도 경도 저장하기</title>
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- kakao geolocation -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=966cd89e4a2aec000f0c186e68244c89"></script>
+
+    <!-- kakao 라이브러리 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+    <!-- services 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
+
+    <!-- kakao 주소 검색 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+    <h1>위치 불러오기 - 위도 경도 저장하기</h1>
+
+    <a href = '/sign/signup'>이전</a>
+
+    <h2>현재 위치를 지정해주세요.</h2>
+    <div id = "map" style = "width: 500px; height: 400px;"></div><br>
+    <div id = "result"></div><br>
+    <button type = "button" onclick = "setPosition();">위치 설정 완룐</button>
+
+
+
+
+    <h3>주소</h3>
+    <input type = "text" id = "address_kakao" name = "address" readonly><br>
+
+    <h3>상세주소</h3> 
+    <input type = "text" name = "address_detail">
+
+    <script>
+        var container = document.getElementById('map');
+		var options = {
+			//center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new kakao.maps.LatLng(37.567130512492994, 126.97849370396516),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+        //clusterer: 마커를 클러스터링 할 수 있는 클러스터러 라이브러리
+        //services: 장소검색과 주소-좌표 변환을 할 수 있는 services 라이브러리
+        //drawing: 지도 위에 마커와 그래픽스 객체를 쉽게 그릴 수 있게 그리기 모드를 지원하는 drawing 라이브러리
+
+        //지도를 클릭한 위치에 표출할 마커이다.
+        var marker = new kakao.maps.Marker({
+            //지도 중심좌표에 마커를 생성한다.
+            position: map.getCenter()
+        });
+
+        //지도에 마커를 표시한다.
+        marker.setMap(map);
+        
+        //지도에 클릭 이벤트를 등록한다.
+        //지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출한다.
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+            //클릭한 위도, 경도 정보를 가져온다.
+            var lating = mouseEvent.latLng;
+
+            //마커 위치를 클릭한 위치로 옮긴다.
+            marker.setPosition(lating);
+
+
+            var message = '클릭한 위치의 경도는 ' + lating.getLat() + ' 이다<br>';
+            message += '경도는 ' + lating.getLng() + ' 입니다.';
+
+            var resultDiv = document.querySelector('#result');
+            resultDiv.innerHTML = message;
+
+            console.log('경도: ', lating.getLat());
+            console.log('위도: ', lating.getLng());
+        })
+
+
+        //kakao 주소 검색
+        window.onload = function(){
+            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                //카카오 지도 발생
+                new daum.Postcode({
+                    oncomplete: function(data) { //선택시 입력값 세팅
+                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                        console.log('data>>', data);
+                        console.log('전체 주소: ', data.address);
+                        console.log('도: ', data.sido);
+                        console.log('시: ', data.sigungu);
+                        console.log('동: ', bname1);
+                        console.log('동2: ', bname2);
+                        console.log('로: ', roadname);
+                    }
+                }).open();
+
+            });
+        }
+
+
+        
+    </script>
+</body>
+</html>
