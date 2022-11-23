@@ -4,22 +4,29 @@ const models = require("../models/chatindex"); // ../models/index.js
 // exports.main = (req, res) => {
 //   res.render("chatcont");
 // };
-//잠깐 주석처리!!!
-// exports.getChatconts = (req, res) => {
-//   models.Chatcont.findAll({
-//     // attributes: ['user_id', 'name'], // 일부 컬럼이 필요한 경우, attirbutes 옵션 사용 가능
-//     include: [
-//       // { model: models.Orderlist, attributes: ['product_name', 'quantity'] },
-//       { model: models.Part },
-//     ],
-//     raw: true, // 단순히 값을 사용하려는 경우, 조회 결과를 객체로 표기하는 옵션인 raw: true 설정 필요
-//   }).then((result) => {
-//     // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
-//     // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
+exports.getChatconst = (req, res) => {
+  const query = `SELECT *  
+    FROM chat_contents AS c
+    
+    JOIN chat_participants AS p
+    ON c.part_id = p.part_id
+    
+    JOIN user AS u
+    ON p.user_index = u.user_index
+  
+    WHERE (p.room_id = ${req.query.roomId}
+    and p.user_index =${req.query.pubId}) or (p.room_id = ${req.query.roomId}
+    and p.user_index =${req.query.thisId})
+    ORDER BY c.createdAt desc;`;
+  models.sequelize
+    .query(query, { type: models.sequelize.QueryTypes.SELECT })
+    .then((result) => {
+      // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
+      // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-//     res.send(result);
-//   });
-// };
+      res.render("chatcont", { data: result });
+    });
+};
 
 // exports.getChatcont = (req, res) => {
 //   // [Before]
