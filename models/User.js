@@ -1,8 +1,7 @@
 // TODO: user 모델(-> 테이블 구조) 정의
 
 const User = function(Sequelize, DataTypes) {
-    'user',
-    {
+    return Sequelize.define('user', {
         // 	`user_id`	INT	NOT NULL	COMMENT '회원 index',
         user_id: {
             type: DataTypes.INTEGER,
@@ -35,13 +34,11 @@ const User = function(Sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: true,
         },
-    },
-    {
+    }, {
         tableName: 'user',
         freezeTableName: true,
         timestamps: true,
-    }
-    return model;
+    });
 };
 
 module.exports = User;
