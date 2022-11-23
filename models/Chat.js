@@ -8,7 +8,7 @@
 
 // chat_room 모델(-> 테이블 구조) 정의
 // 시퀄라이즈 모델이랑 mysql table 연결
-const User = function (Sequelize, DataTypes) {
+const Chat = function (Sequelize, DataTypes) {
   // Sequelize: models/index.js 의 sequelize
   // DataTypes: models/index.js 의 Sequelize
   // Sequelize.define(param1, param2, param3)
@@ -16,53 +16,48 @@ const User = function (Sequelize, DataTypes) {
   // param2: 컬럼 정의 -> {}
   // param3: 모델 옵션 정의 -> {}
   const model = Sequelize.define(
-    "user",
+    "chat_room",
     {
-      // 	`user_id`	INT	NOT NULL	COMMENT '회원 index',
-      user_id: {
+      // `room_id`	INT	NOT NULL	COMMENT 'PK 채팅방 Index',
+      room_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      // 	`id`	VARCHAR(15)	NOT NULL	COMMENT '회원아이디',
-      id: {
+      // `board_id`	VARCHAR(255)	NULL	COMMENT 'FK',
+      article_id: {
+        type: DataTypes.INT,
+        allowNull: false,
+      },
+      // `contactor_id`	VARCHAR(15)	NOT NULL	COMMENT '채팅신청자 아이디',
+      contactor_id: {
         type: DataTypes.STRING(15),
         allowNull: false,
       },
-      // 	`pw`	VARCHAR(15)	NOT NULL	COMMENT '비밀번호',
-      pw: {
-        type: DataTypes.STRING(15),
+      // `created_dt`	DATE	NOT NULL	COMMENT '채팅방생성일자',
+      chat_kind: {
+        type: DataTypes.INT,
         allowNull: false,
       },
-      // 	`user_name`	VARCHAR(15)	NOT NULL	COMMENT '회원의 성명',
-      user_name: {
-        type: DataTypes.STRING(15),
-        allowNull: false,
-      },
-      // 	`user_email`	VARCHAR(15)	NOT NULL	COMMENT '회원이메일',
-      user_email: {
-        type: DataTypes.STRING(15),
-        allowNull: false,
-      },
-      // 	`prof_img_url`	TEXT	NULL	COMMENT '회원프로필 이미지 url'
-      prof_img_url: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      // `created_dt`    DATE    NOT NULL    COMMENT '회원가입일자',
-      created_dt: {
+      // `chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: '1' , 그룹채팅방: '2''
+      createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      // `chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: '1' , 그룹채팅방: '2''
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
-      tableName: "user",
-      freezeTableName: true,
-      timestamps: false,
+      tableName: "chat_room", // 실제 DB의 테이블 이름
+      freezeTableName: true, // 테이블 이름 고정
+      timestamps: true, // 데이터가 추가/수정 시간을 자동으로 컬럼 만들어서 기록
     }
   );
   return model;
 };
 
-module.exports = User;
+module.exports = Chat;

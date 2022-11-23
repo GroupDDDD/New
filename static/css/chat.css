@@ -1,0 +1,51 @@
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+.entry-box {
+  margin-top: 5vh;
+}
+
+.chat-list {
+  background-color: skyblue;
+  margin-top: 1px;
+  width: 50vw;
+  height: 70vh;
+  padding: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.chat-list div {
+  margin-top: 3px;
+}
+
+.chat-list div div {
+  display: inline-block;
+  padding: 3px;
+}
+
+.my-chat {
+  text-align: right;
+}
+
+.my-chat div {
+  background-color: yellow;
+}
+.secret-chat div {
+  background-color: pink;
+}
+
+.other-chat div {
+  background-color: white;
+}
+
+.notice {
+  text-align: center;
+  color: navy;
+  font-size: 12px;
+}
+/* .d-none {
+  display: none;
+} */
