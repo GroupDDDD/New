@@ -6,9 +6,9 @@ exports.main = (req, res) => {
 exports.getUsername = (req, res) => {
   console.log(req.query);
   // SELECT *FROM user WHERE user_id=${req.query.userId}
-  models.User.findOne({
+  models.Sign.findOne({
     where: {
-      user_id: req.query.id,
+      user_index: req.query.id,
     },
   }).then((result) => {
     console.log("findOne >> ", result);

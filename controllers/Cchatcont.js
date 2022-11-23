@@ -1,5 +1,5 @@
 const { getLineAndCharacterOfPosition } = require("typescript");
-const models = require("../models"); // ../models/index.js
+const models = require("../models/chatindex"); // ../models/index.js
 
 // exports.main = (req, res) => {
 //   res.render("chatcont");

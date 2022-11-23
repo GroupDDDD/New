@@ -71,10 +71,9 @@
             method: "GET",
             url: `/chat/getChatlistpage?id=${id}`,
           }).then((res) => {
-            console.log("1: ", res.data);
+            console.log("채팅방리스트 페이지 렌더링", res.data);
             return res.data;
           });
-          console.log("채팅방리스트 페이지 렌더링", roomlistResult);
         }
 
         // 게시자가 아니고 채팅방 존재하면 채팅방페이지로 이동

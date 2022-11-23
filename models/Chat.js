@@ -27,17 +27,17 @@ const Chat = function (Sequelize, DataTypes) {
       },
       // `board_id`	VARCHAR(255)	NULL	COMMENT 'FK',
       article_id: {
-        type: DataTypes.INT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       // `contactor_id`	VARCHAR(15)	NOT NULL	COMMENT '채팅신청자 아이디',
       contactor_id: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       // `created_dt`	DATE	NOT NULL	COMMENT '채팅방생성일자',
       chat_kind: {
-        type: DataTypes.INT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       // `chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: '1' , 그룹채팅방: '2''
@@ -48,7 +48,7 @@ const Chat = function (Sequelize, DataTypes) {
       // `chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: '1' , 그룹채팅방: '2''
       updatedAt: {
         type: DataTypes.DATE,
-        allowNull: true,
+        allowNull: false,
       },
     },
     {

@@ -24,45 +24,53 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 // db = { sequelize: sequelize, Sequelize: Sequelize }
 // 잠깐주석처리!!!
-// db.Board = require("./Board")(sequelize, Sequelize);
-// db.Chat = require("./Chat")(sequelize, Sequelize);
-// db.Chatcont = require("./Chatcont")(sequelize, Sequelize);
-db.User = require("./User")(sequelize, Sequelize);
-// db.Part = require("./Part")(sequelize, Sequelize);
+db.Board = require("./Board")(sequelize, Sequelize);
+db.Chat = require("./Chat")(sequelize, Sequelize);
+db.Chatcont = require("./Chatcont")(sequelize, Sequelize);
+db.Sign = require("./Sign")(sequelize, Sequelize);
+db.Part = require("./Part")(sequelize, Sequelize);
 // models/Visitor.js 정의한 model이 db.Visitor에 들어감
 // db = { sequelize: sequelize, Sequelize: Sequelize, Visitor: model }
 
 // Board : Chat -> 1:N
-// db.Board.hasMany(db.Chat, {
-//   foreignKey: "board_id",
-// });
-// db.Chat.belongsTo(db.Board, {
-//   foreignKey: "board_id",
-// });
+db.Board.hasMany(db.Chat, {
+  foreignKey: "article_id",
+});
+db.Chat.belongsTo(db.Board, {
+  foreignKey: "article_id",
+});
 
-// // Chat : Part -> 1:N
-// db.Chat.hasMany(db.Part, {
-//   foreignKey: "room_id",
-// });
-// db.Part.belongsTo(db.Chat, {
-//   foreignKey: "room_id",
-// });
+// Chat : Part -> 1:N
+db.Chat.hasMany(db.Part, {
+  foreignKey: "room_id",
+});
+db.Part.belongsTo(db.Chat, {
+  foreignKey: "room_id",
+});
 
-// // Part : Chatcont -> 1:N
-// db.Part.hasMany(db.Chatcont, {
-//   foreignKey: "part_id",
-// });
-// db.Chatcont.belongsTo(db.Part, {
-//   foreignKey: "part_id",
-// });
+// Part : Chatcont -> 1:N
+db.Part.hasMany(db.Chatcont, {
+  foreignKey: "part_id",
+});
+db.Chatcont.belongsTo(db.Part, {
+  foreignKey: "part_id",
+});
 
-// // User : Chatcont -> 1:N
-// db.User.hasMany(db.Chatcont, {
-//   foreignKey: "user_id",
-// });
-// db.Chatcont.belongsTo(db.User, {
-//   foreignKey: "user_id",
-// });
+// User : Part -> 1:N
+db.Sign.hasMany(db.Part, {
+  foreignKey: "user_index",
+});
+db.Part.belongsTo(db.Sign, {
+  foreignKey: "user_index",
+});
+
+// Part : Chatcont -> 1:N
+db.Part.hasMany(db.Chatcont, {
+  foreignKey: "part_id",
+});
+db.Chatcont.belongsTo(db.Part, {
+  foreignKey: "part_id",
+});
 
 module.exports = db;
 // db 변수 내보냄 -> 다른 파일에서 사용하기 때문

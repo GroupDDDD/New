@@ -19,10 +19,10 @@ exports.getChatlistpage = (req, res) => {
   ON r.room_id = p.room_id
 
   JOIN user AS u
-  ON r.contactor_id = u.user_id
+  ON r.contactor_id = u.user_index
   
   WHERE p.pub_status = '2' 
-  and b.user_id =${req.query.id};`;
+  and b.user_index =${req.query.id};`;
   models.sequelize
     .query(query, { type: models.sequelize.QueryTypes.SELECT })
     .then((result) => {
@@ -68,67 +68,60 @@ exports.postChat = (req, res) => {
   //     comment: req.body.comment, // 폼에 입력한 comment
   //   });
   // });
-
   // [After]
   // INSERT INTO visitor (name, comment) VALUES('${data.name}', '${data.comment}')
   // INSERT INTO visitor (name, comment) VALUES('${req.body.name}', '${req.body.comment}')
-  models.Chat.create({
-    room_id: req.body.room_id,
-    board_id: req.body.board_id,
-    contactor_id: req.body.contactor_id,
-    created_dt: req.body.created_dt,
-    chat_kind: req.body.chat_kind,
-  }).then((result) => {
-    console.log("create >> ", result);
-    res.send(result);
-  });
+  //   models.Chat.create({
+  //     room_id: req.body.room_id,
+  //     board_id: req.body.board_id,
+  //     contactor_id: req.body.contactor_id,
+  //     created_dt: req.body.created_dt,
+  //     chat_kind: req.body.chat_kind,
+  //   }).then((result) => {
+  //     console.log("create >> ", result);
+  //     res.send(result);
+  //   });
+  // };
+  // exports.patchVisitor = (req, res) => {
+  //   // [Before]
+  //   // console.log(req.body);
+  //   // Visitor.patchVisitor(req.body, (result) => {
+  //   //   console.log('Cvisitor.js:', result);
+  //   //   res.send('수정 성공!!!');
+  //   // });
+  //   // [After]
+  //   // UPDATE visitor SET name='${data.name}', comment='${data.comment}' WHERE id=${data.id}
+  //   // UPDATE visitor SET name='${req.body.name}', comment='${req.body.comment}' WHERE id=${req.body.id}
+  //   models.Visitor.update(
+  //     {
+  //       name: req.body.name,
+  //       comment: req.body.comment,
+  //     },
+  //     {
+  //       where: {
+  //         id: req.body.id,
+  //       },
+  //     }
+  //   ).then((result) => {
+  //     console.log("update >> ", result);
+  //     res.send("수정 성공!!!");
+  //   });
+  // };
+  // exports.deleteVisitor = (req, res) => {
+  //   // [Before]
+  //   // console.log(req.body); // { id: '1' }
+  //   // console.log(req.body.id); // 1
+  //   // Visitor.deleteVisitor(req.body.id, (result) => {
+  //   //   console.log('Cvisitor.js: ', result);
+  //   //   res.send('삭제 성공!!!');
+  //   // });
+  //   // [After]
+  //   // DELETE FROM visitor WHERE id=${id}
+  //   // DELETE FROM visitor WHERE id=${req.body.id}
+  //   models.Visitor.destroy({
+  //     where: { id: req.body.id },
+  //   }).then((result) => {
+  //     console.log("destroy >> ", result);
+  //     res.send("삭제 성공!!!!");
+  //   });
 };
-
-// exports.patchVisitor = (req, res) => {
-//   // [Before]
-//   // console.log(req.body);
-
-//   // Visitor.patchVisitor(req.body, (result) => {
-//   //   console.log('Cvisitor.js:', result);
-//   //   res.send('수정 성공!!!');
-//   // });
-
-//   // [After]
-//   // UPDATE visitor SET name='${data.name}', comment='${data.comment}' WHERE id=${data.id}
-//   // UPDATE visitor SET name='${req.body.name}', comment='${req.body.comment}' WHERE id=${req.body.id}
-//   models.Visitor.update(
-//     {
-//       name: req.body.name,
-//       comment: req.body.comment,
-//     },
-//     {
-//       where: {
-//         id: req.body.id,
-//       },
-//     }
-//   ).then((result) => {
-//     console.log("update >> ", result);
-//     res.send("수정 성공!!!");
-//   });
-// };
-
-// exports.deleteVisitor = (req, res) => {
-//   // [Before]
-//   // console.log(req.body); // { id: '1' }
-//   // console.log(req.body.id); // 1
-
-//   // Visitor.deleteVisitor(req.body.id, (result) => {
-//   //   console.log('Cvisitor.js: ', result);
-//   //   res.send('삭제 성공!!!');
-//   // });
-
-//   // [After]
-//   // DELETE FROM visitor WHERE id=${id}
-//   // DELETE FROM visitor WHERE id=${req.body.id}
-//   models.Visitor.destroy({
-//     where: { id: req.body.id },
-//   }).then((result) => {
-//     console.log("destroy >> ", result);
-//     res.send("삭제 성공!!!!");
-//   });
-// };
