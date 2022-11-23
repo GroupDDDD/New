@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>채팅방입장 버튼</title>
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- jquery cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- socket.io cdn -->
+    <script
+      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- 버튼누를 때 user 아이디값받아오기추가요(임시데이터 '1' 하드코딩상태) -->
+    <button type="button" onclick="chatStart('1');">채팅하기</button>
+    <div class="login-result"></div>
+    <div class="room-result"></div>
+    <div class="publisher-result"></div>
+    <script>
+      // 게시글 상세페이지에서 게시자인지 아닌지 값 받아오기
+      let publisherOrnot = true;
+      let roomExistsOrnot = true;
+      // div에 나타나도록
+      const roomResult = document.querySelector(".room-result");
+      roomResult.textContent = `채팅방존재여부: ${roomExistsOrnot}`;
+      const publisherResult = document.querySelector(".publisher-result");
+      publisherResult.textContent = `게시자여부: ${publisherOrnot}`;
+
+      // 로그인 아이디 확인용 div class login-result
+      const loginResult = document.querySelector(".login-result");
+      let socket = io.connect(); // socket 사용을 위한 객체 생성
+      // let myId;
+      // let myNick; // 내 닉네임 설정
+      async function chatStart(id) {
+        // 소켓 잠깐 주석처리...!!
+        // socket.emit("setNick", document.querySelector("#nickname").value);
+
+        console.log("chatStart!!!");
+        console.log(id); //현재 행에대한 id(pk)
+        // axios 응답 결과를 result 변수에 담고자 함(->동기처리가 필요)
+        // 응답처리를 받고 result
+        // (result 변수에 한 명에 대한 정보를 담아야 하니까)
+        // ->axios처리를 기다렸다가 result라는 변수에 담아야함(동기처리)
+        // ->async/await
+        // await를 만나 프로미스가 처리될 때까지 기다려줌
+        // axios작업을 기다려야
+        // await async는세트
+        let result = await axios({
+          method: "GET",
+          url: `/user/get?id=${id}`,
+        }).then((res) => {
+          console.log("1: ", res.data);
+          return res.data;
+        });
+        console.log("'2 채팅신청자하나 조회 결과: ", result);
+
+        // 게시자이고 채팅방 존재하면 채팅방리스트 조회페이지로 이동
+        if (publisherOrnot === true && roomExistsOrnot === true) {
+          let roomlistResult = await axios({
+            method: "GET",
+            url: `/chat/getChatlistpage?id=${id}`,
+          }).then((res) => {
+            console.log("1: ", res.data);
+            return res.data;
+          });
+          console.log("채팅방리스트 페이지 렌더링", roomlistResult);
+        }
+
+        // 게시자가 아니고 채팅방 존재하면 채팅방페이지로 이동
+        if (publisherOrnot === false && roomExistsOrnot === true) {
+          socket.emit("setNick", result.user_name);
+        }
+
+        // 존재하면 조회
+
+        // 채팅방 신규일경우 insert
+      }
+    </script>
+  </body>
+</html>

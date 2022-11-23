@@ -1,19 +1,16 @@
+// modules
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 
 // router
 const { sequelize } = require('./models/index_board'); // 시퀄라이즈
-const indexRouter = require('./routes/index');
 const boardRouter = require('./routes/board');
 
 // app
 const app = express();
-// port number setting
 app.set('port', process.env.PORT || 8500);
-// view engine setting
 app.set('view engine', 'ejs');
-// static file setting
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/static', express.static(__dirname + '/static'));
 app.use('/static/css', express.static(__dirname + '/static/css'));
@@ -31,15 +28,10 @@ sequelize.sync({ force: false }) // 서버 실행시마다 테이블을 재생�
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-const app = express();
-passportConfig(); // 패스포트 설정
-app.set('view engine', 'ejs');
-
-
-// router setting
-app.use("/", indexRouter);
-app.use("/board", boardRouter);
+app.use('/', boardRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

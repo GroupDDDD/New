@@ -1,7 +1,3 @@
-const { STRING, DOUBLE } = require("sequelize"); //어차피 비활성화 -> 없어도 된다.
-
-// const { ModifierFlags } = require('typescript');
-
 const Sign = function(Sequelize, DataTypes){ 
     const model = Sequelize.define(
         'user',
@@ -56,5 +52,6 @@ const Sign = function(Sequelize, DataTypes){
 
     return model;
 }
+
 
 module.exports = Sign;
