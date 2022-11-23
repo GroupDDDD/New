@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <form action="/board" method="patch" name="article-form-edit">
+        <input type="text" name="title" placeholder="제목" value="<%= req.body.title %>">
+        <br>
+        <div> <span>스터디 형태</span>
+            <input type="radio" name="parity" id="on" value="ONLINE">
+            <label for="on">온라인</label>
+            <input type="radio" name="parity" id="off" value="OFFLINE">
+            <label for="off">오프라인</label>
+        </div>
+        <br>
+        <input type="text" name="member_number" placeholder="모집인원" value="<%= req.body.member_number %>">
+        <br>
+        <textarea name="description" id="description" cols="30" rows="10" placeholder="상세내용" value="<%= req.body.description %>"></textarea>
+        <br><br>
+        <label for="expr_dt">모집마감일</label>
+        <input type="date" name="expr_dt" id="expr_dt" value="<%= req.body.expr_dt %>">
+        <br>
+        <label for="start_dt">스터디 시작일</label>
+        <input type="date" name="start_dt" id="start_dt" value="<%= req.body.start_dt%>">
+        <br>
+        <label for="end_dt">스터디 종료일</label>
+        <input type="date" name="end_dt" id="end_dt" value="<%= req.body.end_dt %>">
+        <br><br>
+        <button onclick="editDo();">변경사항 저장</button>
+        <button onclick="editCancel();">취소</button>
+
+    </form>
+
+    <script src="../static/js/edit.js"></script>
+</body>
+
+</html>

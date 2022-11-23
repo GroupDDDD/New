@@ -6,24 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판기능</title>
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <h1>게시판</h1>
-    <button></button>
+    <button onclick="location.href='/board/write'">게시글 등록</button>
+    <br>
+    <label for="search">검색</label>
+    <input type="search" name="search" id="search">
     <hr>
+    <button onclick="getBoard();">getBoard</button>
+    <!-- article_id, title, category_id, member_number, appo_aria, expr_dt, createdAt 정보가 게시판에서 보여야 함 -->
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <!-- 게시글 번호: article_id -->
+                <th>제목</th>
+                <!-- 게시글 제목: title -->
+                <th>모집인원</th>
+                <!-- 작성자: member_number -->
+                <th>작성일</th>
+                <!-- 작성일: createdAt -->
+                <th>모집기간</th>
+                <!-- 모집기간: expr_dt -->
+                <!-- <th>카테고리</th> -->
+                <!-- 카테고리: category_id -->
+                <!-- <th>지역</th> -->
+            </tr>
+        </thead>
+        <tbody id="article-list">
+            <!-- 게시글 목록 -->
+        </tbody>
+    </table>
 
-    <div id="board_title">
-        <h2>제목</h2>
-        <h2>작성자</h2>
-        <h2>작성일</h2>
-    </div>
-    <div id="board_content">
-        <h2>내용</h2>
-        <h2>작성자</h2>
-        <h2>작성일</h2>
-    </div>
-    </div>
+    <script src="../static/js/board.js"></script>
 </body>
 
 </html>
