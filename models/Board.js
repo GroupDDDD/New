@@ -12,7 +12,7 @@ const Board = function(Sequelize, DataTypes) {
 
     const model = Sequelize.define(
         // param1: 모델 이름 설정
-        'board',
+        'Board',
         // param2: 컬럼 정의
         {
             // `article_id`	INT	NOT NULL	COMMENT 'auto increment'
@@ -22,6 +22,11 @@ const Board = function(Sequelize, DataTypes) {
                 primaryKey: true,
                 autoIncrement: true,
             },
+            // `user_id`	INT	NOT NULL	COMMENT 'user index'
+            user_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
             // `title`	VARCHAR(100)	NOT NULL	COMMENT '게시글 제목'
             title: {
                 type: DataTypes.STRING(100),
@@ -29,7 +34,7 @@ const Board = function(Sequelize, DataTypes) {
             },
             // `parity`	VARCHAR(2)	NOT NULL	DEFAULT OFF	COMMENT 'ON 또는 OFF 선택값 저장',
             parity: {
-                type: DataTypes.STRING(4),
+                type: DataTypes.ENUM('ONLINE', 'OFFLINE', ''),
                 allowNull: false,
                 defaultValue: 'OFF',
             },
@@ -43,11 +48,6 @@ const Board = function(Sequelize, DataTypes) {
                 type: DataTypes.STRING(5000),
                 allowNull: false,
             },
-            // `created_dt`	DATE	NOT NULL	COMMENT '게시글 생성일자',
-            created_dt: {
-                type: DataTypes.DATE,
-                allowNull: false,
-            },
             // `expr_dt`	DATA	NOT NULL	COMMENT '게시글 만료일 (모집종료일)',
             expr_dt: {
                 type: DataTypes.DATE,
@@ -55,22 +55,22 @@ const Board = function(Sequelize, DataTypes) {
             },
             // `start_dt`	DATE	NOT NULL	COMMENT '스터디 시작일',
             start_dt: {
-                type: Datatypes.DATE,
+                type: DataTypes.DATE,
                 allowNull: false,
             },
             // `end_dt`	DATE	NOT NULL	COMMENT '스터디 종료일',
             end_dt: {
-                type: DataTypes.DATA,
+                type: DataTypes.DATE,
                 allowNull: false,
             },
             // `appo_time`	INTERVAL_DAY	NOT NULL	COMMENT '스터디 진행 약속 시간',
             appo_time: {
-                type: DataTypes.INTERVAL_DAY,
+                type: DataTypes.DATE,
                 allowNull: true,
             },
             // `appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소'
             appo_aria: {
-                type: Datatypes.STRING(100),
+                type: DataTypes.STRING(100),
                 allowNull: true,
             }
         },

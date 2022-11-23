@@ -23,6 +23,7 @@ fs
     })
     .forEach(file => {
         const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+        console.log('model list >>', model);
         db[model.name] = model;
     });
 
@@ -32,26 +33,30 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
-const { User, Category, Board, Comment } = db;
+const { Category, SCategory, Board, TBoard } = db;
 
-User.hasMany(Board, { foreignKey: 'user_id', sourceKey: 'user_id' });
-Board.belongsTo(User, { foreignKey: 'user_id', targetKey: 'user_id' });
+db.Board.hasMany(SCategory, { foreignKey: 'article_id', sourceKey: 'article_id' });
+db.SCategory.belongsTo(Board, { foreignKey: 'article_id', targetKey: 'article_id' });
 
+db.Category.hasMany(SCategory, { foreignKey: 'category_id', sourceKey: 'category_id' });
+db.SCategory.belongsTo(Category, { foreignKey: 'category_id', targetKey: 'category_id' });
 
-Board.hasMany(Category, { foreignKey: 'category_id', sourceKey: 'category_id' });
-Category.belongsTo(Board, { foreignKey: 'category_id', targetKey: 'category_id' });
-
-User.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음 
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})
-
-Category.sync({
+db.Category.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
     alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
 })
 
-Board.sync({
+db.SCategory.sync({
+    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
+    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
+})
+
+db.Board.sync({
+    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
+    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
+})
+
+db.TBoard.sync({
     force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
     alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
 })
