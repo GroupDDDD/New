@@ -1,6 +1,6 @@
 // TODO: 라우트 설정
 const express = require('express');
-const controllerB = require('../../study_group/controllers/CBoard');
+const controllerB = require('../controllers/Cboard');
 const controllerM = require('../../study_group/controllers/Cmain');
 const router = express.Router();
 
