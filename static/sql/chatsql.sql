@@ -201,6 +201,8 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 
 
 -- 채팅방내용 조회
+-- '2' 채팅신청자 아이디
+-- '1' 게시글작성자 아이디
 
   SELECT *  
   FROM chat_contents AS c
@@ -218,6 +220,24 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 
 
     SELECT * 
+  FROM chat_room AS r
+  
+  JOIN board AS b
+  ON r.article_id = b.article_id
+  
+  JOIN chat_participants AS p
+  ON r.room_id = p.room_id
+
+  JOIN user AS u
+  ON r.contactor_id = u.user_index
+  
+  WHERE p.pub_status = '2' 
+  and b.user_index = '1';
+
+
+--   채팅방리스트조회 최종
+
+  SELECT r.room_id, u.prof_img_url, u.user_name, b.title  
   FROM chat_room AS r
   
   JOIN board AS b

@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>채팅 프로그램</title>
+    <title>채팅창</title>
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- jquery cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
 
     <!-- socket.io cdn -->
     <script
@@ -15,24 +25,10 @@
     <link rel="stylesheet" href="/views/css/chat.css" />
   </head>
   <body>
-    <h1>채팅 프로그램</h1>
-
-    <!-- [실습44-2] 채팅창 입장 문구 안내 socket.it -> nickname -->
-    <!-- <div class="entry-box">
-      <input
-        type="text"
-        id="nickname"
-        placeholder="닉네임"
-        autofocus
-        onkeyup="if(window.event.keyCode==13){entry()}"
-      />
-      <button type="button" onclick="entry();">입장</button>
-    </div> -->
-
-    <!-- [실습43] 채팅창 UI 만들기 -->
+    <!--채팅창 UI 만들기 -->
     <div class="chat-box">
       <div id="chat-list" class="chat-list">
-        <!-- [실습43] 임시 데이터 -->
+        <!-- 기존데이터 조회 -->
         <!-- <div class="my-chat">
           <div>user1: msg1</div>
         </div>
@@ -40,6 +36,21 @@
           <div>user2: msg2</div>
         </div>
         <div class="notice">xx가 입장했습니다.</div> -->
+
+        <% for (let i = 0; i < data.length; i++) { %>
+            <div><%= data[i].user_name %></div>
+            <td><%= data[i].user_name %></td>
+            <td><%= data[i].title %></td>
+            <td>
+              <button
+                type="button"
+                onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+              >
+                Go
+              </button>
+            </td>
+          </tr>
+          <% } %>
       </div>
       <select id="nick-list">
         <!-- <option value="all">전체</option>

@@ -43,7 +43,7 @@
           <td>
             <button
               type="button"
-              onclick="chatEntry(this, '<%= data[i].user_index %>');"
+              onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
             >
               Go
             </button>
@@ -56,15 +56,19 @@
 
     <script>
       // 채팅창 입장
-      function chatEntry(obj, user_index) {
+      function chatEntry(user_index, id, room_id) {
         console.log(user_index);
-        console.log(obj);
+        console.log(id);
+        console.log(room_id);
 
+        // 채팅창 조회
         axios({
           method: "GET",
-          url: "/chatcont/get",
+          url: "/chatcont/getChatcont",
           data: {
-            id: user_index,
+            thisId: user_index, // obj.user_index: 클릭한 채팅방의 chat_participants테이블의 user_index
+            pubId: id, // 로그인한 사람의 user_index
+            roomId: room_id,
           },
         }).then((res) => {
           console.log(res.data);

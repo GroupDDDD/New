@@ -8,8 +8,9 @@ const models = require("../models/chatindex"); // ../models/index.js
 // };
 
 // 채팅방 리스트 페이지 렌더해서 조회
+// 게시자일 경우에만 리스트 페이지 조회돼서 pub_status=2인것만 가져옴
 exports.getChatlistpage = (req, res) => {
-  const query = `SELECT u.prof_img_url, u.user_name, b.title  
+  const query = `SELECT r.room_id, u.prof_img_url, u.user_index, u.user_name, b.title  
   FROM chat_room AS r
   
   JOIN board AS b
@@ -29,7 +30,7 @@ exports.getChatlistpage = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.render("chatlist", { data: result });
+      res.render("chatlist", { data: result, pubId: req.query.id });
     });
 };
 

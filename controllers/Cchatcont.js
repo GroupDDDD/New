@@ -4,7 +4,7 @@ const models = require("../models/chatindex"); // ../models/index.js
 // exports.main = (req, res) => {
 //   res.render("chatcont");
 // };
-exports.getChatconst = (req, res) => {
+exports.getChatcont = (req, res) => {
   const query = `SELECT *  
     FROM chat_contents AS c
     
@@ -24,7 +24,7 @@ exports.getChatconst = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.render("chatcont", { data: result });
+      res.render("chat", { data: result, pubId: req.query.pubId });
     });
 };
 

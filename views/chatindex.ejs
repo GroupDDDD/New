@@ -42,10 +42,12 @@
       let socket = io.connect(); // socket 사용을 위한 객체 생성
       // let myId;
       // let myNick; // 내 닉네임 설정
-      async function chatStart(id) {
+      function chatStart(id) {
         // 소켓 잠깐 주석처리...!!
         // socket.emit("setNick", document.querySelector("#nickname").value);
 
+        window.location.href = `/chat/getChatlistpage?id=${id}`;
+        /*
         console.log("chatStart!!!");
         console.log(id); //현재 행에대한 id(pk)
         // axios 응답 결과를 result 변수에 담고자 함(->동기처리가 필요)
@@ -64,16 +66,16 @@
           return res.data;
         });
         console.log("'2 채팅신청자하나 조회 결과: ", result);
+        loginResult.textContent = `로그인아이디: ${result.user_index}`;
 
         // 게시자이고 채팅방 존재하면 채팅방리스트 조회페이지로 이동
         if (publisherOrnot === true && roomExistsOrnot === true) {
+          console.log("id >>> ", id);
           let roomlistResult = await axios({
             method: "GET",
             url: `/chat/getChatlistpage?id=${id}`,
-          }).then((res) => {
-            console.log("채팅방리스트 페이지 렌더링", res.data);
-            return res.data;
           });
+          console.log("test >> ", roomlistResult);
         }
 
         // 게시자가 아니고 채팅방 존재하면 채팅방페이지로 이동
@@ -84,6 +86,7 @@
         // 존재하면 조회
 
         // 채팅방 신규일경우 insert
+        */
       }
     </script>
   </body>
