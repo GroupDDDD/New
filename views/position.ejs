@@ -26,19 +26,21 @@
 <body>
     <h1>위치 불러오기 - 위도 경도 저장하기</h1>
 
+   
+    
+
     <a href = '/sign/signup'>이전</a>
 
     <h2>현재 위치를 지정해주세요.</h2>
     <div id = "map" style = "width: 500px; height: 400px;"></div><br>
     <div id = "result"></div><br>
-    <button type = "button" onclick = "setPosition();">위치 설정 완룐</button>
+    <button type = "button" onclick = "setPosition();">위치 설정 완료</button>
 
 
 
 
     <h3>주소</h3>
     <input type = "text" id = "address_kakao" name = "address" readonly><br>
-
     <h3>상세주소</h3> 
     <input type = "text" name = "address_detail">
 
@@ -87,27 +89,42 @@
 
 
         //kakao 주소 검색
-        window.onload = function(){
+        window.onload = function address(){
             document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
                 //카카오 지도 발생
                 new daum.Postcode({
-                    oncomplete: function(data) { //선택시 입력값 세팅
-                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    oncomplete: function(info) { //선택시 입력값 세팅
+                        document.getElementById("address_kakao").value = info.address; // 주소 넣기
                         document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-                        console.log('data>>', data);
-                        console.log('전체 주소: ', data.address);
-                        console.log('도: ', data.sido);
-                        console.log('시: ', data.sigungu);
-                        console.log('동: ', bname1);
-                        console.log('동2: ', bname2);
-                        console.log('로: ', roadname);
+                        console.log('info>>', info);
+                        console.log('전체 주소: ', info.address);
+                        console.log('도: ', info.sido);
+                        console.log('시: ', info.sigungu);
+                        console.log('동2: ', info.bname2);
+                        console.log('로: ', info.roadname);
                     }
                 }).open();
-
             });
+                return info;
         }
 
+        function setPosition(){
 
+            axios({
+                method: 'POST',
+                url: '/sign/position/update',
+                data: {
+                    //도
+                    //시
+                    //구
+                    //동
+                }.then((res) => {
+
+                }).then((data) => {
+
+                })
+            })
+        }
         
     </script>
 </body>

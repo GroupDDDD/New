@@ -92,6 +92,7 @@ exports.postEmailTest = (req, res) => {
     })
 }
 
+
 //로그인
 exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
     console.log('postSingin의 req.body>>', req.body);
@@ -118,7 +119,8 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
         if(result == null){ // 로그인 실패
             res.send(false);
         }
-        else{
+        else{ //로그인 정보 일치한다면
+            req.session.user = req.body.user_id;
             res.send(true);
         }
     })
@@ -132,7 +134,7 @@ exports.postProfile = (req, res) => {
         console.log('findOne >>', result);
 
         if(result != null){
-            res.render('profile', {data: result});
+            res.render('profile', {data: result, user: req.body.user_id});
         }
     })
 }
@@ -173,7 +175,10 @@ exports.postProfileDelete = (req, res) => {
 //req.session.destroy는 req.session의 내용의 제거한다.
 //세션 정보를 지운 후 메인 페이지로 되돌아간다. 로그인이 헤제되어 있다.
 exports.getLogout = (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect('/');
+    req.session.destroy((err) => {
+        if(err){
+            throw err;
+        }
+        res.redirect('/main2');
+    })
 }
