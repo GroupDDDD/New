@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/front-board.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
+  </head>
+  <body>
+    <%- include('./nav.ejs') %>
+
+    <div class="write-info">
+      <div class="insert-img">
+        <img src="" alt="" />
+      </div>
+      <div class="write-title">
+        <input type="text" placeholder="제목 입력" />
+      </div>
+      <select class="write-category">
+        <option value="">직업선택</option>
+        <option value="프로그래밍">프로그래밍</option>
+        <option value="공모전" selected="selected">공모전</option>
+        <option value="자격증">자격증</option>
+      </select>
+      <div>
+        <input class="write-content" type="text" placeholder="제목 입력" />
+      </div>
+    </div>
+
+    <img src="/upload/${bucketProduct.image}" alt="" />
+  </body>
+</html>

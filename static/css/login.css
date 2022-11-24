@@ -89,3 +89,24 @@
   width: 450px;
   height: 450px;
 }
+
+.form-register-button {
+  margin: 50px;
+}
+
+.form-login-button {
+  margin: 50px 0 0 0;
+}
+
+.form-button {
+  width: 200px;
+  height: 40px;
+  background-color: rgb(244, 144, 244);
+  border-radius: 10px;
+  border: none;
+}
+
+.form-button > p {
+  font-weight: 800;
+  font-size: 15px;
+}

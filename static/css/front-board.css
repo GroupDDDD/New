@@ -1,0 +1,26 @@
+.write-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.insert-img {
+  width: 250px;
+  height: 250px;
+  background-color: gray;
+  margin: 5vh 0 0 0;
+}
+
+.write-title > input {
+  width: 250px;
+}
+
+.write-category {
+  width: 250px;
+}
+
+.write-content {
+  width: 250px;
+  height: 200px;
+}
