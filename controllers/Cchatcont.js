@@ -23,14 +23,18 @@ exports.getChatcont = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.render("chat", { data: result, pubId: req.query.pubId });
+      res.render("chat", {
+        data: result,
+        pubId: req.query.pubId,
+        partId: req.query.partId,
+      });
     });
 };
 // 채팅내용 DB저장 chat_contents테이블
 // INSERT INTO chat_contents (part_id, message, createdAt, updatedAt) VALUES ('2', '스터디참가하고싶습니다.', '20221122', '20221122');
 exports.postChatcont = (req, res) => {
   models.Chatcont.create({
-    part_id: req.body.part_id,
+    partId: req.body.partId,
     message: req.body.message,
   }).then((result) => {
     console.log("create >> ", result);
@@ -39,13 +43,6 @@ exports.postChatcont = (req, res) => {
 };
 
 // exports.patchVisitor = (req, res) => {
-//   // [Before]
-//   // console.log(req.body);
-
-//   // Visitor.patchVisitor(req.body, (result) => {
-//   //   console.log('Cvisitor.js:', result);
-//   //   res.send('수정 성공!!!');
-//   // });
 
 //   // [After]
 //   // UPDATE visitor SET name='${data.name}', comment='${data.comment}' WHERE id=${data.id}
@@ -67,14 +64,6 @@ exports.postChatcont = (req, res) => {
 // };
 
 // exports.deleteVisitor = (req, res) => {
-//   // [Before]
-//   // console.log(req.body); // { id: '1' }
-//   // console.log(req.body.id); // 1
-
-//   // Visitor.deleteVisitor(req.body.id, (result) => {
-//   //   console.log('Cvisitor.js: ', result);
-//   //   res.send('삭제 성공!!!');
-//   // });
 
 //   // [After]
 //   // DELETE FROM visitor WHERE id=${id}

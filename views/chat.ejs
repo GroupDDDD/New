@@ -60,7 +60,7 @@
 
     <script>
       let socket = io.connect(); // socket 사용을 위한 객체 생성
-      let myNick = "게시자1"; // 내 아이디이름 설정
+      let myNick = "게시자1"; // 세션값받아오기 추가요 내 아이디이름 설정
       const input = document.querySelector("#message");
       const bg = document.querySelector(".chat-list");
 
@@ -92,10 +92,10 @@
         // 메세지내용 DB에 저장
         axios({
           method: "POST",
-          url: "/chatcont/write",
+          url: "/chatcont/postChatcont",
           data: {
-            name: data.value,
-            comment: form.comment.value,
+            partId: data.partId,
+            message: msg,
           },
         });
       }

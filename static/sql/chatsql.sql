@@ -130,7 +130,7 @@ INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt, updatedAt
 -- chat_participants테이블 테스트 데이터 입력
 INSERT INTO chat_participants (room_id, user_index, pub_status, createdAt) VALUES ('1', '1', '1', '20221122');
 
-INSERT INTO chat_participants (room_id, user_index,  pub_status, createdAt) VALUES ('1', '2', '1', '20221122');
+INSERT INTO chat_participants (room_id, user_index,  pub_status, createdAt) VALUES ('1', '3', '2', '20221122');
 
 -- chat_contents테이블 테스트 데이터 입력
 INSERT INTO chat_contents (part_id, message, createdAt, updatedAt) VALUES ('2', '스터디참가하고싶습니다.', '20221122', '20221122');
@@ -182,7 +182,7 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 -- 채팅방리스트 조회
 
 
-  SELECT u.prof_img_url, u.user_name, b.title  
+  SELECT u.prof_img_url, r.user_name, b.title  
   FROM chat_room AS r
   
   JOIN board AS b
@@ -242,12 +242,32 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
   
   JOIN board AS b
   ON r.article_id = b.article_id
-  
-  JOIN chat_participants AS p
-  ON r.room_id = p.room_id
 
   JOIN user AS u
   ON r.contactor_id = u.user_index
   
-  WHERE p.pub_status = '2' 
-  and b.user_index = '1';
+  WHERE b.user_index = '1';
+
+
+--   채팅방 있는지 여부조회 게시자용
+
+
+ SELECT *
+    ->   FROM chat_room AS r
+    ->
+    ->   JOIN board AS b
+    ->   ON r.article_id = b.article_id
+    ->
+    ->   WHERE r.article_id ='1'
+    ->   and b.user_index='1';
+
+    -- 채팅방 있는지 조회(채팅신청자용)
+
+  SELECT *  
+  FROM chat_room 
+  
+  WHERE article_id ='1'
+  and contactor_id='2';
+
+
+
