@@ -28,7 +28,7 @@
     <!--채팅창 UI 만들기 -->
     <div class="chat-box">
       <div id="chat-list" class="chat-list">
-        <!-- 기존데이터 조회 -->
+        <!-- 기존데이터 조회(참고용) -->
         <!-- <div class="my-chat">
           <div>user1: msg1</div>
         </div>
@@ -36,27 +36,20 @@
           <div>user2: msg2</div>
         </div>
         <div class="notice">xx가 입장했습니다.</div> -->
-
-        <% for (let i = 0; i < data.length; i++) { %>
-            <div><%= data[i].user_name %></div>
-            <td><%= data[i].user_name %></td>
-            <td><%= data[i].title %></td>
-            <td>
-              <button
-                type="button"
-                onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
-              >
-                Go
-              </button>
-            </td>
-          </tr>
-          <% } %>
+        <!-- 기존채팅방 내용 조회 로그인 아이디값 임시('1')-->
+        <% for (let i = 0; i < data.length; i++) { %> <% if (data.[i].user_index
+        === '1') { %>
+        <div class="my-chat">
+          <div><%= data[i].user_name %></div>
+          <div><%= data[i].message %></div>
+        </div>
+        <% } else { %>
+        <div class="other-chat">
+          <div><%= data[i].user_name %></div>
+          <div><%= data[i].message %></div>
+        </div>
+        <% } %>
       </div>
-      <select id="nick-list">
-        <!-- <option value="all">전체</option>
-        <option value="socketId1">nick1</option>
-        <option value="socketId2">nick2</option> --></select
-      >에게
       <input
         type="text"
         id="message"
@@ -67,13 +60,18 @@
 
     <script>
       let socket = io.connect(); // socket 사용을 위한 객체 생성
-      let myNick; // 내 닉네임 설정
+      let myNick = "게시자1"; // 내 아이디이름 설정
+      const input = document.querySelector("#message");
+      const bg = document.querySelector(".chat-list");
 
       socket.on("connect", () => {
         console.log("**** ⭕ Client Socket Connected >>", socket.id);
+        input.focus();
       });
+      // 소켓에 로그인 이름 전달
+      socket.emit("setNick", myNick);
 
-      // [실습44] 채팅창 입장 안내 문구
+      // 채팅창 입장 안내 문구
       // notice 이벤트를 받아서 공지 문구를 출력
       socket.on("notice", (msg) => {
         console.log("socket on notice >> ", msg);
@@ -83,42 +81,23 @@
           .insertAdjacentHTML("beforeend", `<div class="notice">${msg}</div>`);
       });
 
-      // [실습44-2] 채팅창 입장 안내 문구 socket.id -> nickname
-      // function entry() {
-      //   // console.log(document.querySelector('#nickname').value);
-      //   if (document.querySelector("#nickname").value) {
-      //     socket.emit("setNick", document.querySelector("#nickname").value);
-      //   }
-      // }
-
-      socket.on("entrySuccess", (nick) => {
-        myNick = nick;
-
-        // 입력창 비활성화
-        document.querySelector("#nickname").disabled = true;
-        // [입장] 버튼 비활성화
-        document.querySelector(".entry-box > button").disabled = true;
-        // 채팅 박스를 보여줌
-        document.querySelector(".chat-box").classList.remove("d-none");
-        const input = document.querySelector("#message");
-        input.focus();
-      });
-
-      // 'error' 이벤트 받기 -> on
-      // alert() 메세지 출력
-      socket.on("error", (data) => {
-        alert(data);
-      });
-
       // [실습45] 채팅창 메세지 전송 Step1
       // "send" 이벤트 전송하기
       function send() {
         const data = {
-          myNick: myNick, //"entrySuccess" 이벤트에서 입장 성공시 설정하는 내 닉네임
-          dm: document.querySelector("#nick-list").value, //현재 선택된 select 태그의 option값
+          myNick: myNick,
           msg: document.querySelector("#message").value,
         };
         socket.emit("send", data);
+        // 메세지내용 DB에 저장
+        axios({
+          method: "POST",
+          url: "/chatcont/write",
+          data: {
+            name: data.value,
+            comment: form.comment.value,
+          },
+        });
       }
 
       // [실습45] 채팅창 메세지 전송 Step2
@@ -143,8 +122,6 @@
         let divChat = document.createElement("div"); // 가장 안쪽 div (메세지 박스) 생성
         // <div></div>
         // 스크롤 포커스
-        const input = document.querySelector("#message");
-        const bg = document.querySelector(".chat-list");
 
         // 새 메세지(data => { nick: 'a', msg: 'hello' })가 도착했는데
         // myNick에 저장된 현재 내 닉네임과
@@ -157,13 +134,8 @@
         }
         // [실습46] DM기능 추가
         console.log("send data check >>", data);
-        // 전체 {nick: '2121', msg: 'dd'}
-        // dm: {nick: '2121', msg: 'dd', dm: '(속닥속닥)'}
+        // {nick: '2121', msg: 'dd'}
 
-        if (data.dm) {
-          div.classList.add("secret-chat");
-          divChat.textContent = data.dm; //(속닥속닥) 글자 추가
-        }
         // 닉네임 분리
         // console.log(`${data.nick}`);
         console.log("닉네임분리:", divNick.textContent);
@@ -180,36 +152,6 @@
 
         //입력된 input의 value 지우기.
         input.value = "";
-      });
-
-      // [실습46] DM 기능 추가
-      socket.on("updateNicks", (nickArray) => {
-        console.log("socket on updateNicks >> ", nickArray);
-
-        // 미션!!!!!!!
-        // 유저목록 하나하나를 option태그로 만들어서 select에 추가
-        // select 태그 내부에 추가되어야 할 코드 형식
-        // <option value="all">전체</option>
-        // <option value="socketId1">nick1</option>
-        // <option value="socketId2">nick2</option>
-        let options = `<option value="all">전체</option>`;
-        let nickList = document.querySelector("#nick-list"); // #nick-list 선택
-
-        // 1. 반복문 사용해서 option 태그 하나하나 완성
-        // 2. select 태그에 option 태그들을 추가
-        for (const key in nickArray) {
-          console.log(`${key}, ${nickArray[key]}`);
-          options = options.concat(
-            `<option value='${key}'>${nickArray[key]}</option>`
-          );
-          // options +=  `<option value='${key}'>${nickArray[key]}</option>` //x +=1
-          console.log("option: ", options);
-        }
-        //
-        // for (let i=0; i < nickArray.length; i++){
-
-        // }
-        nickList.innerHTML = options;
       });
     </script>
   </body>

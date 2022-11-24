@@ -1,10 +1,9 @@
 const { getLineAndCharacterOfPosition } = require("typescript");
 const models = require("../models/chatindex"); // ../models/index.js
 
-// exports.main = (req, res) => {
-//   res.render("chatcont");
-// };
+// 채팅창 내용조회
 exports.getChatcont = (req, res) => {
+  console.log("getChatcont", req.query);
   const query = `SELECT *  
     FROM chat_contents AS c
     
@@ -27,57 +26,17 @@ exports.getChatcont = (req, res) => {
       res.render("chat", { data: result, pubId: req.query.pubId });
     });
 };
-
-// exports.getChatcont = (req, res) => {
-//   // [Before]
-//   // console.log(req.query); // { id: '1' }
-//   // console.log(req.query.id); // '1'
-//   // Visitor.getVisitor(req.query.id, (result) => {
-//   //   console.log('Cvisitor.js', result);
-//   //   res.send(result);
-//   // });
-
-//   // [After]
-//   // SELECT room_id FROM chat_room WHERE room_id=${req.query.chatId} and board_id=${req.query.boardId} and contactor_id = ${req.query.contactorId}
-//   models.Chat.findOne({
-//     where: {
-//       room_id: req.query.chatId,
-//       board_id: req.query.boardId,
-//       contactor_id: req.query.contactorId,
-//     },
-//   }).then((result) => {
-//     console.log("findOne >> ", result);
-//     res.send(result);
-//   });
-// };
-
-// exports.postChatcont = (req, res) => {
-//   // [Before]
-//   // console.log('postvisitor: ', req.body);
-//   // // postvisitor:  { name: '빅파이', comment: '맛있다' }
-//   // Visitor.postVisitor(req.body, (result) => {
-//   //   console.log('Cvisitor.js', result); // Cvisitor.js 10
-//   //   res.send({
-//   //     id: result, // pk(id) -> 10
-//   //     name: req.body.name, // 폼에 입력한 name
-//   //     comment: req.body.comment, // 폼에 입력한 comment
-//   //   });
-//   // });
-
-//   // [After]
-//   // INSERT INTO visitor (name, comment) VALUES('${data.name}', '${data.comment}')
-//   // INSERT INTO visitor (name, comment) VALUES('${req.body.name}', '${req.body.comment}')
-//   models.Chat.create({
-//     room_id: req.body.room_id,
-//     board_id: req.body.board_id,
-//     contactor_id: req.body.contactor_id,
-//     created_dt: req.body.created_dt,
-//     chat_kind: req.body.chat_kind,
-//   }).then((result) => {
-//     console.log("create >> ", result);
-//     res.send(result);
-//   });
-// };
+// 채팅내용 DB저장 chat_contents테이블
+// INSERT INTO chat_contents (part_id, message, createdAt, updatedAt) VALUES ('2', '스터디참가하고싶습니다.', '20221122', '20221122');
+exports.postChatcont = (req, res) => {
+  models.Chatcont.create({
+    part_id: req.body.part_id,
+    message: req.body.message,
+  }).then((result) => {
+    console.log("create >> ", result);
+    res.send(result);
+  });
+};
 
 // exports.patchVisitor = (req, res) => {
 //   // [Before]
