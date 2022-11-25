@@ -5,22 +5,24 @@ CREATE TABLE `board` (
 	`parity`	VARCHAR(4)	NOT NULL	COMMENT 'ON 또는 OFF 선택값 저장',
 	`member_num`	INT	NOT NULL	COMMENT '스터디멤버 수',
 	`description`	VARCHAR(5000)	NOT NULL	COMMENT '스터디 내용',
-	`expr_dt`	DATA	NOT NULL	COMMENT '게시글 만료일 (모집종료일)',
+	`expr_dt`	DATE	NOT NULL	COMMENT '게시글 만료일 (모집종료일)',
 	`start_dt`	DATE	NOT NULL	COMMENT '스터디 시작일',
 	`end_dt`	DATE	NOT NULL	COMMENT '스터디 종료일',
-	`appo_time`	INTERVAL_DAY	NOT NULL	COMMENT '스터디 진행 약속 시간',
+	`appo_time`	DATE	NOT NULL	COMMENT '스터디 진행 약속 시간',
 	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '게시글 생성일자',
-	`updatedAt`	DATETIME	NULL	COMMENT '게시글 수정일자'
+	`updatedAt`	DATETIME	NULL	COMMENT '게시글 수정일자',
+	PRIMARY KEY(`article_id`)
 );
 
 CREATE TABLE `chat_room` (
 	`room_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'PK 채팅방 Index',
 	`article_id`	INT	NOT NULL	COMMENT 'auto increment',
 	`contactor_id`	VARCHAR(15)	NOT NULL	COMMENT '채팅신청자 아이디',
-	`chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: '1' , 그룹채팅방: '2'',
+	`chat_kind`	INT	NOT NULL	COMMENT '1:1채팅방: 1 , 그룹채팅방: 2',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅방생성일자',
-	`updatedAt`	DATETIME	NULL	COMMENT '수정일자'
+	`updatedAt`	DATETIME	NULL	COMMENT '수정일자',
+	PRIMARY KEY(`room_id`)
 );
 
 CREATE TABLE `user` (
@@ -33,7 +35,8 @@ CREATE TABLE `user` (
 	`user_sigungu`	VARCHAR(15)	NULL	COMMENT '회원의 주소(시군구)',
 	`user_bname`	VARCHAR(15)	NULL	COMMENT '회원의 주소(읍면동)',
 	`user_roadname`	VARCHAR(15)	NULL	COMMENT '회원의 주소(도로명)',
-	`prof_img_url`	TEXT	NULL	COMMENT '회원프로필 이미지 url'
+	`prof_img_url`	TEXT	NULL	COMMENT '회원프로필 이미지 url',
+	PRIMARY KEY (`user_index`)
 );
 
 CREATE TABLE `chat_contents` (
@@ -42,24 +45,29 @@ CREATE TABLE `chat_contents` (
 	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
 	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅글 생성일자',
-	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간'
+	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간',
+	PRIMARY KEY(`content_id`)
 );
 
 CREATE TABLE `category` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
 	`category_img`	TEXT	NULL	COMMENT '카테고리 이미지',
-	`category_name`	VARCHAR(20)	NOT NULL	COMMENT '카테고리이름'
+	`category_name`	VARCHAR(20)	NOT NULL	COMMENT '카테고리이름',
+	PRIMARY KEY(`category_id`)
 );
 
 CREATE TABLE `aria` (
 	`aria_id`	INT	NOT NULL	COMMENT '활동지역 Index',
 	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
-	`Field`	VARCHAR(255)	NULL
+	`Field`	VARCHAR(255)	NULL,
+	PRIMARY KEY(`aria_id`)
 );
 
 CREATE TABLE `attachment` (
 	`id`	INT	NOT NULL	COMMENT 'auto increment',
-	`data_loc`	TEXT	NOT NULL
+	`data_loc`	TEXT	NOT NULL,
+	`file_name`	VARCHAR(255)	NOT NULL,
+	PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `participants` (
@@ -68,10 +76,12 @@ CREATE TABLE `participants` (
 	`user_id`	INT	NOT NULL	COMMENT '회원 index',
 	`pub_status`	INT	NOT NULL	COMMENT '게시자여부(1게시자 2비게시자)',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '생성일',
-	`updatedAt`	DATETIME	NULL	COMMENT '수정일'
+	`updatedAt`	DATETIME	NULL	COMMENT '수정일',
+	PRIMARY KEY(`part_id`)
 );
 
 CREATE TABLE `cat_selected` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
-	`article_id`	INT	NOT NULL
+	`article_id`	INT	NOT NULL,
+	PRIMARY KEY(`category_id`)
 );
