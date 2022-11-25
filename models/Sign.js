@@ -25,18 +25,6 @@ const Sign = function(Sequelize, DataTypes) {
                 allowNull: false,
                 unique: true,
             },
-            // user_adr: {
-            //     type: DataTypes.STRING(50),
-            //     allowNull: false,
-            // },
-            // user_Lat: {
-            //     type: DataTypes.DOUBLE,
-            //     allowNull: true,
-            // },
-            // user_Lon: {
-            //     type: DataTypes.DOUBLE,
-            //     allowNull: true,
-            // },
             user_sido: {
                 type: DataTypes.STRING(15),
                 allowNull: true,
