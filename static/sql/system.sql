@@ -13,7 +13,7 @@ CREATE TABLE `board` (
 	`createdAt`	DATETIME	NOT NULL	COMMENT '게시글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '게시글 수정일자',
 	PRIMARY KEY(`article_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `chat_room` (
 	`room_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'PK 채팅방 Index',
@@ -23,7 +23,7 @@ CREATE TABLE `chat_room` (
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅방생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '수정일자',
 	PRIMARY KEY(`room_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `user` (
 	`user_index`	INT	NOT NULL	AUTO_INCREMENT	COMMENT '회원 index',
@@ -37,7 +37,7 @@ CREATE TABLE `user` (
 	`user_roadname`	VARCHAR(15)	NULL	COMMENT '회원의 주소(도로명)',
 	`prof_img_url`	TEXT	NULL	COMMENT '회원프로필 이미지 url',
 	PRIMARY KEY (`user_index`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `chat_contents` (
 	`content_id`	INT	NOT NULL	COMMENT 'auto increment',
@@ -54,21 +54,21 @@ CREATE TABLE `category` (
 	`category_img`	TEXT	NULL	COMMENT '카테고리 이미지',
 	`category_name`	VARCHAR(20)	NOT NULL	COMMENT '카테고리이름',
 	PRIMARY KEY(`category_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `aria` (
 	`aria_id`	INT	NOT NULL	COMMENT '활동지역 Index',
 	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`Field`	VARCHAR(255)	NULL,
 	PRIMARY KEY(`aria_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `attachment` (
 	`id`	INT	NOT NULL	COMMENT 'auto increment',
 	`data_loc`	TEXT	NOT NULL,
 	`file_name`	VARCHAR(255)	NOT NULL,
 	PRIMARY KEY(`id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `participants` (
 	`part_id`	INT	NOT NULL	COMMENT 'PK 참여자table index',
@@ -78,10 +78,10 @@ CREATE TABLE `participants` (
 	`createdAt`	DATETIME	NOT NULL	COMMENT '생성일',
 	`updatedAt`	DATETIME	NULL	COMMENT '수정일',
 	PRIMARY KEY(`part_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `cat_selected` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
 	`article_id`	INT	NOT NULL,
 	PRIMARY KEY(`category_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
