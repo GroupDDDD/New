@@ -6,7 +6,13 @@ const morgan = require('morgan');
 // router
 const { sequelize } = require('./models/index_board'); // 시퀄라이즈
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
 const boardRouter = require('./routes/board');
+const chatRouter = require("./routes/chat");
+
+// socket
+const http = require("http").Server(app);
+const io = require("socket.io")(http); // http-socket 연결
 
 // app
 const app = express();
@@ -38,7 +44,9 @@ app.use(express.json());
 
 // router setting
 app.use("/", indexRouter);
+app.use("/user", userRouter);
 app.use("/board", boardRouter);
+app.use("/chat", chatRouter); // 기본 경로: localhost:PORT/chat
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

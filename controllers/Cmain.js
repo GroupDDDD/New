@@ -16,7 +16,3 @@ exports.study = (req, res) => {
 exports.login = (req, res) => {
     res.render('login');
 }
-
-exports.chat = (req, res) => {
-    res.render('chat');
-}

@@ -11,6 +11,4 @@ router.get("/study", controller.study); // 전체 조회
 
 router.get("/login", controller.login);
 
-router.get("/chat", controller.chat);
-
 module.exports = router;

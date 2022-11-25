@@ -5,7 +5,7 @@ const controller = require("../controllers/Cuser");
 const router = express.Router();
 
 // GET / => localhost:PORT/
-router.get("/", controller.main);
+router.get("/user", controller.main);
 
 router.get("/user/get", controller.getUsername);
 // router.post('/practice30', controller.practice30);
