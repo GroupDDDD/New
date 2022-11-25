@@ -41,7 +41,6 @@ CREATE TABLE `user` (
 
 CREATE TABLE `chat_contents` (
 	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
-	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`part_id`	INT	NOT NULL	COMMENT 'FK 참여자 index',
 	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
 	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
@@ -86,7 +85,7 @@ CREATE TABLE `chat_participants` (
 CREATE TABLE `cat_selected` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
 	`article_id`	INT	NOT NULL,
-	PRIMARY KEY(`category_id`)
+	PRIMARY KEY(`category_id`)gi
 )engine=innodb auto_increment=1 default charset=utf8;
 
 
