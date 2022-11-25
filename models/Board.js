@@ -16,7 +16,7 @@ const Board = function(Sequelize, DataTypes) {
                 autoIncrement: true,
             },
             // `user_id`	INT	NOT NULL	COMMENT 'user index'
-            user_id: {
+            user_index: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },

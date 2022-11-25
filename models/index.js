@@ -36,11 +36,11 @@ db.Part = require("./Part")(sequelize, Sequelize);
 
 // Sign : Board = 1 : N
 db.Sign.hasMany(db.Board, {
-    foreignKey: "user_id",
+    foreignKey: "user_index",
     sourceKey: "user_index",
 });
 db.Board.belongsTo(db.Sign, {
-    foreignKey: "user_id",
+    foreignKey: "user_index",
     targetKey: "user_index",
 });
 
