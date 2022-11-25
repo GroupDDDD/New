@@ -40,14 +40,14 @@ CREATE TABLE `user` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `chat_contents` (
-	`content_id`	INT	NOT NULL	COMMENT 'auto increment',
+	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`part_id`	INT	NOT NULL	COMMENT 'FK 참여자 index',
 	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
 	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간',
 	PRIMARY KEY(`content_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `category` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
@@ -57,21 +57,21 @@ CREATE TABLE `category` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `aria` (
-	`aria_id`	INT	NOT NULL	COMMENT '활동지역 Index',
+	`aria_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT '활동지역 Index',
 	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`Field`	VARCHAR(255)	NULL,
 	PRIMARY KEY(`aria_id`)
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `attachment` (
-	`id`	INT	NOT NULL	COMMENT 'auto increment',
+	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`data_loc`	TEXT	NOT NULL,
 	`file_name`	VARCHAR(255)	NOT NULL,
 	PRIMARY KEY(`id`)
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `participants` (
-	`part_id`	INT	NOT NULL	COMMENT 'PK 참여자table index',
+	`part_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'PK 참여자table index',
 	`room_id`	INT	NOT NULL	COMMENT 'FK 채팅방 index',
 	`user_id`	INT	NOT NULL	COMMENT '회원 index',
 	`pub_status`	INT	NOT NULL	COMMENT '게시자여부(1게시자 2비게시자)',
@@ -85,3 +85,12 @@ CREATE TABLE `cat_selected` (
 	`article_id`	INT	NOT NULL,
 	PRIMARY KEY(`category_id`)
 )engine=innodb auto_increment=1 default charset=utf8;
+
+INSERT INTO `category` VALUES (1, 'https://i.imgur.com/1Z1Z1Z1.jpg', '자바');
+INSERT INTO `category` VALUES (2, 'https://i.imgur.com/2Z2Z2Z2.jpg', '자바스크립트');
+INSERT INTO `category` VALUES (3, 'https://i.imgur.com/3Z3Z3Z3.jpg', '파이썬');
+INSERT INTO `category` VALUES (4, 'https://i.imgur.com/4Z4Z4Z4.jpg', 'C');
+INSERT INTO `category` VALUES (5, 'https://i.imgur.com/5Z5Z5Z5.jpg', 'C++');
+INSERT INTO `category` VALUES (6, 'https://i.imgur.com/6Z6Z6Z6.jpg', 'C#');
+
+INSERT INTO `user` VALUES (1, 'admin', 'admin', 'admin', 'admin@admin.com', '', '', '', '', '');
