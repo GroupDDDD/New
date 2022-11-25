@@ -1,4 +1,4 @@
-const models = require('../models/index_board');
+const models = require('../models/index');
 
 exports.board = (req, res) => {
     res.render('board');

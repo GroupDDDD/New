@@ -1,101 +1,104 @@
+// sequelize-cli 자동 생성한 파일
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
 const Sequelize = require("sequelize");
-const process = require("process");
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const config = require(__dirname + "/../config/config.json")["development"];
+// const a = require(__dirname + '/../config/config.json');
+// const a = {
+//   "development": { "username": "user", "password": "1234", "database": "kdt", "host": "127.0.0.1", "dialect": "mysql" },
+//   "test": {},
+//   "production": {}
+// }
+// const config = a["development"];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-    sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-    sequelize = new Sequelize(
-        config.database,
-        config.username,
-        config.password,
-        config
-    );
-}
+let sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+);
+// sequelize 객체 선언시 매개변수로 정보들을 받음
 
-fs.readdirSync(__dirname)
-    .filter((file) => {
-        return (
-            file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-        );
-    })
-    .forEach((file) => {
-        const model = require(path.join(__dirname, file))(
-            sequelize,
-            Sequelize.DataTypes
-        );
-        console.log("model list >>", model);
-        db[model.name] = model;
-    });
-
-Object.keys(db).forEach((modelName) => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
-});
-
-
-const { Sign, Board, Category, SCategory, Chat, Part, Chatcont } = db;​
-db.Sign.hasMany(Board, { foreignKey: 'user_id', sourceKey: 'user_index' });
-db.Board.belongsTo(Sign, { foreignKey: 'user_id', targetKey: 'user_index' });
-
-db.Board.hasMany(SCategory, {
-    foreignKey: "article_id",
-    sourceKey: "article_id",
-});
-db.SCategory.belongsTo(Board, {
-    foreignKey: "article_id",
-    targetKey: "article_id",
-});
-
-db.Category.hasMany(SCategory, { foreignKey: 'category_id', sourceKey: 'category_id' });
-db.SCategory.belongsTo(Category, { foreignKey: 'category_id', targetKey: 'category_id' });​
-
-db.Sign.hasMany(Part, { foreignKey: 'user_id', sourceKey: 'user_index' });
-db.Part.belongsTo(Sign, { foreignKey: 'user_id', targetKey: 'user_index' });
-
-db.Chat.hasOne(Part, { foreignKey: 'room_id', sourceKey: 'room_id' });​
-db.Part.belongsTo(Chat, { foreignKey: 'room_id', targetKey: 'room_id' });
-
-db.Part.hasOne(Chatcont, { foreignKey: 'part_id', sourceKey: 'part_id' });
-db.Chatcont.belongsTo(Part, { foreignKey: 'part_id', targetKey: 'part_id' });
-
-db.Sign.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})
-db.Board.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})
-db.Category.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})​
-db.SCategory.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})​
-db.Part.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})​
-db.Chat.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})
-db.Chatcont.sync({
-    force: process.env.TABLE_CREATE_ALWAYS === 'true', // true: (drop) table 없어질 수 있음
-    alter: process.env.TABLE_ALTER_SYNC === 'true', // 개발 끝나면 false로 바꿔야함
-})​
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;​
-module.exports = db;\
+db.Sequelize = Sequelize;
+// db = { sequelize: sequelize, Sequelize: Sequelize }
+// 잠깐주석처리!!!
+db.Sign = require("./Sign")(sequelize, Sequelize);
+db.Board = require("./Board")(sequelize, Sequelize);
+db.Category = require("./Category")(sequelize, Sequelize);
+db.SCategory = require("./SCategory")(sequelize, Sequelize);
+db.Chat = require("./Chat")(sequelize, Sequelize);
+db.Chatcont = require("./Chatcont")(sequelize, Sequelize);
+db.Part = require("./Part")(sequelize, Sequelize);
+// models/Visitor.js 정의한 model이 db.Visitor에 들어감
+// db = { sequelize: sequelize, Sequelize: Sequelize, Visitor: model }
+
+// Sign : Board = 1 : N
+db.Sign.hasMany(db.Board, {
+    foreignKey: "user_id",
+    sourceKey: "user_index",
+});
+db.Board.belongsTo(db.Sign, {
+    foreignKey: "user_id",
+    targetKey: "user_index",
+});
+
+// Board : SCategory = 1 : N
+db.Board.hasMany(db.SCategory, {
+    foreignKey: "article_id",
+});
+db.SCategory.belongsTo(db.Board, {
+    foreignKey: "article_id",
+});
+
+// Category : SCategory = 1 : N
+db.Category.hasMany(db.SCategory, {
+    foreignKey: "category_id",
+});
+db.SCategory.belongsTo(db.Category, {
+    foreignKey: "category_id",
+});
+
+// Board : Chat -> 1:N
+db.Board.hasMany(db.Chat, {
+    foreignKey: "article_id",
+});
+db.Chat.belongsTo(db.Board, {
+    foreignKey: "article_id",
+});
+
+// Chat : Part -> 1:N
+db.Chat.hasMany(db.Part, {
+    foreignKey: "room_id",
+});
+db.Part.belongsTo(db.Chat, {
+    foreignKey: "room_id",
+});
+
+// Part : Chatcont -> 1:N
+db.Part.hasMany(db.Chatcont, {
+    foreignKey: "part_id",
+});
+db.Chatcont.belongsTo(db.Part, {
+    foreignKey: "part_id",
+});
+
+// User : Part -> 1:N
+db.Sign.hasMany(db.Part, {
+    foreignKey: "user_index",
+});
+db.Part.belongsTo(db.Sign, {
+    foreignKey: "user_index",
+});
+
+// Part : Chatcont -> 1:N
+db.Part.hasMany(db.Chatcont, {
+    foreignKey: "part_id",
+});
+db.Chatcont.belongsTo(db.Part, {
+    foreignKey: "part_id",
+});
+
+module.exports = db;
+// db 변수 내보냄 -> 다른 파일에서 사용하기 때문

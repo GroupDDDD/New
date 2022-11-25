@@ -25,7 +25,7 @@ exports.main2 = (req, res) => {
 }
 
 exports.index = (req, res) => {
-    res.render("index");
+    res.render("temp_index");
 };
 
 exports.study = (req, res) => {
