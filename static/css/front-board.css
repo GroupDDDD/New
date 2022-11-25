@@ -34,6 +34,12 @@
 .write-title {
   margin: 15px 0 0 0;
 }
+.study-how {
+  margin: 15px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}
 
 .write-title > input {
   width: 400px;
@@ -71,4 +77,11 @@
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.board-date {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 0 0;
 }

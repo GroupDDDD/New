@@ -1,26 +1,12 @@
 {
   "development": {
     "username": "root",
-    "password": "9698",
+    "password": "0928",
     "database": "project2",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
   },
-  "test": {
-    "username": "root",
-    "password": "9698",
-    "database": "project2",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": 0
-  },
-  "production": {
-    "username": "root",
-    "password": "9698",
-    "database": "project2",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": 0
-  }
+  "test": {},
+  "production": {}
 }
