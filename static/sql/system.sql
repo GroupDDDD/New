@@ -41,12 +41,14 @@ CREATE TABLE `user` (
 
 CREATE TABLE `chat_contents` (
 	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
+	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`part_id`	INT	NOT NULL	COMMENT 'FK 참여자 index',
 	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
 	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간',
 	PRIMARY KEY(`content_id`)
+)engine=innodb auto_increment=1 default charset=utf8;
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `category` (
@@ -64,6 +66,7 @@ CREATE TABLE `aria` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `attachment` (
+	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`data_loc`	TEXT	NOT NULL,
 	`file_name`	VARCHAR(255)	NOT NULL,
@@ -94,3 +97,4 @@ INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (
 INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (5, '', '공무원/임용');
 INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (6, '', '아무거나');
 
+INSERT INTO `user` VALUES (1, 'admin', 'admin', 'admin', 'admin@admin.com', '', '', '', '', '');
