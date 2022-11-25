@@ -30,12 +30,28 @@ const Sign = function(Sequelize, DataTypes){
             //     type: DataTypes.STRING(50),
             //     allowNull: false,
             // },
-            user_Lat: {
-                type: DataTypes.DOUBLE,
+            // user_Lat: {
+            //     type: DataTypes.DOUBLE,
+            //     allowNull: true,
+            // },
+            // user_Lon: {
+            //     type: DataTypes.DOUBLE,
+            //     allowNull: true,
+            // },
+            user_sido:{
+                type: DataTypes.STRING(15),
                 allowNull: true,
             },
-            user_Lon: {
-                type: DataTypes.DOUBLE,
+            user_sigungu: {
+                type: DataTypes.STRING(15),
+                allowNull: true,
+            },
+            user_bname: {
+                type: DataTypes.STRING(15),
+                allowNull: true,
+            },
+            user_roadname: {
+                type: DataTypes.STRING(15),
                 allowNull: true,
             },
             prof_img_url: {
@@ -52,6 +68,5 @@ const Sign = function(Sequelize, DataTypes){
 
     return model;
 }
-
 
 module.exports = Sign;
