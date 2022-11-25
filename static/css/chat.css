@@ -1,0 +1,114 @@
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+.entry-box {
+  margin-top: 5vh;
+}
+
+.chat-list {
+  background-color: skyblue;
+  margin-top: 1px;
+  width: 50vw;
+  height: 70vh;
+  padding: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.chat-list div {
+  margin-top: 3px;
+}
+
+.chat-list div div {
+  display: inline-block;
+  padding: 3px;
+}
+
+.my-chat {
+  text-align: right;
+}
+
+.my-chat div {
+  background-color: yellow;
+}
+.secret-chat div {
+  background-color: pink;
+}
+
+.other-chat div {
+  background-color: white;
+}
+
+.notice {
+  text-align: center;
+  color: navy;
+  font-size: 12px;
+}
+/* .d-none {
+  display: none;
+} */
+
+/* =====================================front */
+.chat-section {
+  width: 100vw;
+  height: 80vh;
+  margin: 0 0 0 0;
+  display: flex;
+}
+
+.chat-users {
+  width: 15vw;
+  height: 100%;
+  background-color: rgb(242, 243, 245);
+}
+
+.chat-user {
+  width: 100%;
+  height: 7vh;
+  background-color: rgb(242, 243, 245);
+  display: flex;
+  align-items: center;
+  font-size: 1.5;
+  font-weight: 600;
+}
+
+.chat-user:hover {
+  background-color: rgb(220, 223, 227);
+}
+
+.chat-room-title {
+  background-color: rgb(242, 243, 245);
+  padding: 1vw;
+  font-size: 1vw;
+}
+
+.chat-room {
+  width: 85vw;
+  height: 100%;
+  padding: 2vw 2vw 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatting {
+  height: 90%;
+}
+
+.chat-input {
+  margin: 2vw 0 2vw 0;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-input > textarea {
+  width: 95%;
+  height: 70%;
+  border: hidden;
+  background-color: rgb(235, 237, 239);
+  border-radius: 5px;
+}
