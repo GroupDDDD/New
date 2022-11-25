@@ -10,8 +10,6 @@ router.get("/main", controller.main);
 //김예나 메인 코드
 router.get("/main2", controller.main2);
 
-router.get("/index", controller.index);
-
 router.get("/study", controller.study); // 전체 조회
 
 router.get("/login", controller.login);
