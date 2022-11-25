@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보</title>
+    <title>회원정보 수정 - 마이페이지</title>
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -20,30 +20,72 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 </head>
 <style>
-    #user_img{
+    #modalOpen{
         width: 50px;
         height: 50px;
         border : 1px solid black;
         border-radius: 50%;
         background-color: blue;
     }
+    #modalOpen #divInImg{
+        width: 100%;
+        height: 100%;
+    }
+     .result{
+        width: 150px;
+        height : 150px;
+        background-color: pink;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+     }
+     #twoBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+     }
+     .box1{
+        width: 50px;
+        height: 50px;
+        background-color: red;
+     }
+     .box2{
+        width: 50px;
+        height: 50px;
+        background-color: green;
+     }
 </style>
 <body>
     <a href = '/'>Home</a>
-    <p>회원정보 수정</p>
+    <p>회원정보 수정-마이페이지</p>
 
 
     <h1><%= user %>님 환영합니다.</h1>
     <div id = "map" style = "width: 500px; height : 400px;"></div>
 
-    <div id = "result"></div>
 
-    <form name = "form_profile">
-        <div id = "profile_img">
-            <label for = "prof_img_url">프로필 사진</label>
-            <div id = "user_img" onclick = "imgEdit();"></div>
+    
+    <div id = "profile_img">
+        <p>Axios 동적 파일 업로드</p>
+        <div id = "modalOpen" onclick = "fileUpload();">
+            <img src = "" id = "divInImg" alt = "선택프로필">
         </div>
 
+        <div id = "resultId">
+            <div id = "twoBox">
+                <div id = "box1"></div>
+
+                <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
+                <div class = "upload"></div>
+            </div>
+
+            <button type = "button" id = "imgEdit" onclick = "editBtn();" style="display:none">수정하기</button> <!-- .uploadBtn -->
+        </div>
+
+    </div>
+    
+    <form name = "form_profile">
         <input type="hidden" id="user_index" value="<%= data.user_index %>" />
 
         <label for = "user_id">ID</label>
@@ -60,13 +102,17 @@
         <input id = "user_email" name = "user_email" type = "email" value = "<%= data.user_email %>" required>
         <button type = "button">중복확인</button><br>
 
-        <!-- <label for = "user_adr">address</label>
-        <input id = "user_adr" name = "user_adr" type = "text" required value = "<%= data.user_adr %>" required><br> -->
 
         <button type = "button" onclick = "profileEdit();">수정완료</button>
         <button type = "button" onclick = "profileDelete();">회원탈퇴</button>
-        <a href = "/main2">main2</a>
+        <br>
+
+        <a href = "/main2">main2(홈)</a>
         <a href = "/sign/logout">로그아웃</a>
+        <br><br>
+
+        <button type = "button">취소</button>
+        <button type = "button" onclick = totalSave();>저장</button>
     </form>
 
     <script>
@@ -111,17 +157,79 @@
             console.log('경도: ', lating.getLat());
             console.log('위도: ', lating.getLng());
         })
-
-        
-
-        let user_img = document.querySelector('#user_img');
-        console.log('프로필 이미지 user_img >>', user_img);
-
     
 
 
-        function imgEdit(){
+        const resultId = document.querySelector('#resultId');
+        const box1 = document.querySelector('#box1');
+        const box2 = document.querySelector('.upload');
+        const dynamicFile = document.querySelector('#dynamicFile');
+        const modalOpen = document.querySelector('#modalOpen');
+        const imgEdit  = document.querySelector('#imgEdit');
+
+        //div태그 클릭 시 파일선택창 뜨게 하기.
+        const realUpload = document.querySelector('.real-upload');
+        const upload = document.querySelector('.upload');
+    
+        upload.addEventListener('click', () => realUpload.click());
+
+        function fileUpload(){ //프로필 수정 버튼을 누르면
             console.log('프로필 사진 선택');
+            
+            resultId.classList.toggle('result');
+            box1.classList.toggle('box1');
+            box2.classList.toggle('box2');
+            imgEdit.classList.toggle('uploadBtn'); //버튼을 누르면 uploadBtn 클래스 생성
+
+            if(imgEdit.classList.contains('uploadBtn')){
+                imgEdit.style.display = "inline-block"; //버튼 보이게
+            }else{
+                imgEdit.style.display = "none"; //버튼 안보이게
+            }
+
+        }
+
+
+        //수정하기 버튼 누르면
+        //1. 사용자가 지정한 사진이 화면에 보이게 하기
+        //2. 사용자가 지정한 사진의 정보를 table에 update하기.
+        function editBtn(){
+            console.log('수정하기 버튼 클릭함');
+
+            const form = document.forms['form_profile'];
+        
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+
+            const formData = new FormData(); // 폼 객체 생성
+            const file = document.querySelector('#profileImg');
+
+            console.log('file 선택>> ', file);
+            console.log('file[0] 선택 >> ', file.files[0]);
+
+            formData.append('profileImg', file.files[0]);
+
+            console.log('front에서 formData보기 >> ', formData);
+
+            //axios 통신
+            axios({
+                method: 'POST',
+                url: '/sign/profile/dynamicFile',
+                data: {
+                    formData: formData,
+                    
+                },
+                //data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data', // enctype="multipart/form-data"
+                },
+            }).then(function(response){ //res.send(req.file);
+                //1. 사용자가 지정한 사진이 화면에 보이게 하기
+                document.querySelector('#divInImg').src = "/" + response.data.path;
+            }) //'/sign/profile/dynamicFile' axios 끝
         }
 
 
@@ -175,6 +283,12 @@
                 
                 document.location.href = "/";
             })
+        }
+
+
+        //최종 수정 후 저장하기 버튼
+        function totalSave(){
+
         }
     </script>
 </body>

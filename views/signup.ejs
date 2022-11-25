@@ -12,6 +12,12 @@
 <body>
     <h1>회원가입</h1>
 
+    <form name = "form_position" action = "/sign/position" method = "GET">
+        <input type = "hidden" name = "user_id">
+    </form>
+
+
+
     <form name="form_register">
         <div id = "id">
             <label for = "user_id">아이디</label>
@@ -80,7 +86,11 @@
                 console.log('data', data);
                 alert('회원가입 성공');
 
-                document.location.href = '/sign/position';
+                const form_position = document.forms['form_position'];
+                form_position.user_id.value = form.user_id.value;
+                form_position.submit();
+
+                //document.location.href = '/sign/position';
                 //document.location.href = '/sign/signin';
             }).catch((data) => { //이메일 중복O -> catch
                 // alert('이미 가입된 이메일입니다.');
