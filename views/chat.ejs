@@ -22,10 +22,77 @@
       integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="/views/css/chat.css" />
+    <link rel="stylesheet" href="../static/css/chat.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
   </head>
   <body>
     <!--채팅창 UI 만들기 -->
+
+    <%- include('./nav.ejs') %>
+
+    <div class="chat-section">
+      <div class="chat-users">
+        <div class="chat-room-title">공모전</div>
+        <div class="chat-user">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+            />
+          </svg>
+          user1
+        </div>
+        <div class="chat-user">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+            />
+          </svg>
+          user2
+        </div>
+      </div>
+      <div class="chat-room">
+        <div class="chatting">
+          <div>채팅1</div>
+          <div>채팅2</div>
+        </div>
+        <div class="chat-input">
+          <textarea
+            type="text"
+            name="chat"
+            placeholder="...방에 메세지 보내기"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- [실습44-2] 채팅창 입장 문구 안내 socket.it -> nickname -->
+    <!-- <div class="entry-box">
+      <input
+        type="text"
+        id="nickname"
+        placeholder="닉네임"
+        autofocus
+        onkeyup="if(window.event.keyCode==13){entry()}"
+      />
+      <button type="button" onclick="entry();">입장</button>
+    </div> -->
+
+    <!-- [실습43] 채팅창 UI 만들기 -->
+
     <div class="chat-box">
       <div id="chat-list" class="chat-list">
         <!-- 기존데이터 조회(참고용) -->

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보 수정 - 마이페이지</title>
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- kakao geolocation -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=966cd89e4a2aec000f0c186e68244c89"></script>
+
+    <!-- kakao 라이브러리 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+    <!-- services 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+</head>
+<style>
+    #modalOpen{
+        width: 50px;
+        height: 50px;
+        border : 1px solid black;
+        border-radius: 50%;
+        background-color: blue;
+    }
+    #modalOpen #divInImg{
+        width: 100%;
+        height: 100%;
+    }
+     .result{
+        width: 150px;
+        height : 150px;
+        background-color: pink;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+     }
+     #twoBox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+     }
+     .box1{
+        width: 50px;
+        height: 50px;
+        background-color: red;
+     }
+     .box2{
+        width: 50px;
+        height: 50px;
+        background-color: green;
+     }
+</style>
+<body>
+    <a href = '/'>Home</a>
+    <p>회원정보 수정-마이페이지</p>
+
+
+    <h1><%= user %>님 환영합니다.</h1>
+    <div id = "map" style = "width: 500px; height : 400px;"></div>
+
+
+    
+    <div id = "profile_img">
+        <p>Axios 동적 파일 업로드</p>
+        <div id = "modalOpen" onclick = "fileUpload();">
+            <img src = "" id = "divInImg" alt = "선택프로필">
+        </div>
+
+        <div id = "resultId">
+            <div id = "twoBox">
+                <div id = "box1"></div>
+
+                <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
+                <div class = "upload"></div>
+            </div>
+
+            <button type = "button" id = "imgEdit" onclick = "editBtn();" style="display:none">수정하기</button> <!-- .uploadBtn -->
+        </div>
+
+    </div>
+    
+    <form name = "form_profile">
+        <input type="hidden" id="user_index" value="<%= data.user_index %>" />
+
+        <label for = "user_id">ID</label>
+        <input id = "user_id" name = "user_id" type = "text" value = "<%= data.user_id %>" required>
+        <button type = "button">중복확인</button><br>
+
+        <label for = "user_pw">PW</label>
+        <input id = "user_pw" name = "user_pw" type = "password" value = "<%= data.user_pw %>" required><br>
+
+        <label for = "user_name">NAME</label>
+        <input id = "user_name" name = "user_name" type = "text" value = "<%= data.user_name %>" required><br>
+
+        <label for = "user_email">email</label>
+        <input id = "user_email" name = "user_email" type = "email" value = "<%= data.user_email %>" required>
+        <button type = "button">중복확인</button><br>
+
+
+        <button type = "button" onclick = "profileEdit();">수정완료</button>
+        <button type = "button" onclick = "profileDelete();">회원탈퇴</button>
+        <br>
+
+        <a href = "/main2">main2(홈)</a>
+        <a href = "/sign/logout">로그아웃</a>
+        <br><br>
+
+        <button type = "button">취소</button>
+        <button type = "button" onclick = totalSave();>저장</button>
+    </form>
+
+    <script>
+        var container = document.getElementById('map');
+		var options = {
+			//center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new kakao.maps.LatLng(37.567130512492994, 126.97849370396516),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+        //clusterer: 마커를 클러스터링 할 수 있는 클러스터러 라이브러리
+        //services: 장소검색과 주소-좌표 변환을 할 수 있는 services 라이브러리
+        //drawing: 지도 위에 마커와 그래픽스 객체를 쉽게 그릴 수 있게 그리기 모드를 지원하는 drawing 라이브러리
+
+        //지도를 클릭한 위치에 표출할 마커이다.
+        var marker = new kakao.maps.Marker({
+            //지도 중심좌표에 마커를 생성한다.
+            position: map.getCenter()
+        });
+
+        //지도에 마커를 표시한다.
+        marker.setMap(map);
+        
+        //지도에 클릭 이벤트를 등록한다.
+        //지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출한다.
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+            //클릭한 위도, 경도 정보를 가져온다.
+            var lating = mouseEvent.latLng;
+
+            //마커 위치를 클릭한 위치로 옮긴다.
+            marker.setPosition(lating);
+
+
+            var message = '클릭한 위치의 경도는 ' + lating.getLat() + ' 이다<br>';
+            message += '경도는 ' + lating.getLng() + ' 입니다.';
+
+            var resultDiv = document.querySelector('#result');
+            resultDiv.innerHTML = message;
+
+            console.log('경도: ', lating.getLat());
+            console.log('위도: ', lating.getLng());
+        })
+    
+
+
+        const resultId = document.querySelector('#resultId');
+        const box1 = document.querySelector('#box1');
+        const box2 = document.querySelector('.upload');
+        const dynamicFile = document.querySelector('#dynamicFile');
+        const modalOpen = document.querySelector('#modalOpen');
+        const imgEdit  = document.querySelector('#imgEdit');
+
+        //div태그 클릭 시 파일선택창 뜨게 하기.
+        const realUpload = document.querySelector('.real-upload');
+        const upload = document.querySelector('.upload');
+    
+        upload.addEventListener('click', () => realUpload.click());
+
+        function fileUpload(){ //프로필 수정 버튼을 누르면
+            console.log('프로필 사진 선택');
+            
+            resultId.classList.toggle('result');
+            box1.classList.toggle('box1');
+            box2.classList.toggle('box2');
+            imgEdit.classList.toggle('uploadBtn'); //버튼을 누르면 uploadBtn 클래스 생성
+
+            if(imgEdit.classList.contains('uploadBtn')){
+                imgEdit.style.display = "inline-block"; //버튼 보이게
+            }else{
+                imgEdit.style.display = "none"; //버튼 안보이게
+            }
+
+        }
+
+
+        //수정하기 버튼 누르면
+        //1. 사용자가 지정한 사진이 화면에 보이게 하기
+        //2. 사용자가 지정한 사진의 정보를 table에 update하기.
+        function editBtn(){
+            console.log('수정하기 버튼 클릭함');
+
+            const form = document.forms['form_profile'];
+        
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+
+            const formData = new FormData(); // 폼 객체 생성
+            const file = document.querySelector('#profileImg');
+
+            console.log('file 선택>> ', file);
+            console.log('file[0] 선택 >> ', file.files[0]);
+
+            formData.append('profileImg', file.files[0]);
+
+            console.log('front에서 formData보기 >> ', formData);
+
+            //axios 통신
+            axios({
+                method: 'POST',
+                url: '/sign/profile/dynamicFile',
+                data: {
+                    formData: formData,
+                    
+                },
+                //data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data', // enctype="multipart/form-data"
+                },
+            }).then(function(response){ //res.send(req.file);
+                //1. 사용자가 지정한 사진이 화면에 보이게 하기
+                document.querySelector('#divInImg').src = "/" + response.data.path;
+            }) //'/sign/profile/dynamicFile' axios 끝
+        }
+
+
+        function profileEdit(){
+            const form = document.forms['form_profile'];
+        
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            axios({
+                method: 'POST',
+                url: '/sign/profile/edit',
+                data:{
+                    user_index: form.user_index.value,
+                    user_id: form.user_id.value,
+                    user_pw: form.user_pw.value,
+                    user_name: form.user_name.value,
+                    user_email: form.user_email.value,
+                    //user_adr: form.user_adr.value,
+                },
+            }).then((res) => {
+                return res.data;
+            }).then((data) => {
+                alert(data);
+            });
+        }
+
+        function profileDelete(){
+            const form = document.forms['form_profile'];
+            console.log('delete에서 form>> ', form);
+            console.log('delete에서 form.id.value>> ', form.user_index.value);
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            axios({
+                method: 'POST',
+                url: '/sign/profile/delete',
+                data: {
+                    user_index: form.user_index.value,
+                }
+            }).then((res) => {
+                console.log('delete에서 axios res>> ', res);
+                return res.data;
+            }).then((data) => {
+                alert('회원 탈퇴 성공');
+                
+                document.location.href = "/";
+            })
+        }
+
+
+        //최종 수정 후 저장하기 버튼
+        function totalSave(){
+
+        }
+    </script>
+</body>
+</html>

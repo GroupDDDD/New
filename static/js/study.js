@@ -1,5 +1,7 @@
 const titles = document.querySelectorAll(".title");
 const underboxes = document.querySelectorAll(".title-underbox");
+const study = document.querySelector(".study");
+const study2 = document.querySelector(".study2");
 
 const cards = document.querySelectorAll(".card");
 const modals = document.querySelectorAll(".window-modal");
@@ -12,6 +14,10 @@ for (const title of titles) {
     title.classList.toggle("title-opacity");
   });
 }
+
+// for(const title of titles) {
+//   title.addEventListener("click", )
+// }
 
 for (const card of cards) {
   card.addEventListener("click", function () {
