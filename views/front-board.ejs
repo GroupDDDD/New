@@ -7,15 +7,32 @@
     <title>Document</title>
     <link rel="stylesheet" href="../static/css/front-board.css" />
     <link rel="stylesheet" href="../static/css/nav.css" />
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- jquery cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <%- include('./nav.ejs') %>
 
-    <div class="write-info">
+    <form class="write-info" action="/board" method="post" name="article-form">
       <div class="write-first-line">
         <div>글 쓰기</div>
         <a href="/study">
-          <button class="write-submit">완료</button>
+          <button
+            class="write-submit"
+            type="button"
+            onclick="postArticle(); location.href='/board' "
+            id="btn"
+          >
+            완료
+          </button>
         </a>
       </div>
       <div class="write-title">
@@ -26,13 +43,17 @@
           placeholder="제목 입력"
         />
       </div>
-      <select class="write-category">
+
+      <div class="write-title">
+        <input type="text" name="member_number" placeholder="모집인원" />
+      </div>
+      <!-- <select class="write-category">
         <option value="">카테고리 설정</option>
         <option value="프로그래밍">프로그래밍</option>
         <option value="공모전" selected="selected">공모전</option>
         <option value="자격증">자격증</option>
-      </select>
-      <div class="insert-img">
+      </select> -->
+      <!-- <div class="insert-img">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="45"
@@ -49,16 +70,41 @@
           />
         </svg>
         <img src="" alt="" />
+      </div> -->
+      <div class="study-how">
+        <div>
+          <span>스터디 형태</span>
+        </div>
+        <div>
+          <input type="radio" name="parity" id="on" value="ONLINE" />
+          <label for="on">온라인</label>
+          <input type="radio" name="parity" id="off" value="OFFLINE" />
+          <label for="off">오프라인</label>
+        </div>
+      </div>
+
+      <div class="board-date">
+        <label for="expr_dt">모집마감일</label>
+        <input type="date" name="expr_dt" id="expr_dt" />
+      </div>
+      <div class="board-date">
+        <label for="start_dt">스터디 시작일</label>
+        <input type="date" name="start_dt" id="start_dt" />
+      </div>
+      <div class="board-date">
+        <label for="end_dt">스터디 종료일</label>
+        <input type="date" name="end_dt" id="end_dt" />
       </div>
 
       <textarea
-        name="content"
+        name="description"
+        id="description"
         class="write-content"
         type="text"
         placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요."
       ></textarea>
-    </div>
+    </form>
 
-    <img src="/upload/${bucketProduct.image}" alt="" />
+    <script src="../static/js/post.js"></script>
   </body>
 </html>
