@@ -3,24 +3,72 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* background-color: rgb(173, 234, 173); */
+}
+
+.write-first-line {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 0 0 0;
+  padding: 0 0 15px 0;
+  border-bottom: solid 1px black;
+}
+
+.write-first-line > div {
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .insert-img {
-  width: 250px;
+  width: 400px;
   height: 250px;
-  background-color: gray;
+  border: solid 1px black;
   margin: 5vh 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.write-title {
+  margin: 15px 0 0 0;
 }
 
 .write-title > input {
-  width: 250px;
+  width: 400px;
+  /* background-color: rgb(173, 234, 173); */
+  border: hidden;
+  border-bottom: solid 1px rgb(191, 190, 190);
 }
 
 .write-category {
-  width: 250px;
+  width: 400px;
+  margin: 25px 0 0 0;
+  /* background-color: rgb(173, 234, 173); */
+  border: hidden;
+  border-bottom: solid 1px rgb(191, 190, 190);
+  font-weight: 700;
 }
 
 .write-content {
-  width: 250px;
+  width: 400px;
   height: 200px;
+  margin: 15px 0 15px 0;
+  /* border: hidden; */
+  /* background-color: rgb(173, 234, 173); */
+  border: solid 1px rgb(191, 190, 190);
+  /* border-left: solid 1px rgb(191, 190, 190); */
+  overflow: auto;
+}
+
+.write-submit {
+  width: 70px;
+  height: 30px;
+  background-color: yellowgreen;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
 }

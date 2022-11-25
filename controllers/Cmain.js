@@ -32,3 +32,7 @@ exports.chat = (req, res) => {
 exports.frontBoard = (req, res) => {
   res.render("front-board");
 };
+
+exports.mypage = (Req, res) => {
+  res.render("mypage");
+};
