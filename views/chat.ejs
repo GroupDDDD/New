@@ -157,15 +157,25 @@
           msg: document.querySelector("#message").value,
         };
         socket.emit("send", data);
+        console.log(data.msg);
+        console.log("partId 인서트전", partId);
         // 메세지내용 DB에 저장
         axios({
           method: "POST",
           url: "/chatcont/postChatcont",
           data: {
-            partId: data.partId,
-            message: msg,
+            partId: partId,
+            message: data.msg,
           },
-        });
+        })
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            return res.data;
+          })
+          .then((data) => {
+            console.log("인서트됐는지확인용", data); // {id: 8, name: 'ㅁㅁ', comment: 'ㅁㅁ'}
+          });
       }
 
       // [실습45] 채팅창 메세지 전송 Step2

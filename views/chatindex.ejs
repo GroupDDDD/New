@@ -114,7 +114,21 @@
         else if (publisherOrnot === false && roomExistsOrnot === true) {
           // socket.emit("setNick", result.user_name);//소켓에 전달해야...나중에
           console.log("게시자가 아니고 채팅방 존재", roomId, pubId, id);
-          window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}`;
+
+          // part_id조회
+          let result3 = await axios({
+            method: "GET",
+            url: `/part/getpartid?roomId=${roomId}&id=${id}`,
+          }).then((res) => {
+            console.log("1: ", res.data);
+            return res.data;
+          });
+          console.log("'2 part 조회 결과: ", result3);
+          loginResult.textContent = `part_id값: ${result3.data[0].part_id}`;
+
+          // partid값 넣기
+          partId = result3.data[0].part_id;
+          window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}&partId=${partId}`;
         }
 
         // 게시자가 아니고 채팅방 없으면
@@ -161,17 +175,17 @@
           });
 
           // part_id조회
-          let result3 = await axios({
+          let result4 = await axios({
             method: "GET",
             url: `/part/getpartid?roomId=${roomId}&id=${id}`,
           }).then((res) => {
             console.log("1: ", res.data);
             return res.data;
           });
-          console.log("'2 part 조회 결과: ", result3);
-          loginResult.textContent = `part_id값: ${result3.data[0].part_id}`;
+          console.log("'2 part 조회 결과: ", result4);
+          loginResult.textContent = `part_id값: ${result4.data[0].part_id}`;
           // partid값 넣기
-          partId = result3.data[0].part_id;
+          partId = result4.data[0].part_id;
           // 채팅창페이지로 이동
           window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}&partId=${partId}`;
         }
