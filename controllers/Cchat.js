@@ -40,7 +40,7 @@ exports.pubroom = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.res({ data: result });
+      res.send({ data: result });
     });
 };
 // 채팅신청자용 채팅방존재여부 조회
@@ -57,7 +57,7 @@ exports.conroom = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.res({ data: result });
+      res.send({ data: result });
     });
 };
 

@@ -31,6 +31,8 @@
       // 게시글 상세페이지에서 게시자인지 아닌지 값 받아오기
       let publisherOrnot = false;
       let roomExistsOrnot;
+      let roomId;
+      let partId;
       // div에 나타나도록
       const roomResult = document.querySelector(".room-result");
       roomResult.textContent = `채팅방존재여부: ${roomExistsOrnot}`;
@@ -69,7 +71,7 @@
             console.log("1: ", res.data);
             return res.data;
           });
-          console.log("'2 채팅방 조회 결과: ", result);
+          console.log("'게시자용 채팅방 조회 결과: ", result);
           loginResult.textContent = `채팅방개수: ${result.length}`;
           // 채팅방존재여부값에 true
           if (result) {
@@ -89,13 +91,14 @@
             console.log("1: ", res.data);
             return res.data;
           });
-          console.log("'2 채팅룸아이디가져오기: ", result);
-          loginResult.textContent = `채팅룸아이디: ${result.room_id}`;
+          console.log("'채팅신청자용아이디가져오기: ", result.data[0].room_id);
+          loginResult.textContent = `채팅룸아이디: ${result.data[0].room_id}`;
           // 채팅방존재여부값에 true
           if (result) {
             roomExistsOrnot = true;
             // 채팅룸아이디가져오기
-            let roomId = result.room_id;
+            roomId = result.data[0].room_id;
+            console.log("result(true", roomId);
           } else {
             roomExistsOrnot = false;
           }
@@ -108,8 +111,9 @@
         }
 
         // 게시자가 아니고 채팅방 존재하면 채팅창페이지로 이동
-        if (publisherOrnot === false && roomExistsOrnot === true) {
+        else if (publisherOrnot === false && roomExistsOrnot === true) {
           // socket.emit("setNick", result.user_name);//소켓에 전달해야...나중에
+          console.log("게시자가 아니고 채팅방 존재", roomId, pubId, id);
           window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}`;
         }
 
@@ -140,9 +144,9 @@
             return res.data;
           });
           console.log("'2 채팅룸아이디가져오기: ", result2);
-          loginResult.textContent = `채팅룸아이디: ${result2.room_id}`;
+          loginResult.textContent = `채팅룸아이디: ${result2.data[0].room_id}`;
           // 채팅방아이디값 가져오기
-          let roomId = result2.room_id;
+          roomId = result2.data[0].room_id;
 
           // 2: 참가자테이블값생성(chat_participants)
           // pubStatus: 게시자여부(비게시자)
@@ -165,9 +169,9 @@
             return res.data;
           });
           console.log("'2 part 조회 결과: ", result3);
-          loginResult.textContent = `part_id값: ${result3.part_id}`;
+          loginResult.textContent = `part_id값: ${result3.data[0].part_id}`;
           // partid값 넣기
-          let partId = result3.part_id;
+          partId = result3.data[0].part_id;
           // 채팅창페이지로 이동
           window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}&partId=${partId}`;
         }

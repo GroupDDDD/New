@@ -18,6 +18,12 @@ app.use("/", userRouter);
 const chatRouter = require("./routes/chat");
 app.use("/chat", chatRouter); // 기본 경로: localhost:PORT/chat
 
+const chatcontRouter = require("./routes/chatcont");
+app.use("/chatcont", chatcontRouter); // 기본 경로: localhost:PORT/chatcont
+
+const partRouter = require("./routes/part");
+app.use("/part", partRouter); // 기본 경로: localhost:PORT/part
+
 //소켓 잠깐 주석처리!!!
 
 // // [실습46] DM 기능 구현
