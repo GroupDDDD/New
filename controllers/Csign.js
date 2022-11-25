@@ -49,6 +49,7 @@ exports.getPosition = (req, res) => {
       }
 }
 
+//사용자가 입력한 장소 테이블에 update 하기
 exports.postPositionUpdate = (req, res) => {
     console.log('position의 req.body.user_sido 정보 보기 >> ', req.body.user_sido);
     console.log('position의 req.body.user_sigungu 정보 보기 >> ', req.body.user_sigungu);
@@ -176,11 +177,39 @@ exports.postProfileEdit = (req, res) => {
 
 exports.postProfileDelete = (req, res) => {
     //delete from user where id = ${id}
+    const user = req.session.user;
+
+    console.log('req.session.user >> ', user);
+    
     models.Sign.destroy({
         where:{user_index: req.body.user_index}
     }).then((result) => {
         console.log('destroy>>', result);
-        res.send('탈퇴성공');
+
+        if(user !== undefined){
+            req.session.destroy((err) => {
+                if(err){
+                    throw err;
+                }
+
+
+                res.redirect('/main2');
+            })
+        }else{
+            // 유저가 브라우저에서 /logout 경로로 직접 접근
+        // res.send()
+        // - alert('잘못된 접근입니다');
+        // - /경로로 이동
+        res.send(
+            `<script>
+                alert('잘못된 접근입니다.);
+                document.location.href = '/';
+            </script>`
+          );
+        }
+
+
+        //res.send('탈퇴성공');
     })
 }
 
@@ -203,10 +232,26 @@ exports.postProfileImg = (req, res) => {
 //req.session.destroy는 req.session의 내용의 제거한다.
 //세션 정보를 지운 후 메인 페이지로 되돌아간다. 로그인이 헤제되어 있다.
 exports.getLogout = (req, res) => {
-    req.session.destroy((err) => {
-        if(err){
-            throw err;
-        }
-        res.redirect('/main2');
-    })
+    const user = req.session.user;
+    console.log('req.session.user >> ', user);
+
+    if(user !== undefined){
+        req.session.destroy((err) => {
+            if(err){
+                throw err;
+            }
+            res.redirect('/main2');
+        })
+    }else{
+        // 유저가 브라우저에서 /logout 경로로 직접 접근
+    // res.send()
+    // - alert('잘못된 접근입니다');
+    // - /경로로 이동
+    res.send(
+        `<script>
+            alert('잘못된 접근입니다.);
+            document.location.href = '/';
+        </script>`
+      );
+    }
 }
