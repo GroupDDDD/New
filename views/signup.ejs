@@ -8,6 +8,9 @@
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+     <!-- kakao 주소 검색 -->
+     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
     <h1>회원가입</h1>
@@ -43,6 +46,11 @@
             <div id = "emailTestText"></div>
         </div>
 
+        <h3>주소</h3>
+        <input type = "text" id = "address_kakao" name = "address" readonly><br>
+        <h3>상세주소</h3>
+        <input type = "text" name = "address_detail">
+
         <button type = "button" onclick = "register();">회원가입</button>
     </form>
 
@@ -55,6 +63,43 @@
 
         console.log('idTestTest: ', idTestText);
         console.log('emailTestTExt', emailTestText);
+
+        let getAddrInfo = {
+            address: '',
+            sido: '',
+            sigungu: '',
+            bename2: '',
+            roadname: ''
+        };
+
+        function address(){
+            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                //카카오 지도 발생
+                new daum.Postcode({
+                    oncomplete: function(info) {
+                        document.getElementById("address_kakao").value = info.address; // 주소 넣기
+                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                        console.log('info>>', info);
+                        console.log('전체 주소: ', info.address);
+                        console.log('도: ', info.sido);
+                        console.log('시: ', info.sigungu);
+                        console.log('동2: ', info.bname2);
+                        console.log('로: ', info.roadname);
+                        
+                        getAddrInfo.address = info.address;
+                        getAddrInfo.sido = info.sido;
+                        getAddrInfo.sigungu = info.sigungu;
+                        getAddrInfo.bename2 = info.bname2;
+                        getAddrInfo.roadname = info.roadname;
+                    }
+                }).open();
+            });
+
+            return getAddrInfo;
+        }
+
+        //kakao 주소 검색
+        window.onload = address();
 
 
         function register(){
@@ -70,6 +115,13 @@
                 return;
               }*/
 
+            //return된 getAddInfo 객체의 값이 나온다.
+            console.log('다른 함수에서 가져온 address()함수 >> ', address());
+            console.log('도 >> ', address().sido);
+            console.log('시 >> ', address().sigungu);
+            console.log('동 >> ', address().bename2);
+            console.log('로 >> ', address().roadname);
+
             axios({
                 method: 'POST',
                 url: '/sign/signup',
@@ -78,6 +130,11 @@
                     user_pw: form.user_pw.value,
                     user_name: form.user_name.value,
                     user_email: form.user_email.value,
+
+                    user_sido: address().sido, //도
+                    user_sigungu: address().sigungu,//시
+                    user_bename: address().bename2,//구
+                    user_roadname: address().roadname //동
                 },
             }).then((res) => {
                 console.log('res', res);

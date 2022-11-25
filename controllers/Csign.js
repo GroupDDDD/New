@@ -18,11 +18,18 @@ exports.getSignin = (req, res) => {
 
 //회원가입
 exports.postSignup = (isLoggedIn, (req, res) => {
+    console.log('position의 req.body.user_sido 정보 보기 >> ', req.body.user_sido);
+    console.log('position의 req.body.user_sigungu 정보 보기 >> ', req.body.user_sigungu);
     models.Sign.create({
         user_id: req.body.user_id,
         user_pw: req.body.user_pw,
         user_name: req.body.user_name,
         user_email: req.body.user_email,
+
+        user_sido: req.body.user_sido,
+        user_sigungu: req.body.user_sigungu,
+        user_bename: req.body.user_bename,
+        user_roadname: req.body.user_roadname
     }).then((result) => {
         console.log('중복 확인!create >> ', result);
         //result >>  user {
