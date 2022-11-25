@@ -48,7 +48,6 @@ CREATE TABLE `chat_contents` (
 	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간',
 	PRIMARY KEY(`content_id`)
 )engine=innodb auto_increment=1 default charset=utf8;
-)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `category` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
@@ -65,7 +64,6 @@ CREATE TABLE `aria` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `attachment` (
-	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`data_loc`	TEXT	NOT NULL,
 	`file_name`	VARCHAR(255)	NOT NULL,
