@@ -24,10 +24,6 @@ exports.main2 = (req, res) => {
     // res.render('main2');
 }
 
-exports.index = (req, res) => {
-    res.render("temp_index");
-};
-
 exports.study = (req, res) => {
     res.render("study");
 };

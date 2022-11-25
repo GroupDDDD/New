@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 
+
 // router
 const { sequelize } = require("./models/index"); // 시퀄라이즈
 const indexRouter = require("./routes/index");
@@ -56,7 +57,8 @@ app.use(
     session({
         resave: false,
         saveUninitialized: false,
-        secret: process.env.COOKIE_SECRET,
+        // secret: process.env.COOKIE_SECRET,
+        secret: "secret",
         cookie: {
             httpOnly: true,
             secure: false,
@@ -105,12 +107,12 @@ io.on("connection", (socket) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-    res.status(err.status || 500);
-    res.render("error");
-});
+// app.use((err, req, res, next) => {
+//     res.locals.message = err.message;
+//     res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+//     res.status(err.status || 500);
+//     res.render("error");
+// });
 
 // 주의!!!) 소켓을 사용하기 위해서는 http.listen()으로 포트를 열어야 함
 
