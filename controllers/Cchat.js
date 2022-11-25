@@ -24,6 +24,7 @@ exports.getChatlistpage = (req, res) => {
 };
 
 // 게시자용 채팅방존재여부 조회
+// 게시자용 채팅방존재여부 조회
 
 exports.pubroom = (req, res) => {
   const query = `SELECT *  
