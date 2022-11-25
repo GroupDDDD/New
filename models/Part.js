@@ -6,7 +6,7 @@
 
 // chat_room 모델(-> 테이블 구조) 정의
 // 시퀄라이즈 모델이랑 mysql table 연결
-const part = function (Sequelize, DataTypes) {
+const Part = function (Sequelize, DataTypes) {
   // Sequelize: models/index.js 의 sequelize
   // DataTypes: models/index.js 의 Sequelize
   // Sequelize.define(param1, param2, param3)
@@ -14,7 +14,7 @@ const part = function (Sequelize, DataTypes) {
   // param2: 컬럼 정의 -> {}
   // param3: 모델 옵션 정의 -> {}
   const model = Sequelize.define(
-    "participants",
+    "chat_participants",
     {
       // `part_id`	INT	NOT NULL	COMMENT 'PK 참여자 index',
       part_id: {
@@ -27,16 +27,27 @@ const part = function (Sequelize, DataTypes) {
       room_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true,
       },
       // `user_id`	INT	NOT NULL	COMMENT 'FK 유저 아이디'
-      user_id: {
-        type: DataTypes.STRING(15),
+      user_index: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      pub_status: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
       },
     },
     {
-      tableName: "participants", // 실제 DB의 테이블 이름
+      tableName: "chat_participants", // 실제 DB의 테이블 이름
       freezeTableName: true, // 테이블 이름 고정
       timestamps: true, // 데이터가 추가/수정 시간을 자동으로 컬럼 만들어서 기록
     }

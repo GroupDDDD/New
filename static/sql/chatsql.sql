@@ -113,40 +113,52 @@ CREATE TABLE `chat_room` (
     `chat_kind` 
 -- INSERT문
 -- user테이블 테스트 데이터 입력
-   INSERT INTO user (id, pw, user_name, user_email, prof_img_url, created_dt) VALUES('contactor1', '1111', '채팅신청자1', 'test@test.com', 'https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg','20221121');
+   INSERT INTO user (user_id, user_pw, user_name, user_email,user_Lat, user_Lon, prof_img_url, createdAt, updatedAt) VALUES('publisher1', '1111', '게시자1', 'test@test.com', '11','22','https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg','20221121','20221121');
    
-   INSERT INTO user (id, pw, user_name, user_email, prof_img_url, created_dt) VALUES('contactor2', '1111', '채팅신청자2', 'test@test.com', 'https://cdn.huffingtonpost.kr/news/photo/201911/90011_169154.jpeg','20221121');
+   INSERT INTO user (user_id, user_pw, user_name, user_email,user_Lat, user_Lon, prof_img_url, createdAt, updatedAt) VALUES('contactor1', '1111', '채팅신청자1', 'test@test.com', '11','22','https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg','20221121','20221121');
 
-   INSERT INTO user (id, pw, user_name, user_email, prof_img_url, created_dt) VALUES('contactor3', '1111', '채팅신청자3', 'test@test.com', 'https://cdn.huffingtonpost.kr/news/photo/201911/90011_169154.jpeg','20221121');
+   INSERT INTO user (user_id, user_pw, user_name, user_email,user_Lat, user_Lon, prof_img_url, createdAt, updatedAt) VALUES('contactor2', '1111', '채팅신청자2', 'test@test.com', '11','22','https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg','20221121','20221121');
 
 
-INSERT INTO board (user_id,title,parity,member_num,description,expr_dt,start_dt,end_dt,appo_time,appo_aria,createdAt) VALUES ('1', '테스트1', 'OFFLINE', '5', '스터디 내용','20221122','20221130','20221201','20221201','염리동','20221122');
+INSERT INTO board (user_index,title,parity,member_num,description,expr_dt,start_dt,end_dt,appo_time,appo_aria,createdAt, updatedAt) VALUES ('1', '테스트1', 'OFFLINE', '5', '스터디 내용','20221122','20221130','20221201','20221201','염리동','20221122','20221121');
 
 -- chat_room테이블 테스트 데이터 입력
-INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt) VALUES ('1', '2', '1', '20221122');
+INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt, updatedAt) VALUES ('1', '2', '1', '20221122', '20221122');
 
-INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt) VALUES ('1', '3', '1', '20221122');
+INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt, updatedAt) VALUES ('1', '3', '1', '20221122', '20221122');
 
 -- chat_participants테이블 테스트 데이터 입력
-INSERT INTO chat_participants (room_id, user_id, createdAt) VALUES ('1', '1', '20221122');
+INSERT INTO chat_participants (room_id, user_index, pub_status, createdAt) VALUES ('1', '1', '1', '20221122');
 
-INSERT INTO chat_participants (room_id, user_id, createdAt) VALUES ('1', '2', '20221122');
+INSERT INTO chat_participants (room_id, user_index,  pub_status, createdAt) VALUES ('1', '3', '2', '20221122');
 
 -- chat_contents테이블 테스트 데이터 입력
-INSERT INTO chat_contents (part_id, message, createdAt) VALUES ('3', '안녕하세요', '20221122');
+INSERT INTO chat_contents (part_id, message, createdAt, updatedAt) VALUES ('2', '스터디참가하고싶습니다.', '20221122', '20221122');
 
-INSERT INTO chat_contents (part_id, message, createdAt) VALUES ('3', '안녕하세요', '20221122');
+INSERT INTO chat_contents (part_id, message, createdAt, updatedAt) VALUES ('1', '누구세요', '20221122', '20221122');
 
 -- DROP테이블( 순서대로 )
 drop table chat_contents;
 
-drop table chat_particippants;
+drop table chat_participants;
 
 drop table chat_room;
 
+drop tabel chat_selected;
+
+drop table aria;
+
+drop table attachment;
+
+drop table category;
+
+drop table board;
+
+drop table user;
+
 -- 테이블 수정( updatedAt null로 수정)
 
-alter table chat_room modify column updatedAt datetime;
+alter table chat_room modify column contactor_id INT	NOT NULL;
 
 alter table board modify column createdAt datetime NOT NULL;
 
@@ -165,12 +177,12 @@ ALTER TABLE chat_participants DROP pub_status;
 -- chat_participants pub_status
 ALTER TABLE chat_participants ADD pub_status int NOT NULL AFTER user_id;
 
-
+UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 
 -- 채팅방리스트 조회
 
 
-  SELECT u.prof_img_url, u.user_name, b.title  
+  SELECT u.prof_img_url, r.user_name, b.title  
   FROM chat_room AS r
   
   JOIN board AS b
@@ -180,11 +192,82 @@ ALTER TABLE chat_participants ADD pub_status int NOT NULL AFTER user_id;
   ON r.room_id = p.room_id
 
   JOIN user AS u
-  ON r.contactor_id = u.user_id
+  ON r.contactor_id = u.user_index
   
   WHERE p.pub_status = '2' 
-  and b.user_id = '1';
+  and b.user_index = '1';
 
   UPDATE chat_participants SET pub_status = '2' where part_id ='3';
+
+
+-- 채팅방내용 조회
+-- '2' 채팅신청자 아이디
+-- '1' 게시글작성자 아이디
+
+  SELECT *  
+  FROM chat_contents AS c
+  
+  JOIN chat_participants AS p
+  ON c.part_id = p.part_id
+  
+  JOIN user AS u
+  ON p.user_index = u.user_index
+
+  WHERE (p.room_id = '1'
+  and p.user_index ='2') or (p.room_id = '1'
+  and p.user_index ='1')
+  ORDER BY c.createdAt desc;
+
+
+    SELECT * 
+  FROM chat_room AS r
+  
+  JOIN board AS b
+  ON r.article_id = b.article_id
+  
+  JOIN chat_participants AS p
+  ON r.room_id = p.room_id
+
+  JOIN user AS u
+  ON r.contactor_id = u.user_index
+  
+  WHERE p.pub_status = '2' 
+  and b.user_index = '1';
+
+
+--   채팅방리스트조회 최종
+
+  SELECT r.room_id, u.prof_img_url, u.user_name, b.title  
+  FROM chat_room AS r
+  
+  JOIN board AS b
+  ON r.article_id = b.article_id
+
+  JOIN user AS u
+  ON r.contactor_id = u.user_index
+  
+  WHERE b.user_index = '1';
+
+
+--   채팅방 있는지 여부조회 게시자용
+
+
+ SELECT *
+    ->   FROM chat_room AS r
+    ->
+    ->   JOIN board AS b
+    ->   ON r.article_id = b.article_id
+    ->
+    ->   WHERE r.article_id ='1'
+    ->   and b.user_index='1';
+
+    -- 채팅방 있는지 조회(채팅신청자용)
+
+  SELECT *  
+  FROM chat_room 
+  
+  WHERE article_id ='1'
+  and contactor_id='2';
+
 
 

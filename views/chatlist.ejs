@@ -41,18 +41,40 @@
           <td><%= data[i].user_name %></td>
           <td><%= data[i].title %></td>
           <td>
-            입장버튼예정
-            <!-- <button
+            <button
               type="button"
-              onclick="entryChat(this, '<%= data[i].id %>');"
+              onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
             >
-              입장
-            </button> -->
+              Go
+            </button>
           </td>
         </tr>
         <% } %>
         <!-- 추가되어야할 tr 위치 -> 종료태그의 앞(beforeend) -->
       </tbody>
     </table>
+
+    <script>
+      // 채팅창 입장
+      function chatEntry(user_index, id, room_id) {
+        console.log(user_index);
+        console.log(id);
+        console.log(room_id);
+
+        // 채팅창 조회
+        axios({
+          method: "GET",
+          url: "/chatcont/getChatcont",
+          data: {
+            thisId: user_index, // obj.user_index: 클릭한 채팅방의 chat_participants테이블의 user_index
+            pubId: id, // 로그인한 사람의 user_index
+            roomId: room_id,
+          },
+        }).then((res) => {
+          console.log(res.data);
+          return res.data;
+        });
+      }
+    </script>
   </body>
 </html>
