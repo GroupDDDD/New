@@ -20,4 +20,6 @@ router.get("/front-board", controller.frontBoard);
 
 router.get("/mypage", controller.mypage);
 
+router.get("/chatlink", controller.chatStart);
+
 module.exports = router;
