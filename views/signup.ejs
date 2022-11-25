@@ -88,7 +88,7 @@
 
                 const form_position = document.forms['form_position'];
                 form_position.user_id.value = form.user_id.value;
-                form_position.submit();
+                form_position.submit(data.user_index); //position으로 넘어간다.
 
                 //document.location.href = '/sign/position';
                 //document.location.href = '/sign/signin';

@@ -23,9 +23,16 @@ exports.postSignup = (isLoggedIn, (req, res) => {
         user_pw: req.body.user_pw,
         user_name: req.body.user_name,
         user_email: req.body.user_email,
-        // user_adr: req.body.user_adr,
     }).then((result) => {
         console.log('중복 확인!create >> ', result);
+        //result >>  user {
+        //     dataValues: {
+        //       user_index: 39,
+        //       user_id: '2',
+        //       user_pw: '2',
+        //       user_name: '2',
+        //       user_email: '2@2'
+        //     },
         req.session.user = req.body.user_id;
         res.send(result); //then((res) => {
 
@@ -216,6 +223,8 @@ exports.postProfileDelete = (req, res) => {
 exports.postProfileImg = (req, res) => {
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
     console.log('req 보기> >> ', req.body);
+    console.log('***************************');
+    console.log('req 보기 - user_index보기 >> ', req.body.user_index);
     console.log('req.file >> ', req.file)
     console.log('req.file.path >> ', req.file.path);
 
@@ -224,7 +233,17 @@ exports.postProfileImg = (req, res) => {
     res.send(req.file);
 
     //update user set prof_img_url = ${data.prof_img_url}
+    models.Sign.update({
+        prof_img_url: req.file.filename,
+    },
+    {
+        where: {user_index: req.body.user_index}
+    }).then((result) => {
+        console.log('img update >> ', result);
 
+        //res.send(req.file);
+        //res.send('사진 db 업로드 완료');
+    })
 }
 
 

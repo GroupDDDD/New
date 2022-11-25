@@ -86,6 +86,7 @@
     </div>
     
     <form name = "form_profile">
+        <!-- <input name="name" value="Sean"> -->
         <input type="hidden" id="user_index" value="<%= data.user_index %>" />
 
         <label for = "user_id">ID</label>
@@ -204,25 +205,27 @@
             }
 
 
+            const form_profile = document.forms['form_profile'];
             const formData = new FormData(); // 폼 객체 생성
             const file = document.querySelector('#profileImg');
 
             console.log('file 선택>> ', file);
             console.log('file[0] 선택 >> ', file.files[0]);
 
+            formData.append('user_index', form_profile.user_index.value); // <input name="user_index" value="Sean">
             formData.append('profileImg', file.files[0]);
+            
 
+            console.log('*********************************8');
             console.log('front에서 formData보기 >> ', formData);
+            console.log('front에서 내가 넣은 formData.get보기 >> ', formData.get('user_index'));
 
             //axios 통신
             axios({
                 method: 'POST',
                 url: '/sign/profile/dynamicFile',
-                data: {
-                    formData: formData,
-                    
-                },
-                //data: formData,
+                data: 
+                    formData,
                 headers: {
                     'Content-Type': 'multipart/form-data', // enctype="multipart/form-data"
                 },
