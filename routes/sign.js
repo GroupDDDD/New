@@ -9,25 +9,25 @@ const multer = require('multer');
 //multer 설정
 const uploadDetail = multer({
     storage: multer.diskStorage({
-      destination(req, file, done){
-        done(null, 'profileImgs/'); //경로설정.
-      },
-      filename(req, file, done){
-        //file.originalname에서 "확장자" 추출하는 과정
-        const ext = path.extname(file.originalname);
-  
-        console.log('file.originalname: ', file.originalname);
-        console.log('ext: ', ext);
-        console.log('basename: ', path.basename(file.originalname, ext));
-        // console.log('아이디로 붙이기', req.body.user_id);
-  
-        done(null, path.basename(file.originalname, ext) + Date.now() + ext);
-      }
+        destination(req, file, done) {
+            done(null, 'profileImgs/'); //경로설정.
+        },
+        filename(req, file, done) {
+            //file.originalname에서 "확장자" 추출하는 과정
+            const ext = path.extname(file.originalname);
+
+            console.log('file.originalname: ', file.originalname);
+            console.log('ext: ', ext);
+            console.log('basename: ', path.basename(file.originalname, ext));
+            // console.log('아이디로 붙이기', req.body.user_id);
+
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+        }
     }),
-  })
+})
 
 //localhost:8000/sign
-router.get('/', controller.main);
+// router.get('/', controller.main);
 
 // GET /sign/signin
 router.get('/signin', controller.getSignin);
@@ -37,7 +37,7 @@ router.get('/signup', controller.getSignup);
 router.post('/signup', controller.postSignup);
 
 router.get('/position', controller.getPosition);
-router.post('/position/update',controller.postPositionUpdate); //위치정보 update
+router.post('/position/update', controller.postPositionUpdate); //위치정보 update
 
 router.post('/signup/id', controller.postIdTest);
 router.post('/signup/email', controller.postEmailTest);
