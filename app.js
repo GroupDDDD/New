@@ -6,7 +6,15 @@ const morgan = require('morgan');
 // router
 const { sequelize } = require('./models/index_board'); // 시퀄라이즈
 const indexRouter = require('./routes/index');
-const boardRouter = require('./routes/board');
+const userRouter = require('./routes/user');
+const signRouter = require('./routes/sign'); //localhost:8000/sign
+const { sequelize } = require('./models');
+const passportConfig = require('./passport');
+const chatRouter = require("./routes/chat");
+
+// socket
+const http = require("http").Server(app);
+const io = require("socket.io")(http); // http-socket 연결
 
 // app
 const app = express();
@@ -65,17 +73,28 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
-    res.status(err.status || 500);
-    res.render('error');
-});
-
 app.listen(app.get('port'), () => {
     let p = app.get('port');
     console.log(p, '번 포트에서 대기 중');
     console.log('~~~~~~~~~~~~~~~~~~~~~');
     console.log(`http://localhost:${p}`);
     console.log('~~~~~~~~~~~~~~~~~~~~~');
+
+// router setting
+app.use("/", indexRouter);
+app.use("/user", userRouter);
+app.use("/board", boardRouter);
+app.use("/chat", chatRouter); // 기본 경로: localhost:PORT/chat
+
+app.use((req, res, next) => {
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
+});
+
+app.use((err, req, res, next) => {
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.status(err.status || 500);
+    res.render('error');
 });

@@ -16,6 +16,10 @@ router.get("/study", controller.study); // 전체 조회
 
 router.get("/login", controller.login);
 
+<<
+<< << < HEAD
+module.exports = router; ===
+=== =
 router.get("/chat", controller.chat);
 
 router.get("/front-board", controller.frontBoard);
