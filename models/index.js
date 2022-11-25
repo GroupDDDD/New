@@ -33,7 +33,7 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
-const { Sign, Board, Category, SCategory, Chat, Part, Chatcont, } = db;​
+const { Sign, Board, Category, SCategory, Chat, Part, Chatcont } = db;​
 db.Sign.hasMany(Board, { foreignKey: 'user_id', sourceKey: 'user_index' });
 db.Board.belongsTo(Sign, { foreignKey: 'user_id', targetKey: 'user_index' });
 
