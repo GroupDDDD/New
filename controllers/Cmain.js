@@ -2,7 +2,11 @@
 // Path: study_group/controllers/Cmain.js
 
 exports.main = (req, res) => {
-    res.render('main');
+    res.render("main");
+};
+
+exports.main2 = (req, res) => {
+    res.render('main2');
 }
 
 exports.index = (req, res) => {
@@ -10,9 +14,13 @@ exports.index = (req, res) => {
 }
 
 exports.study = (req, res) => {
-    res.render('study');
-}
+    res.render("study");
+};
 
 exports.login = (req, res) => {
-    res.render('login');
-}
+    res.render("login");
+};
+
+exports.chat = (req, res) => {
+    res.render("chat");
+};

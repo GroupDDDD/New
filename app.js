@@ -1,4 +1,3 @@
-// modules
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -39,8 +38,10 @@ sequelize.sync({ force: false }) // 서버 실행시마다 테이블을 재생�
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = express();
+passportConfig(); // 패스포트 설정
+app.set('view engine', 'ejs');
+
 
 // router setting
 app.use("/", indexRouter);

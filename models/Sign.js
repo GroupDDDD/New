@@ -1,15 +1,14 @@
-const { STRING, DOUBLE } = require("sequelize"); //어차피 비활성화 -> 없어도 된다.
-// const { ModifierFlags } = require('typescript');
-const Sign = function(Sequelize, DataTypes) {
+const Sign = function(Sequelize, DataTypes){ 
     const model = Sequelize.define(
-        'user', {
+        'user',
+        {
             user_index: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            user_id: {
+            user_id:{
                 type: DataTypes.STRING(15),
                 allowNull: false,
                 unique: true,
@@ -43,12 +42,16 @@ const Sign = function(Sequelize, DataTypes) {
                 type: DataTypes.TEXT,
                 allowNull: true,
             }
-        }, {
+        },
+        {
             tableName: 'user',
             freezeTableName: true,
             timestamps: false,
         }
     );
+
     return model;
 }
+
+
 module.exports = Sign;
