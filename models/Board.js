@@ -1,9 +1,4 @@
-// using mysql, sequelize, and express
-// board function for the study group finder
-// user can post a board, and other users can view the board
-// here is model among MVC structure
-​
-// TODO: board 모델(-> 테이블 구조) 정의
+
 const Board = function(Sequelize, DataTypes) {
     // Sequelize.define(param1, param2, param3)
     // param1: 모델 이름 설정 -> ''
@@ -86,3 +81,4 @@ const Board = function(Sequelize, DataTypes) {
 };
 ​
 module.exports = Board;
+
