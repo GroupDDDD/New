@@ -10,9 +10,9 @@ const articleList = document.getElementById("article-list");
 (function getBoard() {
     console.log("getBoard() called");
     axios.get('/board')
-        .then((response) => {
-            console.log(response.data);
-            const articles = response.data;
+        .then((res) => {
+            console.log(res.data);
+            const articles = res.data;
             articles.forEach((article) => {
                 const articleRow = document.createElement("tr");
                 articleRow.innerHTML = `
