@@ -9,11 +9,13 @@ function postArticle() {
     const formData = {
         title: form.title.value,
         parity: form.parity.value,
-        member_number: form.member_number.value,
+        member_num: form.member_num.value,
         description: form.description.value,
         expr_dt: form.expr_dt.value,
         start_dt: form.start_dt.value,
-        end_dt: form.end_dt.value
+        end_dt: form.end_dt.value,
+        appo_time: form.appo_time.value,
+        appo_aria: form.appo_aria.value
     };
     console.dir(form);
     console.dir(formData);
@@ -21,13 +23,13 @@ function postArticle() {
     // axios로 post 요청을 보냄
     axios({
             method: "post",
-            url: "/board/post",
+            url: "/study/post",
             data: formData,
         })
         .then((res) => {
             console.log('article posted', res);
-            // 게시글 등록 후 게시글 목록 페이지로 이동
-            location.href = "/board";
+            // 게시글 등록 후 해당 게시글로 이동
+            location.href = "/study/:" + res.data.id;
         })
         .catch((err) => {
             console.log(err);

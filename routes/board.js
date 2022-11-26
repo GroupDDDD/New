@@ -49,12 +49,12 @@ router.patch('/study/edit/:id', controller.doEdit);
 // study 라우트에 대한 요청이 들어오면, controller의 deleteArticle 함수를 호출
 // deleteArticle 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 삭제
 // 삭제한 후, res.redirect()로 /study 라우트로 이동
-router.delete('/study/delete/:id', controller.deleteArticle);
+router.delete('/study/delete', controller.deleteArticle);
 
 // GET /study/search => localhost:PORT/study/search
 // study 라우트에 대한 요청이 들어오면, controller의 searchArticle 함수를 호출
 // searchArticle 함수는 models의 Board 테이블에서 title, description에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 통해 해당 조건에 부합하는 게시글을 조회
-router.get('/study/search', controller.searchArticle);
+// router.get('/study/search', controller.searchArticle);
 
 module.exports = router;

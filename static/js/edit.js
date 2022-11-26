@@ -1,3 +1,12 @@
+// 해당 게시물 id를 가져오는 함수
+function getArticleId() {
+    console.log('getArticleId() called');
+    const url = location.href;
+    const id = url.split("/")[4];
+    console.log(id);
+    return id;
+}
+
 // [변경] 버튼 클릭 시
 // form에 입력된 데이터를 가져와서 ajax로 patch 요청을 보내는 함수
 // /board/get으로 리디렉션
@@ -6,21 +15,23 @@ async function editDo() {
     const formData = {
         title: form.title.value,
         parity: form.parity.value,
-        member_number: form.member_number.value,
+        member_num: form.member_num.value,
         description: form.description.value,
         expr_dt: form.expr_dt.value,
         start_dt: form.start_dt.value,
-        end_dt: form.end_dt.value
+        end_dt: form.end_dt.value,
+        appo_time: form.appo_time.value,
+        appo_aria: form.appo_aria.value
     };
 
     axios({
             method: "patch",
-            url: "/board/edit",
+            url: "/study/edit",
             data: formData,
         })
         .then((res) => {
             console.log(res);
-            location.href = "/board/get/:id";
+            location.href = "/study/:" + res.body.id;
         })
         .catch((err) => {
             console.log(err);
@@ -28,8 +39,8 @@ async function editDo() {
 }
 
 // [취소] 버튼 클릭 시
-// /board/get:id 로 리디렉션
+// 전 페이지로 이동
 async function editCancel() {
     console.log('editCancel() called');
-    location.href = "/board/get:id";
+    history.back();
 }
