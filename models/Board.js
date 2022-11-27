@@ -27,7 +27,7 @@ const Board = function(Sequelize, DataTypes) {
             },
             // `parity`	VARCHAR(2)	NOT NULL	DEFAULT OFF	COMMENT 'ON 또는 OFF 선택값 저장',
             parity: {
-                type: DataTypes.ENUM('ONLINE', 'OFFLINE', ''),
+                type: DataTypes.STRING(4),
                 allowNull: false,
                 defaultValue: 'OFF',
             },

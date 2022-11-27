@@ -61,7 +61,8 @@ exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
     // user_index는 로그인한 사용자의 user_index
     models.Board.create({
-        user_index: req.session.user.user_index,
+        // user_index: req.session.user.user_index,
+        user_index: 1, // 임시
         title: req.body.title,
         parity: req.body.parity,
         member_num: req.body.member_num,
@@ -72,14 +73,15 @@ exports.postArticle = (req, res) => {
         appo_time: req.body.appo_time,
         appo_aria: req.body.appo_aria
     }).then(() => {
+        res.redirect('/study');
         // post된 후 생성된 article_id를 가져와서 article.ejs로 이동
-        models.Board.findOne({
-            where: {
-                title: req.body.title
-            }
-        }).then((board) => {
-            res.redirect('/study/' + board.article_id);
-        });
+        // models.Board.findOne({
+        //     where: {
+        //         title: req.body.title
+        //     }
+        // }).then((board) => {
+        //     res.redirect('/study/' + board.article_id);
+        // });
     });
 };
 

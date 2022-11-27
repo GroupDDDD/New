@@ -5,7 +5,7 @@ function postArticle() {
     console.log("postArticle() called");
 
     // form에 입력된 데이터를 가져옴
-    const form = document.forms["article-form"];
+    const form = document.getElementById("article-form");
     const formData = {
         title: form.title.value,
         parity: form.parity.value,
@@ -17,7 +17,9 @@ function postArticle() {
         appo_time: form.appo_time.value,
         appo_aria: form.appo_area.value // 오타 수정 (appo_aria -> appo_area)
     };
-    console.dir(form);
+    if (form.appo_time.value == "") {
+        formData.appo_time = '0001-01-01 00:00:00';
+    };
     console.dir(formData);
 
     // axios로 post 요청을 보냄
@@ -28,6 +30,8 @@ function postArticle() {
         })
         .then((res) => {
             console.log('article posted', res);
+            // 등록 성공 시, 게시판 페이지로 이동
+            location.href = "/study";
         })
         .catch((err) => {
             console.log(err);
@@ -48,7 +52,7 @@ function showAppo(event) {
     const appo_time = document.getElementById("appo-time");
     const appo_area = document.getElementById("appo-area");
 
-    if (parity == "OFFLINE") {
+    if (parity == "OFF") {
         appo_time.style.display = "";
         appo_area.style.display = "";
     } else {

@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="../static/css/nav.css" />
 
     <!-- axios cdn -->
-    <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
-    <script src=“https://unpkg.com/axios/dist/axios.min.js”></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
     <%- include('./nav.ejs') %>
 
 
-        <form class="write-info" action="/study/post" method="post" name="article-form">
+        <form class="write-info" action="/study/post" method="post" id="article-form">
             <div class="write-first-line">
                 <div>글 쓰기</div>
                 <button class="write-cancel" type="button" onclick="postCancel();" id="btn">취소</button>
@@ -39,9 +39,9 @@
                         <span>스터디 형태</span>
                     </div>
                     <div>
-                        <input type="radio" name="parity" id="on" value="ONLINE" onclick="showAppo(event);" />
+                        <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" />
                         <label for="on">온라인</label>
-                        <input type="radio" name="parity" id="off" value="OFFLINE" onclick="showAppo(event);" />
+                        <input type="radio" name="parity" id="off" value="OFF" onclick="showAppo(event);" />
                         <label for="off">오프라인</label>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <span>약속 시간</span>
                     </div>
                     <div>
-                        <input type="text" name="appo_time" placeholder="약속 시간" />
+                        <input type="date" name="appo_time" id="appo_time" placeholder="약속 시간" />
                     </div>
                 </div>
                 <div class="write-title" id="appo-area" style="display: none;">
