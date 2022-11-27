@@ -143,3 +143,8 @@
 .study-mystudy:hover {
   cursor: pointer;
 }
+
+.decoration-none {
+  text-decoration-line: none;
+  color: black;
+}
