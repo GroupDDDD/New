@@ -101,9 +101,8 @@
         <a href = "/sign/logout">로그아웃</a>
         <br><br>
 
-        <button type = "button">취소</button>
-        <button type = "button" onclick = totalSave();>저장</button>
     </form>
+
 
     <script>
         const resultId = document.querySelector('#resultId');
@@ -150,14 +149,15 @@
             }
 
 
-            const form_profile = document.forms['form_profile'];
+            //const form_profile = document.forms['form_profile'];
             const formData = new FormData(); // 폼 객체 생성
             const file = document.querySelector('#profileImg');
 
             console.log('file 선택>> ', file);
             console.log('file[0] 선택 >> ', file.files[0]);
 
-            formData.append('user_index', form_profile.user_index.value); // <input name="user_index" value="Sean">
+            //formData.append('user_index', form_profile.user_index.value); // <input name="user_index" value="Sean">
+            formData.append('user_index', form.user_index.value); // <input name="user_index" value="Sean">
             formData.append('profileImg', file.files[0]);
             
 
@@ -169,8 +169,7 @@
             axios({
                 method: 'POST',
                 url: '/sign/profile/dynamicFile',
-                data: 
-                    formData,
+                data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data', // enctype="multipart/form-data"
                 },
@@ -182,6 +181,7 @@
 
 
         function profileEdit(){
+            console.log('수정하기 버튼 프론트에서 확인');
             const form = document.forms['form_profile'];
         
             if (!form.checkValidity()) {
