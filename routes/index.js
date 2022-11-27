@@ -17,7 +17,7 @@ router.get("/main2", controller.main2);
 router.get('/study', conBoard.getBoard);
 
 // GET /study/:id => localhost:PORT/study/1
-// router.get('/study/:id', conBoard.getArticleById);
+router.get('/study/:id', conBoard.getArticleById);
 
 // GET /study/write => localhost:PORT/study/write
 router.get('/study/write', conBoard.writeArticle);
