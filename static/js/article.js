@@ -19,7 +19,7 @@ function editArticle() {
 
 // [삭제] 버튼 클릭 시
 // axios로 delete 요청을 보내는 함수
-// /board로 리디렉션
+// /study로 리디렉션
 function deleteArticle() {
     console.log("deleteArticle() called");
     const article_id = getArticleId();
