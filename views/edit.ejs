@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/front-board.css" />
-    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../../static/css/front-board.css" />
+    <link rel="stylesheet" href="../../static/css/nav.css" />
 
     <!-- axios cdn -->
     <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
@@ -29,10 +29,10 @@
             </div>
             <form action="/study/write/post" method="post" name="article-form">
                 <div class="write-title">
-                    <input name="title" class="title" type="text" placeholder="제목 입력" />
+                    <input name="title" class="title" type="text" placeholder="제목 입력" value="<%= article.title %>" />
                 </div>
                 <div class="write-title">
-                    <input type="text" name="member_num" placeholder="모집인원" />
+                    <input type="text" name="member_num" placeholder="모집인원" value="<%= article.member_num %>" />
                 </div>
                 <div class="study-how">
                     <div>
@@ -51,33 +51,33 @@
                         <span>약속 시간</span>
                     </div>
                     <div>
-                        <input type="text" name="appo_time" placeholder="약속 시간" />
+                        <input type="date" name="appo_time" placeholder="약속 시간" value="<%= article.appo_time %>" />
                     </div>
                 </div>
                 <div class="write-title" id="appo-area" style="display: none;">
-                    <input type="text" name="appo_area" placeholder="약속 장소" />
+                    <input type="text" name="appo_area" placeholder="약속 장소" value="<%= article.appo_aria %>" />
                 </div>
 
                 <div class="board-date">
                     <label for="expr_dt">모집마감일</label>
-                    <input type="date" name="expr_dt" id="expr_dt" />
+                    <input type="date" name="expr_dt" id="expr_dt" value="<%= article.expr_dt %>" />
                 </div>
                 <div class="board-date">
                     <label for="start_dt">스터디 시작일</label>
-                    <input type="date" name="start_dt" id="start_dt" />
+                    <input type="date" name="start_dt" id="start_dt" value="<%= article.start_dt %>" />
                 </div>
                 <div class="board-date">
                     <label for="end_dt">스터디 종료일</label>
-                    <input type="date" name="end_dt" id="end_dt" />
+                    <input type="date" name="end_dt" id="end_dt" value="<%= article.end_dt %>" />
                 </div>
 
-                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요."></textarea>
+                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요." value="<%= article.description %>"></textarea>
             </form>
 
         </form>
 
-        <script src="../static/js/edit.js"></script>
-        <script src="../static/js/post.js"></script>
+        <script src="../../static/js/edit.js"></script>
+        <script src="../../static/js/post.js"></script>
 </body>
 
 </html>
