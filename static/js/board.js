@@ -33,16 +33,16 @@ function getArticleList() {
                 const article = document.createElement("div");
                 article.className = "article";
                 article.innerHTML = `
-                <div class="card" id="card1">
+                <div class="card" id="card1" onclick="getArticle(${board.article_id});">
                 <div class="card-deadline">
                     <span class="article__info__item__title">모집기간</span>
                     <span class="article__info__item__content">${board.expr_dt}</span>
                 </div>
                 <div class="card-title">
-                    <a href="/study/${board.id}">${board.title}</a>
+                    ${board.title}
                 </div>
                 <div class="card-badge">배지</div>
-            <div class="card-id">작성자 id</div>
+            <div class="card-id">${board.user_id}</div>
         </div>
         `;
                 articleList.appendChild(article);
@@ -60,7 +60,7 @@ function getArticle(id) {
     // axios로 get 요청을 보냄
     axios({
             method: "get",
-            url: "/board/get/:" + id,
+            url: "/study:" + id,
         })
         .then((res) => {
             console.log(res);
