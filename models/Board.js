@@ -16,7 +16,7 @@ const Board = function(Sequelize, DataTypes) {
                 autoIncrement: true,
             },
             // `user_id`	INT	NOT NULL	COMMENT 'user index'
-            user_id: {
+            user_index: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -27,7 +27,7 @@ const Board = function(Sequelize, DataTypes) {
             },
             // `parity`	VARCHAR(2)	NOT NULL	DEFAULT OFF	COMMENT 'ON 또는 OFF 선택값 저장',
             parity: {
-                type: DataTypes.ENUM('ONLINE', 'OFFLINE', ''),
+                type: DataTypes.STRING(4),
                 allowNull: false,
                 defaultValue: 'OFF',
             },
@@ -62,7 +62,7 @@ const Board = function(Sequelize, DataTypes) {
                 allowNull: true,
             },
             // `appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소'
-            appo_aria: {
+            appo_aria: { // appo_aria >> appo_area로 수정
                 type: DataTypes.STRING(100),
                 allowNull: true,
             }

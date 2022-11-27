@@ -47,7 +47,6 @@ sequelize
   .catch((err) => {
     console.error(err);
   });
-
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
