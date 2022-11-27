@@ -62,7 +62,7 @@ const Board = function(Sequelize, DataTypes) {
                 allowNull: true,
             },
             // `appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소'
-            appo_aria: {
+            appo_aria: { // appo_aria >> appo_area로 수정
                 type: DataTypes.STRING(100),
                 allowNull: true,
             }

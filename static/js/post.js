@@ -35,3 +35,26 @@ function postArticle() {
             console.log(err);
         });
 }
+
+// form의 [취소] 버튼 클릭 시
+// 전 페이지로 이동
+function postCancel() {
+    console.log('postCancel() called');
+    history.back();
+}
+
+// form에서 parity가 OFFLINE으로 선택되면, appo_time과 appo_aria가 보이도록 함
+// 반대로 ONLINE으로 선택되면, appo_time과 appo_aria가 안보이도록 함
+function showAppo(event) {
+    const parity = event.target.value;
+    const appo_time = document.getElementById("appo-time");
+    const appo_area = document.getElementById("appo-area");
+
+    if (parity == "OFFLINE") {
+        appo_time.style.display = "";
+        appo_area.style.display = "";
+    } else {
+        appo_time.style.display = "none";
+        appo_area.style.display = "none";
+    }
+}

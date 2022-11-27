@@ -1,51 +1,51 @@
 const models = require('../models/index');
-const view = require('../views/study.ejs');
-const articleList = document.querySelector(".article-list");
+// const view = require('../views/study.ejs');
+// const articleList = document.querySelector(".article-list");
 let lineCount = 0;
 
 // getArticles 내에서 실행되는 하위 함수
 // 받아온 데이터를 html에 삽입
-function getArticleList() {
-    fetch("/study")
-        .then((res) => res.json())
-        .then((boards) => {
-            boards.forEach((board) => {
-                // articleList에 article을 추가
-                // 각 article에는 title, category_id, member_num, expr_dt 정보가 보여짐
-                // 각 article에는 클릭 이벤트가 추가되어 있음
-                // 클릭 이벤트가 발생하면 getArticle() 함수가 실행되고, 선택된 article의 id를 가져옴
-                // div.line-n은 한 줄을 의미하며, 한 줄에는 3개의 article이 들어감
-                // articleList에 article을 추가할 때마다 lineCount를 1씩 증가시킴
-                // lineCount가 3이 되면 lineCount를 0으로 초기화하고, articleList에 div.line-n을 추가함
-                const article = document.createElement("div");
-                article.className = "article";
-                article.innerHTML = `
-                <div class="card" id="card1">
-                <div class="card-deadline">
-                    <span class="article__info__item__title">모집기간</span>
-                    <span class="article__info__item__content">${board.expr_dt}</span>
-                </div>
-                <div class="card-title">
-                    <a href="/study/${board.id}">${board.title}</a>
-                </div>
-                <div class="card-badge">배지</div>
-            <div class="card-id">작성자 id</div>
-        </div>
-        `;
-                articleList.appendChild(article);
-                lineCount++;
-                if (lineCount === 3) {
-                    lineCount = 0;
-                    const line = document.createElement("div");
-                    line.className = "line";
-                    articleList.appendChild(line);
-                }
-            });
-        });
-}
+// function getArticleList() {
+//     fetch("/study")
+//         .then((res) => res.json())
+//         .then((boards) => {
+//             boards.forEach((board) => {
+//                 // articleList에 article을 추가
+//                 // 각 article에는 title, category_id, member_num, expr_dt 정보가 보여짐
+//                 // 각 article에는 클릭 이벤트가 추가되어 있음
+//                 // 클릭 이벤트가 발생하면 getArticle() 함수가 실행되고, 선택된 article의 id를 가져옴
+//                 // div.line-n은 한 줄을 의미하며, 한 줄에는 3개의 article이 들어감
+//                 // articleList에 article을 추가할 때마다 lineCount를 1씩 증가시킴
+//                 // lineCount가 3이 되면 lineCount를 0으로 초기화하고, articleList에 div.line-n을 추가함
+//                 const article = document.createElement("div");
+//                 article.className = "article";
+//                 article.innerHTML = `
+//                 <div class="card" id="card1">
+//                 <div class="card-deadline">
+//                     <span class="article__info__item__title">모집기간</span>
+//                     <span class="article__info__item__content">${board.expr_dt}</span>
+//                 </div>
+//                 <div class="card-title">
+//                     <a href="/study/${board.id}">${board.title}</a>
+//                 </div>
+//                 <div class="card-badge">배지</div>
+//             <div class="card-id">작성자 id</div>
+//         </div>
+//         `;
+//                 articleList.appendChild(article);
+//                 lineCount++;
+//                 if (lineCount === 3) {
+//                     lineCount = 0;
+//                     const line = document.createElement("div");
+//                     line.className = "line";
+//                     articleList.appendChild(line);
+//                 }
+//             });
+//         });
+// }
 
-exports.getBoard = function(req, res) {
-    res.render('study');
+exports.getBoard = (req, res) => {
+    res.render("study");
 };
 
 
@@ -59,29 +59,29 @@ exports.getBoard = function(req, res) {
 // 이 때, user table의 user_id를 조회하기 위해 include를 사용
 // 이 값을 study.ejs에서 사용하기 위해 board.user.user_id로 접근
 // Path: New/controllers/Cboard.js
-exports.getArticles = function(req, res) {
-    const limit = 9;
-    const offset = 0;
-    models.Board.findAndCountAll({
-        limit: limit,
-        offset: offset,
-        include: [{
-            model: models.User,
-            attributes: ['user_id']
-        }]
-    }).then(function(articles) {
-        let page = parseInt(req.query.page); // 페이지
-        if (!page) {
-            page = 1;
-        }
-        let pages = Math.ceil(data.count / limit);
-        res.render('study', {
-            articles: articles
-        });
-    }).then(function() {
-        getArticleList();
-    });
-};
+// exports.getArticles = function(req, res) {
+//     const limit = 9;
+//     const offset = 0;
+//     models.Board.findAndCountAll({
+//         limit: limit,
+//         offset: offset,
+//         include: [{
+//             model: models.User,
+//             attributes: ['user_id']
+//         }]
+//     }).then(function(articles) {
+//         let page = parseInt(req.query.page); // 페이지
+//         if (!page) {
+//             page = 1;
+//         }
+//         let pages = Math.ceil(data.count / limit);
+//         res.render('study', {
+//             articles: articles
+//         });
+//     }).then(function() {
+//         getArticleList();
+//     });
+// };
 
 // GET /study/:id : 게시글 하나 조회
 // getArticleById 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
@@ -104,11 +104,12 @@ exports.getArticleById = (req, res) => {
 // 로그인이 되지 않았으면 로그인 페이지로 이동
 exports.writeArticle = (req, res) => {
     console.dir('writeArticle: ', req.body);
-    if (req.session.user) {
-        res.render('write');
-    } else {
-        res.redirect('/login');
-    };
+    res.render('write');
+    // if (req.session.user) {
+    //     res.render('write');
+    // } else {
+    //     res.redirect('/login');
+    // };
 };
 
 // POST /study/post : 게시글 하나 추가
