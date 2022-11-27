@@ -72,7 +72,7 @@
 }
 
 .login-button {
-  width: 7vw;
+  width: 50%;
   height: 3vw;
   margin: 0 20px 0 0;
 }
@@ -86,6 +86,37 @@
   height: 40px;
   margin: 30px 0 0 0;
 }
+.input-info > input {
+  width: 100%;
+  height: 100%;
+}
+
+.input-info-cover {
+  width: 400px;
+  height: 40px;
+  /* margin: 30px 0 0 0; */
+}
+
+.input-info2 {
+  width: 100%;
+  height: 100%;
+  margin: 30px 0 0 0;
+  display: flex;
+}
+.input-info2 > input {
+  width: 100%;
+  height: 100%;
+}
+
+.input-email {
+  width: 100%;
+  height: 40px;
+}
+
+.overlap-button {
+  width: 100px;
+  height: 30px;
+}
 
 .form {
   width: 450px;
@@ -93,11 +124,13 @@
 }
 
 .form-register-button {
-  margin: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .form-login-button {
-  margin: 50px 0 0 0;
+  display: flex;
+  justify-content: center;
 }
 
 .form-button {
@@ -106,9 +139,22 @@
   background-color: rgb(244, 144, 244);
   border-radius: 10px;
   border: none;
-}
-
-.form-button > p {
   font-weight: 800;
   font-size: 15px;
+  margin: 50px;
+}
+
+@media (max-width: 950px) {
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    margin: 10vh 0 0 0;
+  }
+
+  .media-950 {
+    justify-content: center;
+    align-items: center;
+  }
 }
