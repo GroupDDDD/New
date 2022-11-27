@@ -66,9 +66,9 @@ exports.conroom = (req, res) => {
 //INSERT INTO chat_room (article_id, contactor_id, chat_kind, createdAt, updatedAt) VALUES ('1', '2', '1', '20221122', '20221122');
 exports.postChat = (req, res) => {
   models.Chat.create({
-    articleId: req.body.articleId,
-    contactorId: req.body.contactorId,
-    chatKind: req.body.chatKind,
+    article_id: req.body.articleId,
+    contactor_id: req.body.contactorId,
+    chat_kind: req.body.chatKind,
   }).then((result) => {
     console.log("Chat create >> ", result);
     res.send(result);

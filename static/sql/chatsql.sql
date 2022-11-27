@@ -119,7 +119,7 @@ CREATE TABLE `chat_room` (
 
    INSERT INTO user (user_id, user_pw, user_name, user_email, prof_img_url) VALUES('contactor2', '1111', '채팅신청자2', 'test@test.com','https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg');
 
-
+ALTER TABLE user AUTO_INCREMENT = 1;
 
 INSERT INTO board (user_index,title, parity,member_num,description,expr_dt,start_dt,end_dt,appo_time,appo_aria,createdAt, updatedAt) VALUES ('1', '테스트1', 'OFF', '5', '스터디 내용','20221122','20221130','20221201','20221201','염리동','20221122','20221121');
 
