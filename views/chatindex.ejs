@@ -124,10 +124,11 @@
             return res.data;
           });
           console.log("'2 part 조회 결과: ", result3);
-          loginResult.textContent = `part_id값: ${result3.data[0].part_id}`;
+          loginResult.textContent = `part_id값: ${result3.part_id}`;
 
           // partid값 넣기
-          partId = result3.data[0].part_id;
+          partId = result3.part_id;
+          console.log("'3 part 입력 결과: ", partId);
           window.location.href = `/chatcont/getChatcont?roomId=${roomId}&pubId=${pubId}&thisId=${id}&partId=${partId}`;
         }
 

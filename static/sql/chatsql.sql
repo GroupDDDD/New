@@ -225,8 +225,24 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
   and p.user_index ='1')
   ORDER BY c.createdAt desc;
 
-
+;
     SELECT * 
+  FROM chat_room AS r
+  
+  JOIN board AS b
+  ON r.article_id = b.article_id
+  
+  JOIN chat_participants AS p
+  ON r.room_id = p.room_id
+
+  JOIN user AS u
+  ON r.contactor_id = u.user_index
+  
+  WHERE p.pub_status = '2' 
+  and b.user_index = '1';
+
+
+      SELECT * 
   FROM chat_room AS r
   
   JOIN board AS b
