@@ -8,19 +8,19 @@ function getArticleId() {
 }
 
 // [수정] 버튼 클릭 시
-// /edit:id로 리디렉션
+// /edit/:id로 리디렉션
 // id는 해당 게시글의 id이며, 해당 게시글의 정보를 가져와서 수정할 수 있도록 함
 function editArticle() {
     console.log("editArticle() called");
     const id = getArticleId();
     console.log(id);
-    document.location.href = "/edit/" + id;
+    document.location.href = "/study/edit/" + id;
 }
 
 // [삭제] 버튼 클릭 시
 // axios로 delete 요청을 보내는 함수
 // /board로 리디렉션
-async function deleteArticle() {
+function deleteArticle() {
     console.log("deleteArticle() called");
     const article_id = getArticleId();
     console.log(article_id);
