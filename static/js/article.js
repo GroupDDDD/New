@@ -14,7 +14,7 @@ function editArticle() {
     console.log("editArticle() called");
     const id = getArticleId();
     console.log(id);
-    location.href = "/edit/" + id;
+    document.location.href = "/edit/" + id;
 }
 
 // [삭제] 버튼 클릭 시
@@ -39,7 +39,7 @@ async function deleteArticle() {
         .then((res) => {
             console.log(res);
             alert("글이 삭제되었습니다.");
-            location.href = "/study";
+            document.location.href = "/study";
         })
         .catch((err) => {
             console.log(err);

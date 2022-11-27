@@ -17,7 +17,7 @@ router.get("/main2", controller.main2);
 router.get('/study', conBoard.getBoard);
 
 // GET /study/:id => localhost:PORT/study/1
-router.get('/study:id', conBoard.getArticleById);
+// router.get('/study/:id', conBoard.getArticleById);
 
 // GET /study/write => localhost:PORT/study/write
 router.get('/study/write', conBoard.writeArticle);
@@ -26,7 +26,7 @@ router.get('/study/write', conBoard.writeArticle);
 router.post('/study/post', conBoard.postArticle);
 
 // GET /study/edit/:id => localhost:PORT/study/edit/1
-router.get('/study/edit:id', conBoard.editArticle);
+router.get('/study/edit/:id', conBoard.editArticle);
 
 // PATCH /study/edit/:id => localhost:PORT/study/edit/1
 router.patch('/study/edit/do', conBoard.doEdit);

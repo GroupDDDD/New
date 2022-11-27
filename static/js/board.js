@@ -1,6 +1,4 @@
-// title, category_id, member_number, appo_aria, expr_dt 정보가 게시판에서 보여야 함
-
-const articleList = document.getElementById("article-board");
+const Board = document.getElementById("article-board");
 
 // function that brings all the articles from the 'board' database
 // sequelize의 findAll() 메소드를 사용하여 board 테이블의 모든 데이터를 가져옴
@@ -28,7 +26,7 @@ function getArticleList() {
                     lineCount = 0;
                     const line = document.createElement("div");
                     line.className = "line";
-                    articleList.appendChild(line);
+                    Board.appendChild(line);
                 }
                 const article = document.createElement("div");
                 article.className = "article";
@@ -45,7 +43,7 @@ function getArticleList() {
             <div class="card-id">${board.user_id}</div>
         </div>
         `;
-                articleList.appendChild(article);
+                Board.appendChild(article);
 
             });
         });
@@ -60,7 +58,7 @@ function getArticle(id) {
     // axios로 get 요청을 보냄
     axios({
             method: "get",
-            url: "/study:" + id,
+            url: "/study/" + id,
         })
         .then((res) => {
             console.log(res);

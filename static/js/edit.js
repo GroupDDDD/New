@@ -26,12 +26,12 @@ async function editDo() {
     const article_id = getArticleId();
     axios({
             method: "patch",
-            url: "/study/edit",
+            url: "/study/edit/do",
             data: formData,
         })
         .then((res) => {
             console.log(res);
-            location.href = "/study/:" + article_id;
+            document.location.href = "/study/" + article_id;
         })
         .catch((err) => {
             console.log(err);

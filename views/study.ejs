@@ -63,27 +63,32 @@
             </a>
         </div>
 
-        <div class="article-board" id="article-board">
-            <div class="line-1">
-                <!-- <div class="card" id="card1" onclick="getArticle();">
-                  <div class="card-deadline">
-                      <span class="article__info__item__title">모집기간</span>
-                      <span class="article__info__item__content">${board.expr_dt}</span>
-                  </div>
-                  <div class="card-title">
-                      <a href="/study/${board.id}">${board.title}</a>
-                  </div>
-                  <div class="card-badge">배지</div>
-                  <div class="card-id">작성자 id</div>
-                </div> -->
-            </div>
-            <div class="line-2">
-
-            </div>
-            <div class="line-3">
-
-            </div>>
-        </div>
+        <!-- <div class="article-board" id="article-board">
+          <% let lineCount = 0; %>
+            <% data.forEach((board) => { %>
+                <% if (lineCount % 3 == 0) { %>
+                    <div class="article-line">
+                    <% lineCount = 0; %>
+                <% }; %>
+                <div class="card" id="card<%= board.article_id %> " onclick="getArticle( <%= board.article_id %> );">
+                    <div class="card-deadline">
+                        <span class="article__info__item__title">모집기간</span>
+                        <span class="article__info__item__content"> <%= board.expr_dt %> </span>
+                    </div>
+                    <div class="card-title">
+                        <%= board.title %>
+                    </div>
+                    <div class="card-badge">배지</div>
+                    <div class="card-id">
+                        <%= board.user_id %>
+                    </div>
+                </div>
+                <% lineCount++;%>
+                <% if (lineCount % 3 == 2) { %>
+                    </div>
+                <% }; %>
+            <% }) %>
+        </div> -->
 
         <!-- <div class="window-modal">
             <div class="card-modal">1</div>
