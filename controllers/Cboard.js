@@ -4,7 +4,7 @@ const models = require('../models/index');
 // getBoard 함수는 models의 Board 테이블에서 모든 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 통해 게시글 전체를 조회
 exports.getBoard = (req, res) => {
-
+    res.render('study');
 };
 
 // GET /study/:id : 게시글 하나 조회
