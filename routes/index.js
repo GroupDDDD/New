@@ -17,6 +17,7 @@ router.get("/main2", controller.main2);
 router.get('/study', conBoard.getBoard);
 
 // GET /study/:id => localhost:PORT/study/1
+// id는 article_id, id에 해당하는 게시글을 가져옴
 router.get('/study/:id', conBoard.getArticleById);
 
 // GET /study/write => localhost:PORT/study/write

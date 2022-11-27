@@ -28,16 +28,23 @@ exports.getBoard = (req, res) => {
 // GET /study/:id : 게시글 하나 조회
 // getArticleById 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 통해 게시글 하나를 조회해서 보여줌
+// user_id를 통해 Sign 테이블에서 user_index를 조회
 exports.getArticleById = (req, res) => {
     console.dir('getArticleById: ', req.body);
     models.Board.findOne({
         where: {
-            article_id: req.params.article_id
-        }
-    }).then((board) => {
+            article_id: req.params.id
+        },
+        include: [{
+            model: models.Sign,
+            attributes: ['user_id']
+        }]
+    }).then((result) => {
         res.render('article', {
-            board: board
+            article: result
         });
+    }).catch((err) => {
+        console.log(err);
     });
 };
 
@@ -99,11 +106,11 @@ exports.editArticle = (req, res) => {
     console.dir('editArticle: ', req.body);
     models.Board.findOne({
         where: {
-            article_id: req.params.article_id
+            article_id: req.params.id
         }
-    }).then((board) => {
+    }).then((article) => {
         res.render('edit', {
-            board: board
+            article: article
         });
     });
 };

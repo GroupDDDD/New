@@ -23,6 +23,36 @@
         <!-- 
         게시글 내용
     -->
+        <div class="article">
+            <div class="article-title">
+                <h1>
+                    <%= article.title %>
+                </h1>
+                <div class="article-info">
+                    <span class="article-parity"><%= article.parity %></span>
+                    <span class="article-member"><%= article.member_num %></span>
+                    <span class="article-id"><%= article.user_id %></span>
+                    <span class="article-date"><%= article.createdAt %> ~ <%= article.expr_dt%></span>
+                </div>
+            </div>
+            <div class="article-appo">
+                <p>
+                    <%= article.start_dt %> <span>~</span>
+                        <%= article.end_dt %>
+                </p>
+                <p>
+                    <%= article.appo_time %>
+                </p>
+                <p>
+                    <%= article.appo_aria %>
+                </p>
+            </div>
+            <div class="article-content">
+                <p>
+                    <%= article.description %>
+                </p>
+            </div>
+        </div>
 
         <!-- 수정, 삭제 버튼 -->
         <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
