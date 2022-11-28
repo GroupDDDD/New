@@ -17,9 +17,11 @@
 <body style="overflow-x: hidden">
     <%- include('./nav.ejs') %>
 
-        <div class="searchDiv">
-            <input class="search" id="search" name="search" value="<%= keyword %> " />
-            <button onclick="searchArticle()">
+        <div class="example">
+            <div class="searchDiv">
+                <div class="searchDiv-first">
+                    <input class="search" id="search" name="search" value="<%= keyword %> " />
+                    <button onclick="searchArticle()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -33,29 +35,6 @@
           />
         </svg>
       </button>
-        </div>
-
-        <div class="category">
-            <div class="category-title">
-                <div class="title">
-                    title1
-                    <div class="title-underbox"></div>
-                </div>
-                <div class="title">
-                    title2
-                    <div class="title-underbox"></div>
-                </div>
-                <div class="title">
-                    title3
-                    <div class="title-underbox"></div>
-                </div>
-                <div class="title">
-                    title4
-                    <div class="title-underbox"></div>
-                </div>
-                <div class="title">
-                    title5
-                    <div class="title-underbox"></div>
                 </div>
             </div>
             <a href="/study/write" class="remove-line">
@@ -75,35 +54,37 @@
                                         <% }; %>
                                             <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
                                                 <div class="card-deadline">
-                                                    <span class="article__info__item__title">모집기간</span>
-                                                    <span class="article__info__item__content"> <%= board.expr_dt %> </span>
+                                                    <span class="article__info__item__title">모집기간:</span>
+                                                    <span class="article__info__item__content"> ~ <%= board.expr_dt %> </span>
                                                 </div>
                                                 <div class="card-title">
                                                     <%= board.title %>
                                                 </div>
-                                                <div class="card-badge">배지</div>
+                                                <div class="card-badge">
+                                                    <img class="card-badge-img" src="<%=board.Category.category_img%>" alt="<%=board.Category.category_name%>" />
+                                                </div>
                                                 <div class="card-id">
-                                                    <%= board.user_id %>
+                                                    <%= board.user.user_id %>
                                                 </div>
                                             </div>
                                             <% lineCount++;%>
-                                                <% if (lineCount % 3 == 2) { %>
+                                                <% if (lineCount % 3 == 0) { %>
                                 </div>
                                 <% }; %>
                                     <% }) %>
         </div>
 
-        <!-- <div class="window-modal">
-            <div class="card-modal">1</div>
-        </div>
-        </div>
-        <div class="window-modal">
-            <div class="card-modal">
-                <a href="/chat"> 해당 스터디 그룹장과 채팅하기 </a>
-            </div>
-        </div> -->
         <script src="/static/js/study.js"></script>
         <script src="/static/js/board.js"></script>
+        <script>
+            // enter key 누르면 searchArticle() 실행
+            document.getElementById("search").addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.getElementById("searchBtn").click();
+                }
+            });
+        </script>
 </body>
 
 </html>

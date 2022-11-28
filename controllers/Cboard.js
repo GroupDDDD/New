@@ -50,8 +50,16 @@ exports.getArticleById = (req, res) => {
             attributes: ['category_img', 'category_name']
         }]
     }).then((result) => {
+        console.log('login user: ', req.session.user);
+        let userInfo = req.session.user;
+        if (req.session.user === undefined) {
+            userInfo = {
+                user_index: 0,
+            };
+        };
         res.render('article', {
-            article: result
+            article: result,
+            user: userInfo
         });
     }).catch((err) => {
         console.log(err);
@@ -63,7 +71,7 @@ exports.getArticleById = (req, res) => {
 // 로그인이 되지 않았으면 로그인 페이지로 이동
 exports.writeArticle = (req, res) => {
     console.dir('writeArticle: ', req.body);
-    res.render('write');
+    console.dir('writeArticle: ', req.session.user);
     if (req.session.user !== undefined) {
         res.render('write');
     } else {
@@ -77,7 +85,7 @@ exports.writeArticle = (req, res) => {
 exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
     models.Board.create({
-        user_index: req.session.user_index,
+        user_index: req.session.user.user_index,
         title: req.body.title,
         category_id: req.body.category_id,
         parity: req.body.parity,
@@ -105,7 +113,7 @@ exports.editArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        if (article.user_index === req.session.user_index) {
+        if (article.user.user_index === req.session.user_index) {
             res.render('edit', {
                 article: article
             });
@@ -187,7 +195,7 @@ exports.deleteArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        if (article.user_index === req.session.user_index) {
+        if (article.user_index === req.session.user.user_index) {
             models.Board.destroy({
                 where: {
                     article_id: req.params.id
