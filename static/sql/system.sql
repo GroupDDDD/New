@@ -6,26 +6,27 @@ SHOW databases;
 
 USE project2;
 /* 회원정보 */
-CREATE TABLE user(
-    user_index INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    user_id VARCHAR(15) UNIQUE NOT NULL,
-    user_pw VARCHAR(15) NOT NULL,
-    user_name VARCHAR(15) NOT NULL,
-    user_email VARCHAR(35) UNIQUE NOT NULL ,
-    user_sido VARCHAR(15) NULL,
-    user_sigungu VARCHAR(15) NULL,
-    user_bname VARCHAR(15) NULL,
-    user_roadname VARCHAR(15) NULL,
-    prof_img_url TEXT NULL
+CREATE TABLE `user` (
+ `user_index` INT NOT NULL auto_increment COMMENT '회원 index',
+ `user_id` VARCHAR(15) NOT NULL UNIQUE COMMENT '회원아이디',
+ `user_pw` VARCHAR(15) NOT NULL COMMENT '비밀번호',
+ `user_name` VARCHAR(15) NOT NULL COMMENT '회원의 성명',
+ `user_email` VARCHAR(35) NOT NULL COMMENT '회원이메일',
+ `user_Lat` DOUBLE NULL COMMENT '위도',
+ `user_Lon` DOUBLE NULL COMMENT '경도',
+ `prof_img_url` TEXT NULL COMMENT '회원프로필 이미지 url',
+ createdAt DATETIME NOT NULL COMMENT '생성일',
+ updatedAt DATETIME NOT NULL COMMENT '수정일',
+ PRIMARY KEY (`user_index`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 insert into user(user_id, user_pw, user_name, user_email) values('admin', '1234', '관리자', 'admin@example.com');
 
 /* 스터디 모집글 카테고리 */
 CREATE TABLE `category` (
-	`category_id`	INT	NOT NULL	auto_increment	COMMENT '카테고리 Index값',
-	`category_img`	TEXT	NULL	COMMENT '카테고리 이미지',
-	`category_name`	VARCHAR(20)	NOT NULL	COMMENT '카테고리이름',
-	PRIMARY KEY (`category_id`)
+ `category_id` INT NOT NULL auto_increment COMMENT '카테고리 Index값',
+ `category_img` TEXT NULL COMMENT '카테고리 이미지',
+ `category_name` VARCHAR(20) NOT NULL COMMENT '카테고리이름',
+ PRIMARY KEY (`category_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /* 그룹원 모집글 */
@@ -75,15 +76,15 @@ CREATE TABLE `chat_participants` (
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /* 채팅방 메세지 내역 저장 */
-CREATE TABLE `chat_contents` (
-	`content_id`	INT	NOT NULL	auto_increment	COMMENT 'auto increment',
-	`part_id`	INT	NOT NULL	COMMENT 'FK 참여자 index',
-	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
-	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
-	createdAt	DATETIME	NOT NULL	COMMENT '생성일',
-	updatedAt	DATETIME	NOT NULL	COMMENT '수정일',
-	PRIMARY KEY (`content_id`),
-	FOREIGN KEY (`part_id`) REFERENCES `chat_participants`(`part_id`)
+ CREATE TABLE `chat_contents` (
+ `content_id` INT NOT NULL auto_increment COMMENT 'auto increment',
+`part_id` INT NOT NULL COMMENT 'FK 참여자 index',
+ `message` VARCHAR(5000) NOT NULL COMMENT '채팅방에서 주고받은 메세지',
+ `image` TEXT NULL COMMENT '채팅 이미지url',
+ createdAt DATETIME NOT NULL COMMENT '생성일',
+ updatedAt DATETIME NOT NULL COMMENT '수정일',
+ PRIMARY KEY (`content_id`),
+ FOREIGN KEY (`part_id`) REFERENCES `chat_participants`(`part_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (1, '', '학교공부');
