@@ -22,6 +22,8 @@ function searchArticle() {
 // category_id를 통해 Board 테이블에서 category_id에 해당하지 않는 class: cat-id 값을 가진 div를 display: none으로 숨김
 function selCategory(id) {
     console.log("selCategory() called");
+    console.log("category_id: " + id);
+
     document.getElementsByClassName("card").classList.add("hidden");
     document.getElementsByClassName("cat-" + id).classList.remove("hidden");
 }
