@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../../static/css/front-board.css" />
-    <link rel="stylesheet" href="../../static/css/nav.css" />
+    <link rel="stylesheet" href="/static/css/front-board.css" />
+    <link rel="stylesheet" href="/static/css/nav.css" />
 
     <!-- axios cdn -->
     <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
@@ -45,17 +45,23 @@
                         <label for="off">오프라인</label>
                     </div>
                 </div>
-                <!-- parity의 value가 OFFLINE이면 appo_time과 appo_aria를 받는 input이 등장 -->
-                <div class="board-date" id="appo-time" style="display: none;">
-                    <div>
-                        <span>약속 시간</span>
-                    </div>
-                    <div>
-                        <input type="date" name="appo_time" placeholder="약속 시간" value="<%= article.appo_time %>" />
+                <div class="study-how">
+                    <div class="study-how-box">
+                        <input type="radio" name="category_id" id="school" value="1">
+                        <label for="school">학교공부</label>
+                        <input type="radio" name="category_id" id="lang" value="2">
+                        <label for="lang">어학</label>
+                        <input type="radio" name="category_id" id="job" value="3">
+                        <label for="job">취업</label>
+                        <input type="radio" name="category_id" id="cert" value="4">
+                        <label for="cert">자격증</label>
+                        <input type="radio" name="category_id" id="civil" value="5">
+                        <label for="civil">공무원/임용</label>
                     </div>
                 </div>
+                <!-- parity의 value가 OFFLINE이면 appo_area를 받는 input이 등장 -->
                 <div class="write-title" id="appo-area" style="display: none;">
-                    <input type="text" name="appo_area" placeholder="약속 장소" value="<%= article.appo_aria %>" />
+                    <input type="text" name="appo_area" placeholder="약속 장소" value="<%= article.appo_area %>" />
                 </div>
 
                 <div class="board-date">
@@ -71,13 +77,24 @@
                     <input type="date" name="end_dt" id="end_dt" value="<%= article.end_dt %>" />
                 </div>
 
-                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요." value="<%= article.description %>"></textarea>
+                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요."><%= article.description %></textarea>
             </form>
 
         </form>
 
-        <script src="../../static/js/edit.js"></script>
-        <script src="../../static/js/post.js"></script>
+        <script src=/static/js/edit.js "></script>
+        <script src="/static/js/post.js "></script>
+
+        <script>
+            // 선택된 스터디 카테고리값을 가져와서 해당하는 라디오버튼을 체크해준다.
+            const category_id = <%= article.category_id %>;
+            const category = document.getElementsByName("category_id ");
+            for (let i = 0; i < category.length; i++) {
+                if (category[i].value == category_id) {
+                    category[i].checked = true;
+                }
+            };
+        </script>
 </body>
 
 </html>

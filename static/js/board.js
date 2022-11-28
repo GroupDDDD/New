@@ -17,3 +17,11 @@ function searchArticle() {
     console.log("url: /study/search/" + keyword);
     document.location.href = "/study/search/" + keyword;
 };
+
+// 상단 카테고리바 클릭하면 동작
+// category_id를 통해 Board 테이블에서 category_id에 해당하지 않는 class: cat-id 값을 가진 div를 display: none으로 숨김
+function selCategory(id) {
+    console.log("selCategory() called");
+    document.getElementsByClassName("card").classList.add("hidden");
+    document.getElementsByClassName("cat-" + id).classList.remove("hidden");
+}

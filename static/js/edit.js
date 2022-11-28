@@ -20,8 +20,7 @@ async function editDo() {
         expr_dt: form.expr_dt.value,
         start_dt: form.start_dt.value,
         end_dt: form.end_dt.value,
-        appo_time: form.appo_time.value,
-        appo_aria: form.appo_aria.value
+        appo_area: form.appo_area.value
     };
     const article_id = getArticleId();
     axios({
