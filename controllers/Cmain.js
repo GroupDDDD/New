@@ -33,7 +33,7 @@ exports.login = (req, res) => {
 };
 
 exports.chat = (req, res) => {
-  res.render("chat");
+  res.render("chatindex");
 };
 
 exports.frontBoard = (req, res) => {

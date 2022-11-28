@@ -28,6 +28,7 @@ exports.getChatcont = (req, res) => {
         pubId: req.query.pubId,
         partId: req.query.partId,
         roomId: req.query.roomId,
+        thisId: req.query.thisId,
       });
     });
 };
