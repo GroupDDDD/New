@@ -64,11 +64,11 @@ exports.getArticleById = (req, res) => {
 exports.writeArticle = (req, res) => {
     console.dir('writeArticle: ', req.body);
     res.render('write');
-    // if (req.session.user) {
-    //     res.render('write');
-    // } else {
-    //     res.redirect('/login');
-    // };
+    if (req.session.user !== undefined) {
+        res.render('write');
+    } else {
+        res.redirect('/login');
+    };
 };
 
 // POST /study/post : 게시글 하나 추가
@@ -77,8 +77,7 @@ exports.writeArticle = (req, res) => {
 exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
     models.Board.create({
-        // user_index: req.session.user.user_index,
-        user_index: 1, // 임시
+        user_index: req.session.user_index,
         title: req.body.title,
         category_id: req.body.category_id,
         parity: req.body.parity,
@@ -106,9 +105,15 @@ exports.editArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        res.render('edit', {
-            article: article
-        });
+        if (article.user_index === req.session.user_index) {
+            res.render('edit', {
+                article: article
+            });
+        } else {
+            res.redirect('/study/' + req.params.id);
+        }
+    }).catch((err) => {
+        console.log(err);
     });
 };
 
@@ -182,7 +187,7 @@ exports.deleteArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        if (article.user_id === req.user.user_id) {
+        if (article.user_index === req.session.user_index) {
             models.Board.destroy({
                 where: {
                     article_id: req.params.id
