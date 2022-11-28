@@ -170,6 +170,13 @@ exports.postProfile = (req, res) => {
 }
 
 exports.postProfileEdit = (req, res) => {
+    console.log('수정완료에서 !!!!!!!!!!!!!!!!!!!!!');
+    console.log('수정완료에서 req.body 보기 >> ', req.body);
+    console.log('req.file >> ', req.file);
+    //console.log('req.file.path >> ',req.file.path);
+    console.log('수정완료에서 req_index 보기 - user_index 보기 >> ', req.body.user_index);
+    console.log('user_pw 보기 >> ', req.body.user_pw);
+    console.log('user_email 보기 >> ', req.body.user_email);
     //update user set user_id = `${data.name}`, user_pw, user_name, user_email, user_adr
     models.Sign.update({
         user_id: req.body.user_id,
@@ -179,9 +186,7 @@ exports.postProfileEdit = (req, res) => {
         // user_adr: req.body.user_adr,
     },
     {
-        where: {
-            user_index: req.body.user_index,
-        }
+        where: {user_index: req.body.user_index}
     }).then((result) => {
         console.log('result', result);
         
@@ -230,16 +235,18 @@ exports.postProfileDelete = (req, res) => {
 exports.postProfileImg = (req, res) => {
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
     console.log('req 보기> >> ', req.body);
-    console.log('***************************');
-    console.log('req 보기 - user_index보기 >> ', req.body.user_index);
     console.log('req.file >> ', req.file)
     console.log('req.file.path >> ', req.file.path);
+    console.log('***************************');
+    console.log('req 보기 - user_index보기 >> ', req.body.user_index);
 
     console.log(req.file);
     console.log(req.file.path)
     res.send(req.file);
 
     //update user set prof_img_url = ${data.prof_img_url}
+    
+    
     models.Sign.update({
         prof_img_url: req.file.filename,
     },
@@ -251,6 +258,8 @@ exports.postProfileImg = (req, res) => {
         //res.send(req.file);
         //res.send('사진 db 업로드 완료');
     })
+    
+    
 }
 
 
