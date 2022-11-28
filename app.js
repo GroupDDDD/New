@@ -40,13 +40,13 @@ app.use("/profileImgs", express.static(__dirname + "/profileImgs"));
 
 // 서버 실행시 MYSQL과 연결
 sequelize
-  .sync({ force: false }) // 서버 실행시마다 테이블을 재생성할건지에 대한 여부
-  .then(() => {
-    console.log("데이터베이스 연결 성공");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+    .sync({ force: false }) // 서버 실행시마다 테이블을 재생성할건지에 대한 여부
+    .then(() => {
+        console.log("데이터베이스 연결 성공");
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -55,17 +55,18 @@ app.use(express.json());
 // passport setting
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    // secret: process.env.COOKIE_SECRET,
-    secret: "secret",
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 600 * 1000,
-    },
-  })
+    session({
+        resave: false,
+        saveUninitialized: true, // 세션에 저장할 내역이 없더라도 세션을 저장할지에 대한 여부
+        // secret: process.env.COOKIE_SECRET,
+        secret: "secret",
+        store: new session.MemoryStore(),
+        cookie: {
+            httpOnly: true,
+            secure: false,
+            maxAge: 600 * 1000,
+        },
+    })
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -80,32 +81,32 @@ app.use("/part", partRouter); // 기본 경로: localhost:PORT/part
 
 // unidentified router
 app.use((req, res, next) => {
-  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-  error.status = 404;
-  next(error);
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
 });
 
 //채팅소켓
 io.on("connection", (socket) => {
-  // 채팅창 입장 안내 문구 socket.id -> nickname
-  socket.on("setNick", (nick) => {
-    // 프론트에서 입력한 닉네임 값
-    console.log("socket on 유저네임가져오기 >> ", nick);
+    // 채팅창 입장 안내 문구 socket.id -> nickname
+    socket.on("setNick", (nick) => {
+        // 프론트에서 입력한 닉네임 값
+        console.log("socket on 유저네임가져오기 >> ", nick);
 
-    io.emit("notice", `${nick}님이 입장하셨습니다.`);
-    socket.emit("entrySuccess", nick);
+        io.emit("notice", `${nick}님이 입장하셨습니다.`);
+        socket.emit("entrySuccess", nick);
 
-    // 채팅창 메세지 전송 Step1
-    socket.on("send", (data) => {
-      console.log("socket on send >> ", data); //  { myNick: 'a', dm: '전체|특정닉네임', msg: 'cc' }
-      console.log(data.myNick);
-      //{ myNick: '333', msg: 'fff' }
-      // 전체 메세지 전송
-      // [실습45] 채팅창 메세지 전송 Step2
-      const sendData = { nick: data.myNick, msg: data.msg };
-      io.emit("newMessage", sendData);
+        // 채팅창 메세지 전송 Step1
+        socket.on("send", (data) => {
+            console.log("socket on send >> ", data); //  { myNick: 'a', dm: '전체|특정닉네임', msg: 'cc' }
+            console.log(data.myNick);
+            //{ myNick: '333', msg: 'fff' }
+            // 전체 메세지 전송
+            // [실습45] 채팅창 메세지 전송 Step2
+            const sendData = { nick: data.myNick, msg: data.msg };
+            io.emit("newMessage", sendData);
+        });
     });
-  });
 });
 
 // error handler
@@ -116,12 +117,11 @@ io.on("connection", (socket) => {
 //     res.render("error");
 // });
 
-// 주의!!!) 소켓을 사용하기 위해서는 http.listen()으로 포트를 열어야 함
-
+// session 사용을 위해서는 http-socket 연결
 http.listen(app.get("port"), () => {
-  let p = app.get("port");
-  console.log(p, "번 포트에서 대기 중");
-  console.log("~~~~~~~~~~~~~~~~~~~~~");
-  console.log(`http://localhost:${p}`);
-  console.log("~~~~~~~~~~~~~~~~~~~~~");
+    let p = app.get("port");
+    console.log(p, "번 포트에서 대기 중");
+    console.log("~~~~~~~~~~~~~~~~~~~~~");
+    console.log(`http://localhost:${p}`);
+    console.log("~~~~~~~~~~~~~~~~~~~~~");
 });

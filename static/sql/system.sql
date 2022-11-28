@@ -87,8 +87,8 @@ CREATE TABLE `chat_participants` (
  FOREIGN KEY (`part_id`) REFERENCES `chat_participants`(`part_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (1, '', '학교공부');
-INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (2, '', '어학');
-INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (3, '', '취업');
-INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (4, '', '자격증');
-INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (5, '', '공무원/임용');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (1, '/static/img/react.png', 'React');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (2, '/static/img/java.png', 'JAVA');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (3, '/static/img/nodejs.png', 'NODE.js');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (4, '/static/img/typescript.png', 'Typescript');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (5, '/static/img/spring.png', 'spring');
