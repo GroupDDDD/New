@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/nav.css" />
-    <link rel="stylesheet" href="../static/css/study.css" />
+    <link rel="stylesheet" href="/static/css/nav.css" />
+    <link rel="stylesheet" href="/static/css/study.css" />
 
     <!-- axios cdn -->
     <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
@@ -58,7 +58,7 @@
                     <div class="title-underbox"></div>
                 </div>
             </div>
-            <a href="/study/write" class="remove-line">
+            <a href="/write" class="remove-line">
                 <div class="study-mystudy">내 스터디 만들기</div>
             </a>
         </div>
@@ -66,7 +66,7 @@
         <div class="article-board" id="article-board">
             <% let lineCount = 0; %>
                 <% data.forEach((board) => { %>
-                    <% if (lineCount % 3 == 0) { %>
+                    <% if (lineCount % 2 == 0) { %>
                         <div class="line">
                             <% lineCount = 0; %>
                                 <% }; %>

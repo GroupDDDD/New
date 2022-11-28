@@ -15,7 +15,7 @@
 .first-content {
   display: flex;
   align-items: center;
-  width: 30vw;
+  width: 300px;
 }
 .logo {
   width: 110px;
@@ -63,4 +63,10 @@
 .login:hover {
   background-color: rgb(85, 120, 255);
   cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .main-logo {
+    display: none;
+  }
 }
