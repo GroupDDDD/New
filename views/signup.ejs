@@ -11,50 +11,75 @@
 
      <!-- kakao 주소 검색 -->
      <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+     <link rel="stylesheet" href="../static/css/nav.css" />
+     <link rel = "stylesheet" href = "../static/css/signup.css">
 </head>
 <body>
-    <h1>회원가입</h1>
+    <%- include('./nav.ejs') %>
+    <!-- <div>회원가입</div> -->
 
-    <form name = "form_position" action = "/sign/position" method = "GET">
+    <form name = "form_position" action = "/main" method = "GET">
         <input type = "hidden" name = "user_id">
     </form>
 
+        
+
+    <div id = "container">
+            <div id = "square">
+                <div id = "text1">
+                    Make<br>
+                    your own
+                </div>
+                <div id = "text2">
+                    study group!
+                </div>
+                
+            </div>
+            <div id = "parallelogram"></div>
 
 
-    <form name="form_register">
-        <div id = "id">
-            <label for = "user_id">아이디</label>
-            <input id = "user_id" name = "user_id" type = "text" required>
-            <button type = "button" onclick = "idTest();">중복확인</button><br>
-            <div id = "idTestText"></div>
+        <div id = "inputInfo">
+            <div id = "infoName">회원가입</div>
+
+            <form name="form_register">
+                <div id = "id" class = "userInfos">
+                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디">
+                    <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
+                    <div id = "idTestText"></div>
+                </div>
+        
+                <div id = "pw" class = "userInfos">
+                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호"><br>
+                </div>
+        
+                <div id = "name" class = "userInfos">
+                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름"><br>
+                </div>
+        
+                <div id = "email" class = "userInfos">
+                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일">
+                    <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
+                    <div id = "emailTestText"></div>
+                </div>
+        
+
+                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소"><br><br>
+                <div id = "addressInfo" class = "userInfos">
+                    <input type="text" name="address_detail" placeholder="상세주소"/>
+                </div>
+        
+            </form>
+            
+            <button type = "button" class = "registerBtn" onclick = "register();">회원가입</button>
+
+            <!-- <div class = "registerBtn">
+                <a id = "Atag" href = "/sign/signin">로그인</a>
+            </div> -->
+            
         </div>
+        
+    </div>
 
-        <div id = "pw">
-            <label for = "user_pw">비밀번호</label>
-            <input id = "user_pw" name = "user_pw" type = "password" required><br>
-        </div>
-
-        <div id = "name">
-            <label for = "user_name">이름</label>        
-            <input id = "user_name" name = "user_name" type = "text" required><br>
-        </div>
-
-        <div id = "email">
-            <label for = "user_email">이메일</label>
-            <input id = "user_email" name = "user_email" type = "email" required>
-            <button type = "button"  onclick = "emailTest();">중복확인</button><br>
-            <div id = "emailTestText"></div>
-        </div>
-
-        <h3>주소</h3>
-        <input type = "text" id = "address_kakao" name = "address" readonly><br><br>
-        <h3>상세주소</h3>
-        <input type="text" name="address_detail" />
-
-        <button type = "button" onclick = "register();">회원가입</button>
-    </form>
-    <br><br><br>
-    <a href = "/sign/signin">로그인</a>
 
 
     <script>
@@ -231,7 +256,7 @@
                 }) // exios 끝
             } //if문 끝
             else{
-                emailTestText.textContent = '값이 입력되지 않았습니다.';
+                emailTestText.textContent = '제대로 된 값이 입력되지 않았습니다.';
                 emailTestText.style.color = "red";
             }
 
