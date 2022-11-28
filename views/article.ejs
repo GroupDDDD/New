@@ -16,6 +16,11 @@
 
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+      crossorigin="anonymous"
+    ></script>
 </head>
 
 <body>
@@ -82,11 +87,11 @@
 
                 <% if ( article.user_id != article.user_id) {%>
                     <div class="article-btn">
-                        <button class="article-chat" type="button" onclick="chatStart('로그인한 유저 인덱스', <%=article.article_id%>, <%= article.user_index%>, false);">가입희망자와 채팅</button>
+                        <button class="article-chat" type="button" onclick="chatStart('1', '1', '1', true);">가입희망자와 채팅</button>
                     </div>
                     <% } else { %>
                         <div class="article-btn">
-                            <button class="article-chat" type="button" onclick="chatStart('로그인한 유저 인덱스', <%=article.article_id%>, <%= article.user_index%>, true);">그룹장과 채팅</button>
+                            <button class="article-chat" type="button" onclick="chatStart('1', '1', '1', true);">그룹장과 채팅</button>
                         </div>
                         <% } %>
 
@@ -106,6 +111,7 @@
 
 
         <script src="/static/js/article.js"></script>
+        <script src="/static/js/chatstart.js"></script>
 </body>
 
 </html>

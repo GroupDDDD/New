@@ -20,34 +20,50 @@
       integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="../static/css/chatlist.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
   </head>
   <body>
+    <%- include('./nav.ejs') %>
+
     <h2>채팅목록</h2>
     <table border="1" cellspacing="0">
-      <thead>
+      <!-- <thead>
         <tr>
           <th>스터디원프로필</th>
           <th>스터디원</th>
           <th>게시글제목</th>
           <th>임시채팅방입장</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <!-- data: db에서 가지고 오는 데이터 => 새로고침해도 데이터 남아있음 -->
         <% for (let i = 0; i < data.length; i++) { %>
         <!-- <tr id="tr_<%= data[i].id %>"> -->
         <tr id="userid">
-          <td><%= data[i].prof_img_url %></td>
-          <td><%= data[i].user_name %></td>
-          <td><%= data[i].title %></td>
-          <td>
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <img src="<%" ="data[i].prof_img_url" % /> />
+          </td>
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <%= data[i].user_name %>
+          </td>
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <%= data[i].title %>
+          </td>
+          <!-- <td>
             <button
               type="button"
               onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
             >
               Go
             </button>
-          </td>
+          </td> -->
         </tr>
         <% } %>
         <!-- 추가되어야할 tr 위치 -> 종료태그의 앞(beforeend) -->
@@ -59,7 +75,6 @@
       // 채팅창 입장
       async function chatEntry(user_index, id, room_id) {
         console.log("chatEntry user_index id room_id", user_index, id, room_id);
-
         // part_id조회
         let result = await axios({
           method: "GET",
@@ -69,11 +84,10 @@
           return res.data;
         });
         console.log("'2 part 조회 결과: ", result);
-
         // partid값 넣기
         partId = result.part_id;
         console.log("'3 part 입력 결과: ", partId);
-        window.location.href = `/chatcont/getChatcont?roomId=${room_id}&pubId=${id}&thisId=${user_index}&partId=${partId}`;
+        window.location.href = `/chatcont/getChatcont?roomId=${room_id}&pubId=${user_index}&thisId=${id}&partId=${partId}`;
       }
     </script>
   </body>
