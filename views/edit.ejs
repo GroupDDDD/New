@@ -35,17 +35,6 @@
                     <input type="text" name="member_num" placeholder="모집인원" value="<%= article.member_num %>" />
                 </div>
                 <div class="study-how">
-                    <div>
-                        <span>스터디 형태</span>
-                    </div>
-                    <div>
-                        <input type="radio" name="parity" id="on" value="ONLINE" onclick="showAppo(event);" />
-                        <label for="on">온라인</label>
-                        <input type="radio" name="parity" id="off" value="OFFLINE" onclick="showAppo(event);" />
-                        <label for="off">오프라인</label>
-                    </div>
-                </div>
-                <div class="study-how">
                     <div class="study-how-box">
                         <input type="radio" name="category_id" id="school" value="1">
                         <label for="school">학교공부</label>
@@ -57,6 +46,17 @@
                         <label for="cert">자격증</label>
                         <input type="radio" name="category_id" id="civil" value="5">
                         <label for="civil">공무원/임용</label>
+                    </div>
+                </div>
+                <div class="study-how">
+                    <div>
+                        <span>스터디 형태</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="parity" id="on" value="ONLINE" onclick="showAppo(event);" />
+                        <label for="on">온라인</label>
+                        <input type="radio" name="parity" id="off" value="OFFLINE" onclick="showAppo(event);" />
+                        <label for="off">오프라인</label>
                     </div>
                 </div>
                 <!-- parity의 value가 OFFLINE이면 appo_area를 받는 input이 등장 -->
@@ -88,10 +88,19 @@
         <script>
             // 선택된 스터디 카테고리값을 가져와서 해당하는 라디오버튼을 체크해준다.
             const category_id = <%= article.category_id %>;
-            const category = document.getElementsByName("category_id ");
-            for (let i = 0; i < category.length; i++) {
-                if (category[i].value == category_id) {
-                    category[i].checked = true;
+            const radio1 = document.getElementsByName("category_id ");
+            for (let i = 0; i < radio1.length; i++) {
+                if (radio1[i].value == category_id) {
+                    radio1[i].checked = true;
+                }
+            };
+            // 선택된 온라인/오프라인값을 가져와서 해당하는 라디오버튼을 체크해준다.
+            const parity = "<%=article.parity %>
+            ";
+            const radio2 = document.getElementsByName("parity ");
+            for (let i = 0; i < radio2.length; i++) {
+                if (radio2[i].value == parity) {
+                    radio2[i].checked = true;
                 }
             };
         </script>

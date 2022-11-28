@@ -21,13 +21,6 @@
 <body>
     <%- include('./nav.ejs') %>
 
-        <!-- 
-        게시글 내용
-        -->
-
-
-
-
         <div class="article-form">
             <div class="article">
                 <div class="article-title">
@@ -52,7 +45,7 @@
                             <span class="article-parity article-db-style">진행 방식 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.parity %>LINE</span>
                         </div>
                         <div class="article-info-inside">
-                            <span class="article-member article-db-style">모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.member_num %></span>
+                            <span class="article-member article-db-style">모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.member_num %>명</span>
                         </div>
                         <div class="article-info-inside">
                             <span class="article-date article-db-style">모집 마감 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.expr_dt%></span>
