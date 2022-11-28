@@ -46,6 +46,7 @@ body {
   background-color: rgb(85, 153, 255);
   border-radius: 10px;
   margin: 5vh 0 0 0;
+  border: none;
 }
 
 .start-study:hover {
@@ -158,6 +159,7 @@ body {
   height: 60px;
   background-color: rgb(85, 153, 255);
   border-radius: 10px;
+  border: none;
 }
 
 .describe-start-study:hover {

@@ -37,25 +37,29 @@
 
         <div class="category">
             <div class="category-title">
-                <div class="title" onclick="selCategory(1);">
-                    학교공부
+                <div class="title">
+                    title1
+                    <img src="/static/img/react.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title" onclick="selCategory(2);">
-                    어학
+                <div class="title">
+                    title2
+                    <img src="/static/img/java.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title" onclick="selCategory(3);">
-                    취업
+                <div class="title">
+                    title3
+                    <img src="/static/img/nodejs.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title" onclick="selCategory(4);">
-                    자격증
+                <div class="title">
+                    title4
+                    <img src="/static/img/typescript.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title" onclick="selCategory(5);">
-                    공무원/임용
-                    <div class="title-underbox"></div>
+                <div class="title">
+                    title5
+                    <img src="/static/img/spring.png" alt="">
                 </div>
             </div>
             <a href="/write" class="remove-line">
@@ -66,7 +70,7 @@
         <div class="article-board" id="article-board">
             <% let lineCount = 0; %>
                 <% data.forEach((board) => { %>
-                    <% if (lineCount % 2 == 0) { %>
+                    <% if (lineCount % 3 == 0) { %>
                         <div class="line">
                             <% lineCount = 0; %>
                                 <% }; %>
@@ -86,7 +90,7 @@
                                         </div>
                                     </div>
                                     <% lineCount++;%>
-                                        <% if (lineCount % 3 == 2) { %>
+                                        <% if (lineCount % 3 == 0) { %>
                         </div>
                         <% }; %>
                             <% }) %>
