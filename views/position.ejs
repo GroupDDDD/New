@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>위도 경도 저장하기</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Town</title>
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -23,36 +24,38 @@
     <!-- kakao 주소 검색 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+
 <body>
     <h1>위치 불러오기 - 위도 경도 저장하기</h1>
 
-    <h3><%= user %>님의 위치 정보를 알려주세요</h3>
-    
+    <h3>
+        <%= user %>님의 위치 정보를 알려주세요</h3>
 
-    <a href = '/sign/signup'>이전</a>
+
+    <a href='/sign/signup'>이전</a>
 
     <h2>현재 위치를 지정해주세요.</h2>
-    <div id = "map" style = "width: 500px; height: 400px;"></div><br>
-    <div id = "result"></div><br>
-    <button type = "button" onclick = "setPosition();">위치 설정 완료</button>
+    <div id="map" style="width: 500px; height: 400px;"></div><br>
+    <div id="result"></div><br>
+    <button type="button" onclick="setPosition();">위치 설정 완료</button>
 
 
 
 
     <h3>주소</h3>
-    <input type = "text" id = "address_kakao" name = "address" readonly><br>
-    <h3>상세주소</h3> 
-    <input type = "text" name = "address_detail">
+    <input type="text" id="address_kakao" name="address" readonly><br>
+    <h3>상세주소</h3>
+    <input type="text" name="address_detail">
 
     <script>
         var container = document.getElementById('map');
-		var options = {
-			//center: new kakao.maps.LatLng(33.450701, 126.570667),
+        var options = {
+            //center: new kakao.maps.LatLng(33.450701, 126.570667),
             center: new kakao.maps.LatLng(37.567130512492994, 126.97849370396516),
-			level: 3
-		};
+            level: 3
+        };
 
-		var map = new kakao.maps.Map(container, options);
+        var map = new kakao.maps.Map(container, options);
 
         //clusterer: 마커를 클러스터링 할 수 있는 클러스터러 라이브러리
         //services: 장소검색과 주소-좌표 변환을 할 수 있는 services 라이브러리
@@ -66,10 +69,10 @@
 
         //지도에 마커를 표시한다.
         marker.setMap(map);
-        
+
         //지도에 클릭 이벤트를 등록한다.
         //지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출한다.
-        kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             //클릭한 위도, 경도 정보를 가져온다.
             var lating = mouseEvent.latLng;
 
@@ -95,9 +98,9 @@
             bename2: '',
             roadname: ''
         };
-        
-        function address(){
-            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+
+        function address() {
+            document.getElementById("address_kakao").addEventListener("click", function() { //주소입력칸을 클릭하면
                 //카카오 지도 발생
                 new daum.Postcode({
                     oncomplete: function(info) {
@@ -109,7 +112,7 @@
                         console.log('시: ', info.sigungu);
                         console.log('동2: ', info.bname2);
                         console.log('로: ', info.roadname);
-                        
+
                         getAddrInfo.address = info.address;
                         getAddrInfo.sido = info.sido;
                         getAddrInfo.sigungu = info.sigungu;
@@ -125,7 +128,7 @@
         //kakao 주소 검색
         window.onload = address();
 
-        function setPosition(){
+        function setPosition() {
 
             //return된 getAddInfo 객체의 값이 나온다.
             console.log('다른 함수에서 가져온 address()함수 >> ', address());
@@ -133,16 +136,16 @@
             console.log('시 >> ', address().sigungu);
             console.log('동 >> ', address().bename2);
             console.log('로 >> ', address().roadname);
-            
+
             axios({
                 method: 'POST',
                 url: '/sign/position/update',
                 data: {
                     //user_index를 받아와야 함
-                    
+
                     user_sido: address().sido, //도
-                    user_sigungu: address().sigungu,//시
-                    user_bename: address().bename2,//구
+                    user_sigungu: address().sigungu, //시
+                    user_bename: address().bename2, //구
                     user_roadname: address().roadname //동
                 },
             }).then((res) => {
@@ -152,7 +155,7 @@
                 alert(data);
             });
         }
-        
     </script>
 </body>
+
 </html>
