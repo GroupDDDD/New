@@ -31,22 +31,24 @@
     >
       <div class="write-first-line">
         <div>글 쓰기</div>
-        <button
-          class="write-cancel"
-          type="button"
-          onclick="postCancel();"
-          id="btn"
-        >
-          취소
-        </button>
-        <button
-          class="write-submit"
-          type="button"
-          onclick="postArticle();"
-          id="btn"
-        >
-          완료
-        </button>
+        <div>
+          <button
+            class="write-cancel"
+            type="button"
+            onclick="postCancel();"
+            id="btn"
+          >
+            취소
+          </button>
+          <button
+            class="write-submit"
+            type="button"
+            onclick="postArticle();"
+            id="btn"
+          >
+            완료
+          </button>
+        </div>
       </div>
       <form action="/study/write/post" method="post" name="article-form">
         <div class="write-title">
@@ -84,7 +86,10 @@
           </div>
         </div>
         <!-- parity의 value가 OFFLINE이면 appo_time과 appo_aria를 받는 input이 등장 -->
-        <div class="board-date" id="appo-time" style="display: none"></div>
+        <div class="write-title" id="appo-time" style="display: none">
+          <input type="text" name="appo_time" placeholder="약속 시간" />
+        </div>
+
         <div class="write-title" id="appo-area" style="display: none">
           <input type="text" name="appo_area" placeholder="약속 장소" />
         </div>
