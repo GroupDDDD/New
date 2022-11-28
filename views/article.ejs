@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/front-board.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
+
+    <!-- axios cdn -->
+    <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
+    <script src=“https://unpkg.com/axios/dist/axios.min.js”></script>
+
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <%- include('./nav.ejs') %>
+
+        <!-- 
+        게시글 내용
+    -->
+        <div class="article">
+            <div class="article-title">
+                <h1>
+                    <%= article.title %>
+                </h1>
+                <div class="article-info">
+                    <span class="article-parity"><%= article.parity %></span>
+                    <span class="article-member"><%= article.member_num %></span>
+                    <span class="article-id"><%= article.user_id %></span>
+                    <span class="article-date"><%= article.createdAt %> ~ <%= article.expr_dt%></span>
+                </div>
+            </div>
+            <div class="article-appo">
+                <p>
+                    <%= article.start_dt %> <span>~</span>
+                        <%= article.end_dt %>
+                </p>
+                <p>
+                    <%= article.appo_time %>
+                </p>
+                <p>
+                    <%= article.appo_aria %>
+                </p>
+            </div>
+            <div class="article-content">
+                <p>
+                    <%= article.description %>
+                </p>
+            </div>
+        </div>
+
+        <!-- 수정, 삭제 버튼 -->
+        <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
+        <!-- 나중에 js function으로 구현할 예정 -->
+        <div class="article-btn">
+            <button class="article-modify" type="button" onclick="editArticle();">수정</button>
+            <button class="article-delete" type="button" onclick="deleteArticle();">삭제</button>
+        </div>
+
+        <!-- 그룹장과 채팅 버튼 -->
+        <!-- 로그인 하지 않았을 때는 채팅 버튼 disable -->
+        <!-- 로그인하면 게시글 작성자와 채팅 가능 -->
+        <!-- 나중에 js function으로 구현할 예정 -->
+        <div class="article-btn">
+            <button class="article-chat" type="button" onclick="location.href='/chat';">그룹장과 채팅</button>
+        </div>
+
+        <script src="../static/js/article.js"></script>
+</body>
+
+</html>

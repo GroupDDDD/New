@@ -24,9 +24,9 @@ exports.main2 = (req, res) => {
   // res.render('main2');
 };
 
-exports.study = (req, res) => {
-  res.render("study");
-};
+// exports.study = (req, res) => {
+//     res.render("study");
+// };
 
 exports.login = (req, res) => {
   res.render("login");
@@ -40,10 +40,18 @@ exports.frontBoard = (req, res) => {
   res.render("front-board");
 };
 
-exports.mypage = (Req, res) => {
+exports.mypage = (req, res) => {
   res.render("mypage");
 };
 
-exports.chatStart = (Req, res) => {
-  res.render("chatindex");
+exports.profile = (req, res) => {
+  res.render("profile");
+};
+
+exports.article = (req, res) => {
+  res.render("article");
+};
+
+exports.write = (req, res) => {
+  res.render("write");
 };

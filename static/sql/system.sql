@@ -9,7 +9,7 @@ CREATE TABLE `board` (
 	`start_dt`	DATE	NOT NULL	COMMENT '스터디 시작일',
 	`end_dt`	DATE	NOT NULL	COMMENT '스터디 종료일',
 	`appo_time`	DATE	NOT NULL	COMMENT '스터디 진행 약속 시간',
-	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
+	`appo_area`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '게시글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '게시글 수정일자',
 	PRIMARY KEY(`article_id`)
@@ -83,7 +83,7 @@ CREATE TABLE `chat_participants` (
 CREATE TABLE `cat_selected` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
 	`article_id`	INT	NOT NULL,
-	PRIMARY KEY(`category_id`)
+	PRIMARY KEY(`category_id`)gi
 )engine=innodb auto_increment=1 default charset=utf8;
 
 
