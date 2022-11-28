@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,18 +13,37 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-</head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
+  <body>
     <%- include('./nav.ejs') %>
-        <form class="write-info" action="/study/post" method="post" id="article-form">
-            <div class="write-first-line">
-                <div>글 쓰기</div>
-                <button class="write-cancel" type="button" onclick="postCancel();" id="btn">
+    <form
+      class="write-info"
+      action="/study/post"
+      method="post"
+      id="article-form"
+    >
+      <div class="write-first-line">
+        <div>글 쓰기</div>
+        <button
+          class="write-cancel"
+          type="button"
+          onclick="postCancel();"
+          id="btn"
+        >
           취소
         </button>
-                <button class="write-submit" type="button" onclick="postArticle();" id="btn">
+        <button
+          class="write-submit"
+          type="button"
+          onclick="postArticle();"
+          id="btn"
+        >
           완료
         </button>
             </div>
@@ -85,15 +103,36 @@
                     </textarea>
             </form>
 
-        </form>
+        <div class="board-date">
+          <label for="expr_dt">모집마감일</label>
+          <input type="date" name="expr_dt" id="expr_dt" />
+        </div>
+        <div class="board-date">
+          <label for="start_dt">스터디 시작일</label>
+          <input type="date" name="start_dt" id="start_dt" />
+        </div>
+        <div class="board-date">
+          <label for="end_dt">스터디 종료일</label>
+          <input type="date" name="end_dt" id="end_dt" />
+        </div>
+        <textarea
+          name="description"
+          id="description"
+          class="write-content"
+          type="text"
+          placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요."
+        >
+        </textarea>
+      </form>
+    </form>
 
-        <!-- <select class="write-category">
+    <!-- <select class="write-category">
         <option value="">카테고리 설정</option>
         <option value="프로그래밍">프로그래밍</option>
         <option value="공모전" selected="selected">공모전</option>
         <option value="자격증">자격증</option>
       </select> -->
-        <!-- <div class="insert-img">
+    <!-- <div class="insert-img">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="45"
@@ -112,7 +151,6 @@
         <img src="" alt="" />
       </div> -->
 
-        <script src="/static/js/post.js"></script>
-</body>
-
+    <script src="/static/js/post.js"></script>
+  </body>
 </html>
