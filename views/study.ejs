@@ -37,24 +37,24 @@
 
         <div class="category">
             <div class="category-title">
-                <div class="title">
-                    title1
+                <div class="title" onclick="selCategory(1);">
+                    학교공부
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title">
-                    title2
+                <div class="title" onclick="selCategory(2);">
+                    어학
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title">
-                    title3
+                <div class="title" onclick="selCategory(3);">
+                    취업
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title">
-                    title4
+                <div class="title" onclick="selCategory(4);">
+                    자격증
                     <div class="title-underbox"></div>
                 </div>
-                <div class="title">
-                    title5
+                <div class="title" onclick="selCategory(5);">
+                    공무원/임용
                     <div class="title-underbox"></div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <div class="line">
                             <% lineCount = 0; %>
                                 <% }; %>
-                                    <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
+                                    <div class="card cat-<%= board.category_id %>" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
                                         <div class="card-deadline">
                                             <span class="article__info__item__title">모집기간</span>
                                             <span class="article__info__item__content"> <%= board.expr_dt %> </span>
@@ -78,7 +78,9 @@
                                         <div class="card-title">
                                             <%= board.title %>
                                         </div>
-                                        <div class="card-badge">배지</div>
+                                        <div class="card-badge">
+                                            <%= board.category_id %>
+                                        </div>
                                         <div class="card-id">
                                             <%= board.user_id %>
                                         </div>

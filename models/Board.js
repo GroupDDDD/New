@@ -25,6 +25,11 @@ const Board = function(Sequelize, DataTypes) {
                 type: DataTypes.STRING(100),
                 allowNull: false,
             },
+            //`category_id`	INT	NOT NULL	COMMENT '카테고리 index',
+            category_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
             // `parity`	VARCHAR(2)	NOT NULL	DEFAULT OFF	COMMENT 'ON 또는 OFF 선택값 저장',
             parity: {
                 type: DataTypes.STRING(4),
@@ -56,13 +61,8 @@ const Board = function(Sequelize, DataTypes) {
                 type: DataTypes.DATE,
                 allowNull: false,
             },
-            // `appo_time`	INTERVAL_DAY	NOT NULL	COMMENT '스터디 진행 약속 시간',
-            appo_time: {
-                type: DataTypes.DATE,
-                allowNull: true,
-            },
-            // `appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소'
-            appo_aria: { // appo_aria >> appo_area로 수정
+            // `appo_area`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소'
+            appo_area: {
                 type: DataTypes.STRING(100),
                 allowNull: true,
             }
