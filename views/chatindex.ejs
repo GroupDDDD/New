@@ -68,8 +68,9 @@
           if (result.data.length > 0) {
             roomExistsOrnot = true;
           } else {
-            // 아무일도 일어나지 않음...버튼에 0개 표시하면될듯..
+            // 아무일도 일어나지 않음...alert창 추가..
             roomExistsOrnot = false;
+            alert("개설된 채팅방이 없습니다.");
           }
 
           console.log("'게시자용 채팅방 조회 결과: ", roomExistsOrnot);

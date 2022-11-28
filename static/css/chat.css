@@ -8,9 +8,9 @@ body {
 }
 
 .chat-list {
-  background-color: skyblue;
+  /* background-color: skyblue; */
   margin-top: 1px;
-  width: 50vw;
+  width: 100vw;
   height: 70vh;
   padding: 10px;
   overflow: scroll;
@@ -28,10 +28,14 @@ body {
 
 .my-chat {
   text-align: right;
+  display: flex;
 }
 
 .my-chat div {
-  background-color: yellow;
+  background-color: rgb(251, 248, 103);
+  border-radius: 10%;
+  margin: 2px;
+  flex-direction: column;
 }
 .secret-chat div {
   background-color: pink;

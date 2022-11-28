@@ -65,15 +65,28 @@
         </div>
       </div>
       <div class="chat-room">
-        <div class="chatting">
-          <div>채팅1</div>
-          <div>채팅2</div>
+        <div id="chat-list" class="chat-list">
+          <% for (let i = 0; i < data.length; i++) { %> <% if (data[i].user_index
+            === thisId) { %>
+            <div class="my-chat">
+              <div><%= data[i].user_name %></div>
+              <div><%= data[i].message %></div>
+            </div>
+            <% } else { %>
+            <div class="other-chat">
+              <div><%= data[i].user_name %></div>
+              <div><%= data[i].message %></div>
+            </div>
+            <% } %> <% } %>
+          </div>
         </div>
         <div class="chat-input">
           <textarea
             type="text"
             name="chat"
-            placeholder="...방에 메세지 보내기"
+            id="message"
+            placeholder="...메세지 보내기"
+            onkeyup="if(window.event.keyCode==13){send()}"
           ></textarea>
         </div>
       </div>
@@ -97,7 +110,6 @@
     <div>로그인아이디)</div>
     <div class="login-id"><%= thisId %></div>
     <div class="chat-box">
-      <div id="chat-list" class="chat-list">
         <!-- 기존데이터 조회(참고용) -->
         <!-- <div class="my-chat">
           <div>user1: msg1</div>
@@ -107,31 +119,16 @@
         </div>
         <div class="notice">xx가 입장했습니다.</div> -->
         <!-- 기존채팅방 내용 조회 로그인 아이디값 임시('1')-->
-
-        <% for (let i = 0; i < data.length; i++) { %> <% if (data[i].user_index
-        === '1') { %>
-        <div class="my-chat">
-          <div><%= data[i].user_name %></div>
-          <div><%= data[i].message %></div>
-        </div>
-        <% } else { %>
-        <div class="other-chat">
-          <div><%= data[i].user_name %></div>
-          <div><%= data[i].message %></div>
-        </div>
-        <% } %> <% } %>
-      </div>
       <input
         type="text"
         id="message"
         onkeyup="if(window.event.keyCode==13){send()}"
       />
       <button type="button" onclick="send();">전송</button>
-    </div>
 
     <script>
       let socket = io.connect(); // socket 사용을 위한 객체 생성
-      let myNick = "게시자1"; // 세션값받아오기 추가요 내 아이디이름 설정
+      let myNick; // user테이블조회해서가져옴
       const input = document.querySelector("#message");
       const bg = document.querySelector(".chat-list");
       const roomId = document.querySelector(".room-id").textContent;
@@ -140,8 +137,24 @@
 
       socket.on("connect", () => {
         console.log("**** ⭕ Client Socket Connected >>", socket.id);
+        setUsername();
         input.focus();
       });
+      async function setUsername() {
+        let result4 = await axios({
+          method: "GET",
+          url: `/sign/getUsername?id=${id}`,
+        }).then((res) => {
+          console.log("4 username조회: ", res.data);
+          console.log("'4-1 username 조회 결과: ", res.data.user_name);
+          // user_name값 넣기
+          myNick = res.data.user_name;
+        });
+
+        console.log("'4-2 username 입력 결과: ", myNick);
+        return myNick;
+      }
+      console.dir("setUsername()", setUsername());
       // 소켓에 로그인 이름 전달
       socket.emit("setNick", myNick);
 
@@ -158,12 +171,16 @@
       // [실습45] 채팅창 메세지 전송 Step1
       // "send" 이벤트 전송하기
       async function send() {
+        // user_name 조회
+
         const data = {
           myNick: myNick,
           msg: document.querySelector("#message").value,
         };
         socket.emit("send", data);
         console.log(data.msg);
+
+        console.log("partId 인서트전", partId);
         console.log("partId조회 전", partId);
 
         // part_id조회
