@@ -19,7 +19,8 @@ exports.getSignin = (req, res) => {
 //회원가입
 exports.postSignup = (isLoggedIn, (req, res) => {
     console.log('position의 req.body.user_sido 정보 보기 >> ', req.body.user_sido);
-    console.log('position의 req.body.user_sigungu 정보 보기 >> ', req.body.user_sigungu);
+    console.log('position의 req.body.user_sigungu 정보 보기 >> ', req.body.user_sigungu)
+    ;
     models.Sign.create({
         user_id: req.body.user_id,
         user_pw: req.body.user_pw,
@@ -32,15 +33,9 @@ exports.postSignup = (isLoggedIn, (req, res) => {
         user_roadname: req.body.user_roadname
     }).then((result) => {
         console.log('중복 확인!create >> ', result);
-        //result >>  user {
-        //     dataValues: {
-        //       user_index: 39,
-        //       user_id: '2',
-        //       user_pw: '2',
-        //       user_name: '2',
-        //       user_email: '2@2'
-        //     },
-        req.session.user = req.body.user_id;
+        
+        user = req.body.user_id;
+
         res.send(result); //then((res) => {
 
         
@@ -54,12 +49,14 @@ exports.postSignup = (isLoggedIn, (req, res) => {
 exports.getPosition = (req, res) => {
     // res.render('position', {user: req.session.user});
     const user = req.session.user;
+    const user_index = result.session.user_index;
+    console.log('user_index', user_index);
     console.log('user', user);
 
     if(req.session.user !== undefined){
         console.log("&&&&&&&&&&&&&&&&&&&&&&&!");
-        console.log('!= 일때, req.session.user>> ', req.session.user);
-        res.render('position',{user: req.session.user});
+        console.log('!= 일때, req.session.user>> ', req.session.user, req.session.user_index);
+        res.render('position',{user: req.session.user, user_index: req.session.user_index});
       }
 }
 
@@ -147,11 +144,15 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
         console.log('Csign의 postSignin. result 출력>> ', result);
 
         if(result == null){ // 로그인 실패
-            res.send(false);
+            res.send({data: result, isLogin: false});
         }
         else{ //로그인 정보 일치한다면
             req.session.user = req.body.user_id;
-            res.send(true);
+            req.session.user_index = result.user_index;
+
+            console.log('콘솔에서 sessiong확인 >> ', req.session.user_index);
+            console.log('콘솔에서 session 확인 - id .>> ', req.session.user)
+            res.send({isLogin: true});
         }
     })
 })
@@ -161,11 +162,20 @@ exports.postProfile = (req, res) => {
     models.Sign.findOne({
         where: {user_id: req.body.user_id}
     }).then((result) => {
-        console.log('findOne >>', result);
+        console.log('(((((((())))))))()()()(())');
+        console.log('result확인 >> findOne >>', result);
 
         if(result != null){
-            res.render('profile', {data: result, user: req.body.user_id});
+            res.render('profile', {data: result, user: req.body.user_id, user_index: result.user_index});
         }
+    })
+}
+
+exports.postAdmin = (req, res) => {
+    models.Sign.findOne({
+        where: {user_id: 59}
+    }).then((result) => {
+        res.render('profile', {user: req.body.user_id});
     })
 }
 
@@ -197,6 +207,7 @@ exports.postProfileEdit = (req, res) => {
 exports.postProfileDelete = (req, res) => {
     //delete from user where id = ${id}
     const user = req.session.user;
+    const user_index = req.session.user_index;
 
     console.log('req.session.user >> ', user);
     
