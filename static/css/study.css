@@ -44,15 +44,15 @@
 }
 
 .line {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   margin: 8vh 0 0 0;
 }
 
 .card {
-  width: 22vw;
-  height: 25vw;
+  width: 25vw;
+  height: 30vw;
   border: solid 2px rgb(167, 165, 165);
   border-radius: 7%;
   display: flex;

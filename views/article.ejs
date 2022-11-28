@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/front-board.css" />
     <link rel="stylesheet" href="/static/css/nav.css" />
+    <link rel="stylesheet" href="/static/css/article.css">
 
     <!-- axios cdn -->
     <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
@@ -22,47 +23,68 @@
 
         <!-- 
         게시글 내용
-    -->
+        -->
+
+    
+
+    
+    <div class="article-form">
         <div class="article">
             <div class="article-title">
-                <h1>
-                    <%= article.title %>
-                </h1>
+                <div class="article-title-name">
+                    <div>
+                        <%= article.title %>
+                    </div>
+                    <div class="article-title-element">
+                        <span class="article-id">작성자(이 글씨는 지울예정) : <%= article.user_id %></span>
+                        <!-- 수정, 삭제 버튼 -->
+                        <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
+                        <!-- 나중에 js function으로 구현할 예정 -->
+                        <div class="article-btn">
+                            <button class="article-modify" type="button" onclick="editArticle();">수정</button>
+                            <button class="article-delete" type="button" onclick="deleteArticle();">삭제</button>
+                        </div>
+                    </div>
+                    
+                </div>
                 <div class="article-info">
-                    <span class="article-parity"><%= article.parity %></span>
-                    <span class="article-member"><%= article.member_num %></span>
-                    <span class="article-id"><%= article.user_id %></span>
-                    <span class="article-date"><%= article.createdAt %> ~ <%= article.expr_dt%></span>
+                    <div class="article-info-inside">
+                        <span class="article-parity article-db-style">진행 방식 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.parity %>LINE</span>
+                    </div>
+                    <div class="article-info-inside">
+                        <span class="article-member article-db-style">모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.member_num %></span>
+                    </div>
+                    <div class="article-info-inside">
+                        <span class="article-date article-db-style">모집 마감 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.expr_dt%></span>
+                    </div>
+                    <div class="article-info-inside">
+                        <span class="article-db-style">예상 일정 &nbsp &nbsp &nbsp &nbsp &nbsp</span><span class="article-db-value"><%= article.start_dt %> <span>~</span>
+                        <%= article.end_dt %></span> 
+                    </div>
+                    
+                </div>
+            </div>   
+            <div class="article-appo">
+                
+                <div class="article-info-inside"><span class="article-db-style">스터디 장소 &nbsp &nbsp &nbsp&nbsp</span><span class="article-db-value">ddd<%= article.appo_area %></span>  
                 </div>
             </div>
-            <div class="article-appo">
-                <p>
-                    <%= article.start_dt %> <span>~</span>
-                        <%= article.end_dt %>
-                </p>
-                <p>
-                    <%= article.appo_area %>
-                </p>
+            <div class="article-content-title">
+                프로젝트 소개
+
             </div>
             <div class="article-content">
-                <p>
                     <%= article.description %>
-                </p>
             </div>
-        </div>
 
-        <!-- 수정, 삭제 버튼 -->
-        <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
-        <!-- 나중에 js function으로 구현할 예정 -->
-        <div class="article-btn">
-            <button class="article-modify" type="button" onclick="editArticle();">수정</button>
-            <button class="article-delete" type="button" onclick="deleteArticle();">삭제</button>
-        </div>
+        
+        <div class="article-btn-zone">
 
         <!-- 그룹장과 채팅 버튼 -->
         <!-- 로그인 하지 않았을 때는 채팅 버튼 disable -->
         <!-- 로그인하면 게시글 작성자와 채팅 가능 -->
         <!-- 나중에 js function으로 구현할 예정 -->
+
         <% if ( article.user_id != article.user_id) {%>
             <div class="article-btn">
                 <button class="article-chat" type="button" onclick="chatStart('로그인한 유저 인덱스', <%=article.article_id%>, <%= article.user_index%>, false);">가입희망자와 채팅</button>
@@ -72,6 +94,19 @@
                     <button class="article-chat" type="button" onclick="chatStart('로그인한 유저 인덱스', <%=article.article_id%>, <%= article.user_index%>, true);">그룹장과 채팅</button>
                 </div>
                 <% } %>
+
+        <div class="article-btn">
+            <button class="article-chat" type="button" onclick="location.href='/chat';">그룹장과 채팅</button>
+        </div>
+        </div>
+        
+
+
+        
+        </div>
+        
+    </div>
+
 
                     <script src="/static/js/article.js"></script>
 </body>

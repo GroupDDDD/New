@@ -46,6 +46,8 @@ router.post('/profile', controller.postProfile); //true가 뜨면 next() 실행.
 router.post('/profile/edit', controller.postProfileEdit);
 router.post('/profile/delete', controller.postProfileDelete);
 router.post('/profile/dynamicFile', uploadDetail.single('profileImg'), controller.postProfileImg);
+
+router.post('/profile/admin', controller.postAdmin);
 // router.post('/profile/update', controller.postProfileImgUpdate); //사진정보 update
 
 //[로그아웃 라우터]
