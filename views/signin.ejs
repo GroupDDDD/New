@@ -30,6 +30,7 @@
         <label for = "user_email">이메일</label>
         <input id = "user_email" name = "user_email" type = "email"><br>
     </form>
+
     <br>
     <button type = "button" onclick = "login();">로그인</button><br><br>
     <div class="kakaoLogo">
@@ -61,7 +62,8 @@
         }).then((res) => {
             return res.data;
         }).then((data) => {
-            if(data){//data = true라면 => res.send(true)라면
+            if(data.isLogin === true){//data = true라면 => res.send(true)라면
+                console.log('data확인!>')
                 alert('로그인 성공');
 
                 const form_info = document.forms['form_info'];
@@ -74,6 +76,7 @@
             }
         })
     }
+
 </script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </html>
