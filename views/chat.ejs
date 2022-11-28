@@ -32,7 +32,7 @@
 
     <div class="chat-section">
       <div class="chat-users">
-        <div class="chat-room-title">공모전</div>
+        <div class="chat-room-title">채팅방</div>
         <div class="chat-user">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -46,22 +46,6 @@
               d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
             />
           </svg>
-          user1
-        </div>
-        <div class="chat-user">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-person"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
-            />
-          </svg>
-          user2
         </div>
       </div>
       <div class="chat-room">
@@ -79,16 +63,17 @@
             </div>
             <% } %> <% } %>
           </div>
+          </div>
         </div>
+
         <div class="chat-input">
           <textarea
             type="text"
             name="chat"
             id="message"
-            placeholder="...메세지 보내기"
+            placeholder="...메세지 작성 후 엔터키 눌러주세요"
             onkeyup="if(window.event.keyCode==13){send()}"
           ></textarea>
-        </div>
       </div>
     </div>
 
@@ -107,9 +92,7 @@
     <!-- [실습43] 채팅창 UI 만들기 -->
     <div class="part-id"><%= partId %></div>
     <div class="room-id"><%= roomId %></div>
-    <div>로그인아이디)</div>
     <div class="login-id"><%= thisId %></div>
-    <div class="chat-box">
         <!-- 기존데이터 조회(참고용) -->
         <!-- <div class="my-chat">
           <div>user1: msg1</div>
@@ -119,12 +102,12 @@
         </div>
         <div class="notice">xx가 입장했습니다.</div> -->
         <!-- 기존채팅방 내용 조회 로그인 아이디값 임시('1')-->
-      <input
+      <!-- <input
         type="text"
         id="message"
         onkeyup="if(window.event.keyCode==13){send()}"
       />
-      <button type="button" onclick="send();">전송</button>
+      <button type="button" onclick="send();">전송</button> -->
 
     <script>
       let socket = io.connect(); // socket 사용을 위한 객체 생성
@@ -135,28 +118,44 @@
       const id = document.querySelector(".login-id").textContent;
       let partId;
 
-      socket.on("connect", () => {
+      socket.on("connect", async () => {
         console.log("**** ⭕ Client Socket Connected >>", socket.id);
-        setUsername();
+        let setNick = await setUsername();
+        console.log('****************', setNick )
         input.focus();
+
+        // console.dir("setUsername()", setUsername());
+        // 소켓에 로그인 이름 전달
+        socket.emit("setNick", setNick);
       });
+
       async function setUsername() {
         let result4 = await axios({
           method: "GET",
           url: `/sign/getUsername?id=${id}`,
-        }).then((res) => {
-          console.log("4 username조회: ", res.data);
-          console.log("'4-1 username 조회 결과: ", res.data.user_name);
+          })
+          console.log("4 username조회: ", result4.data);
+          console.log("'4-1 username 조회 결과: ", result4.data.user_name);
           // user_name값 넣기
-          myNick = res.data.user_name;
-        });
+          myNick = result4.data.user_name;
 
-        console.log("'4-2 username 입력 결과: ", myNick);
-        return myNick;
+          console.log("'4-2 username 입력 결과: ", myNick);
+          return myNick;  
+        // let result4 = await axios({
+        //   method: "GET",
+        //   url: `/sign/getUsername?id=${id}`,
+        //   }).then((res) => {
+        //     console.log("4 username조회: ", res.data);
+        //     console.log("'4-1 username 조회 결과: ", res.data.user_name);
+        //     // user_name값 넣기
+        //     myNick = res.data.user_name;
+        //   });
+
+        // console.log("'4-2 username 입력 결과: ", myNick);
+        // return myNick;  
       }
-      console.dir("setUsername()", setUsername());
-      // 소켓에 로그인 이름 전달
-      socket.emit("setNick", myNick);
+      
+
 
       // 채팅창 입장 안내 문구
       // notice 이벤트를 받아서 공지 문구를 출력
