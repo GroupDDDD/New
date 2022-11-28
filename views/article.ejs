@@ -57,49 +57,6 @@
                 </button>
               </div>
             </div>
-          </div>
-          <div class="article-info">
-            <div class="article-info-inside">
-              <span class="article-parity article-db-style"
-                >진행 방식 &nbsp &nbsp &nbsp &nbsp &nbsp</span
-              ><span class="article-db-value"><%= article.parity %>LINE</span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-member article-db-style"
-                >모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span
-              ><span class="article-db-value"><%= article.member_num %>명</span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-date article-db-style"
-                >모집 마감 &nbsp &nbsp &nbsp &nbsp &nbsp</span
-              ><span class="article-db-value"><%= article.expr_dt%></span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-db-style"
-                >예상 일정 &nbsp &nbsp &nbsp &nbsp &nbsp</span
-              ><span class="article-db-value"
-                ><%= article.start_dt %> <span>~</span>
-                <%= article.end_dt %>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="article-appo">
-        <div class="article-info-inside">
-          <span class="article-db-style"
-            >스터디 장소 &nbsp &nbsp &nbsp&nbsp</span
-          ><span class="article-db-value">ddd<%= article.appo_area %></span>
-        </div>
-      </div>
-      <div class="article-content-title">프로젝트 소개</div>
-      <div class="article-content"><%= article.description %></div>
-
-      <div class="article-btn-zone">
-        <!-- 그룹장과 채팅 버튼 -->
-        <!-- 로그인 하지 않았을 때는 채팅 버튼 disable -->
-        <!-- 로그인하면 게시글 작성자와 채팅 가능 -->
-        <!-- 나중에 js function으로 구현할 예정 -->
 
         <!-- 일단테스트용 삭제 -->
 
@@ -113,23 +70,9 @@
           </button>
         </div>
 
-        <div class="article-btn">
-          <button
-            class="article-chat"
-            type="button"
-            onclick="location.href='/chat';"
-          >
-            그룹장과 채팅
-          </button>
-        </div>
-      </div>
-    </div>
 
-    <script src="/static/js/article.js"></script>
-    <script src="/static/js/chatstart.js"></script>
-    <script>
-      // Cboard에서 Board 테이블에 include된 user 테이블의 user_id를 가져옴
-      //
-    </script>
-  </body>
+            <script src="/static/js/article.js"></script>
+            <script src="/static/js/chatstart.js"></script>
+</body>
+
 </html>

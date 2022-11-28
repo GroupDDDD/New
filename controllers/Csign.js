@@ -53,25 +53,21 @@ exports.postSignup =
   });
 
 exports.getPosition = (req, res) => {
-  // res.render('position', {user: req.session.user});
-  const user = req.session.user;
-  const user_index = result.session.user_index;
-  console.log("user_index", user_index);
-  console.log("user", user);
 
-  if (req.session.user !== undefined) {
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&!");
-    console.log(
-      "!= 일때, req.session.user>> ",
-      req.session.user,
-      req.session.user_index
-    );
-    res.render("position", {
-      user: req.session.user,
-      user_index: req.session.user_index,
-    });
-  }
-};
+    // res.render('position', {user: req.session.user});
+    const user = req.session.user;
+    const user_index = result.session.user_index;
+    console.log('user_index', user_index);
+    console.log('user', user);
+
+    if (req.session.user !== undefined) {
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&!");
+        s
+        console.log('!= 일때, req.session.user>> ', req.session.user, req.session.user_index);
+        res.render('position', { user: req.session.user, user_index: req.session.user_index });
+    }
+}
+
 
 //사용자가 입력한 장소 테이블에 update 하기
 exports.postPositionUpdate = (req, res) => {
@@ -157,6 +153,7 @@ exports.postSignin =
     //다르면 로그인 실패.
     //테이블에 저장된 user_id값이 사용자가 입력한 값(input 태그)과 같은지 비교
     //SELECT * FROM user WHERE user_id = `${data.user_id} AND user_pw = `${data.user_pw}` LIMIT 1`
+
     models.Sign.findOne({
       //비밀번호와 아이디 비교.
       where: {
