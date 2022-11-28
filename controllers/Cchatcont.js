@@ -16,7 +16,7 @@ exports.getChatcont = (req, res) => {
     WHERE (p.room_id = ${req.query.roomId}
     and p.user_index =${req.query.pubId}) or (p.room_id = ${req.query.roomId}
     and p.user_index =${req.query.thisId})
-    ORDER BY c.createdAt desc;`;
+    ORDER BY c.createdAt asc;`;
   models.sequelize
     .query(query, { type: models.sequelize.QueryTypes.SELECT })
     .then((result) => {
@@ -28,6 +28,7 @@ exports.getChatcont = (req, res) => {
         pubId: req.query.pubId,
         partId: req.query.partId,
         roomId: req.query.roomId,
+        thisId: req.query.thisId,
       });
     });
 };

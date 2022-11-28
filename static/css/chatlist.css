@@ -13,5 +13,11 @@ tr {
 }
 tr:hover {
   background-color: #f5f5f5;
+  border-left: none;
 }
-/* dkdk */
+
+.img {
+  border-radius: 50%;
+  width: 5vw;
+  height: 5vw;
+}

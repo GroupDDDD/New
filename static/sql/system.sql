@@ -19,8 +19,7 @@ CREATE TABLE `user` (
  updatedAt DATETIME NOT NULL COMMENT '수정일',
  PRIMARY KEY (`user_index`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-INSERT INTO user (user_id, user_pw, user_name, user_email, user_Lat, user_Lon, prof_img_url, createdAt, updatedAt) VALUES ('admin', '1234', '관리자', 'admin@example.com', 37.5665, 126.9780, '', now(), now());
+insert into user(user_id, user_pw, user_name, user_email) values('admin', '1234', '관리자', 'admin@example.com');
 
 /* 스터디 모집글 카테고리 */
 CREATE TABLE `category` (

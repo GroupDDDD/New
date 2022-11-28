@@ -46,62 +46,62 @@
         >
           완료
         </button>
-      </div>
-      <form action="/study/write/post" method="post" name="article-form">
-        <div class="write-title">
-          <input
-            name="title"
-            class="title"
-            type="text"
-            placeholder="제목 입력"
-          />
-        </div>
-        <div class="write-title">
-          <input type="text" name="member_num" placeholder="모집인원" />
-        </div>
-        <div class="study-how">
-          <div class="study-how-box">
-            <input type="radio" name="category_id" id="school" value="1" />
-            <label for="school">학교공부</label>
-            <input type="radio" name="category_id" id="lang" value="2" />
-            <label for="lang">어학</label>
-            <input type="radio" name="category_id" id="job" value="3" />
-            <label for="job">취업</label>
-            <input type="radio" name="category_id" id="cert" value="4" />
-            <label for="cert">자격증</label>
-            <input type="radio" name="category_id" id="civil" value="5" />
-            <label for="civil">공무원/임용</label>
-          </div>
-        </div>
-        <div class="study-how">
-          <div>
-            <span>스터디 형태</span>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="parity"
-              id="on"
-              value="ON"
-              onclick="showAppo(event);"
-            />
-            <label for="on">온라인</label>
-            <input
-              type="radio"
-              name="parity"
-              id="off"
-              value="OFF"
-              onclick="showAppo(event);"
-            />
-            <label for="off">오프라인</label>
-          </div>
-        </div>
+            </div>
+            <form action="/study/write/post" method="post" name="article-form">
+                <div class="write-title">
+                    <input name="title" class="title" type="text" placeholder="제목 입력" />
+                </div>
+                <div class="write-title">
+                    <input type="text" name="member_num" placeholder="모집인원" />
+                </div>
+                <div class="study-how">
+                    <div class="study-how-box">
+                        <input type="radio" name="category_id" id="school" value="1">
+                        <label for="school">학교공부</label>
+                        <input type="radio" name="category_id" id="lang" value="2">
+                        <label for="lang">어학</label>
+                        <input type="radio" name="category_id" id="job" value="3">
+                        <label for="job">취업</label>
+                        <input type="radio" name="category_id" id="cert" value="4">
+                        <label for="cert">자격증</label>
+                        <input type="radio" name="category_id" id="civil" value="5">
+                        <label for="civil">공무원/임용</label>
+                    </div>
+                </div>
+                <div class="study-how">
+                    <div>
+                        <span>스터디 형태</span>
+                    </div>
+                    <div>
+                        <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" />
+                        <label for="on">온라인</label>
+                        <input type="radio" name="parity" id="off" value="OFF" onclick="showAppo(event);" />
+                        <label for="off">오프라인</label>
+                    </div>
+                </div>
 
-        <!-- parity의 value가 OFFLINE이면 appo_time과 appo_aria를 받는 input이 등장 -->
-        <div class="board-date" id="appo-time" style="display: none"></div>
-        <div class="write-title" id="appo-area" style="display: none">
-          <input type="text" name="appo_area" placeholder="약속 장소" />
-        </div>
+                <!-- parity의 value가 OFFLINE이면 appo_time과 appo_area를 받는 input이 등장 -->
+                <div class="board-date" id="appo-time" style="display: none"></div>
+                <div class="write-title" id="appo-area" style="display: none">
+                    <input type="text" name="appo_area" placeholder="약속 장소" />
+                </div>
+
+                <div class="board-date">
+                    <label for="expr_dt">모집마감일</label>
+                    <input type="date" name="expr_dt" id="expr_dt" />
+                </div>
+                <div class="board-date">
+                    <label for="start_dt">스터디 시작일</label>
+                    <input type="date" name="start_dt" id="start_dt" />
+                </div>
+                <div class="board-date">
+                    <label for="end_dt">스터디 종료일</label>
+                    <input type="date" name="end_dt" id="end_dt" />
+                </div>
+
+                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요.">
+                    </textarea>
+            </form>
 
         <div class="board-date">
           <label for="expr_dt">모집마감일</label>
