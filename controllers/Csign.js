@@ -54,6 +54,7 @@ exports.getPosition = (req, res) => {
 
     if (req.session.user !== undefined) {
         console.log("&&&&&&&&&&&&&&&&&&&&&&&!");
+        s
         console.log('!= 일때, req.session.user>> ', req.session.user, req.session.user_index);
         res.render('position', { user: req.session.user, user_index: req.session.user_index });
     }
@@ -145,7 +146,7 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
             req.session.user = req.body.user_id;
             req.session.user_index = result.user_index;
 
-            console.log('콘솔에서 sessiong확인 >> ', req.session.user_index);
+            console.log('콘솔에서 session 확인 >> ', req.session.user_index);
             console.log('콘솔에서 session 확인 - id .>> ', req.session.user)
             res.send({ isLogin: true });
         }
