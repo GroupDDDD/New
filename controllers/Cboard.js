@@ -44,7 +44,7 @@ exports.getArticleById = (req, res) => {
         },
         include: [{
             model: models.Sign,
-            attributes: ['user_id']
+            attributes: ['user_id', 'user_index'],
         }, {
             model: models.Category,
             attributes: ['category_img', 'category_name']
@@ -73,7 +73,6 @@ exports.writeArticle = (req, res) => {
 
 // POST /study/post : 게시글 하나 추가
 // postArticle 함수는 models의 Board 테이블에 데이터를 추가
-// 추가한 데이터의 article_id를 통해 SCategory 테이블에 데이터를 추가
 // 추가한 후, 방금 생성한 게시글의 id를 따와 /study/:id 라우트로 이동
 exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
@@ -97,7 +96,7 @@ exports.postArticle = (req, res) => {
 };
 
 // GET /study/edit/:id : 수정할 게시물 input페이지
-// editArticle 함수는 먼저 요청이 들어온 id를 참조하여 edit.ejs를 렌더링
+// editArticle 함수는 먼저 요청이 들어온 id를 참조
 // res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 input에 기본값으로 설정
 exports.editArticle = (req, res) => {
