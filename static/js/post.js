@@ -15,12 +15,8 @@ function postArticle() {
         expr_dt: form.expr_dt.value,
         start_dt: form.start_dt.value,
         end_dt: form.end_dt.value,
-        appo_time: form.appo_time.value,
-        appo_aria: form.appo_area.value, // 오타 수정 (appo_aria -> appo_area)
+        appo_area: form.appo_area.value
     };
-    if (form.appo_time.value == "") {
-        formData.appo_time = "0001-01-01 00:00:00";
-    }
     console.dir(formData);
 
     // axios로 post 요청을 보냄
@@ -45,18 +41,15 @@ function postCancel() {
     history.back();
 }
 
-// form에서 parity가 OFFLINE으로 선택되면, appo_time과 appo_area가 보이도록 함
-// 반대로 ONLINE으로 선택되면, appo_time과 appo_area가 안보이도록 함
+// form에서 parity가 OFFLINE으로 선택되면, appo_area가 보이도록 함
+// 반대로 ONLINE으로 선택되면, appo_area가 안보이도록 함
 function showAppo(event) {
     const parity = event.target.value;
-    const appo_time = document.getElementById("appo-time");
     const appo_area = document.getElementById("appo-area");
 
     if (parity == "OFF") {
-        appo_time.style.display = "";
         appo_area.style.display = "";
     } else {
-        appo_time.style.display = "none";
         appo_area.style.display = "none";
     }
 }
