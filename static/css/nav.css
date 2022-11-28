@@ -58,6 +58,7 @@
   width: 100px;
   height: 35px;
   background-color: rgb(85, 153, 255);
+  border: none;
 }
 
 .login:hover {

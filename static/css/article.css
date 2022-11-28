@@ -73,7 +73,7 @@
 
 .article-btn {
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 
 .article-modify {
@@ -84,6 +84,7 @@
   color: white;
   font-weight: 700;
   font-size: 18px;
+  border: none;
 }
 
 .article-delete {
@@ -95,4 +96,17 @@
   color: white;
   font-weight: 700;
   font-size: 18px;
+  border: none;
+}
+
+.article-chat {
+  width: 200px;
+  height: 30px;
+  background-color: rgb(154, 205, 50);
+  border-radius: 8px;
+  margin: 30px 0 10px 0;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
 }
