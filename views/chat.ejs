@@ -92,7 +92,10 @@
     </div> -->
 
     <!-- [실습43] 채팅창 UI 만들기 -->
-
+    <div class="part-id"><%= partId %></div>
+    <div class="room-id"><%= roomId %></div>
+    <div>세션 로그인아이디값받아와야함(인서트되는 로그인아이디)</div>
+    <div class="login-id">2</div>
     <div class="chat-box">
       <div id="chat-list" class="chat-list">
         <!-- 기존데이터 조회(참고용) -->
@@ -131,6 +134,9 @@
       let myNick = "게시자1"; // 세션값받아오기 추가요 내 아이디이름 설정
       const input = document.querySelector("#message");
       const bg = document.querySelector(".chat-list");
+      const roomId = document.querySelector(".room-id").textContent;
+      const id = document.querySelector(".login-id").textContent;
+      let partId;
 
       socket.on("connect", () => {
         console.log("**** ⭕ Client Socket Connected >>", socket.id);
@@ -151,22 +157,51 @@
 
       // [실습45] 채팅창 메세지 전송 Step1
       // "send" 이벤트 전송하기
-      function send() {
+      async function send() {
         const data = {
           myNick: myNick,
           msg: document.querySelector("#message").value,
         };
         socket.emit("send", data);
+        console.log(data.msg);
+        console.log("partId조회 전", partId);
+
+        // part_id조회
+        // 로그인 세션 값 받아와야함...id에 넣어야함
+        let result3 = await axios({
+          method: "GET",
+          url: `/part/getpartid?roomId=${roomId}&id=${id}`,
+        }).then((res) => {
+          console.log("3partid조회: ", res.data);
+          return res.data;
+        });
+        console.log("'2 part 조회 결과: ", result3);
+
+        // partid값 넣기
+        partId = result3.part_id;
+        console.log("'3 part 입력 결과: ", partId);
+
+        console.log("partId 인서트전", partId);
         // 메세지내용 DB에 저장
         axios({
           method: "POST",
           url: "/chatcont/postChatcont",
           data: {
-            partId: data.partId,
-            message: msg,
+            partId: partId,
+            message: data.msg,
           },
-        });
+        })
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            return res.data;
+          })
+          .then((data) => {
+            console.log("인서트됐는지확인용", data); // {id: 8, name: 'ㅁㅁ', comment: 'ㅁㅁ'}
+          });
       }
+
+      //  = document.querySelector(".part-id").textContent
 
       // [실습45] 채팅창 메세지 전송 Step2
       // "newMessage" 이벤트를 전달받기 { 닉네임, 메세지내용 }

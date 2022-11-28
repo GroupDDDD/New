@@ -59,6 +59,7 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
+  cursor: pointer;
 }
 
 .card-deadline {
@@ -142,4 +143,9 @@
 
 .study-mystudy:hover {
   cursor: pointer;
+}
+
+.decoration-none {
+  text-decoration-line: none;
+  color: black;
 }

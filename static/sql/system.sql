@@ -9,7 +9,7 @@ CREATE TABLE `board` (
 	`start_dt`	DATE	NOT NULL	COMMENT '스터디 시작일',
 	`end_dt`	DATE	NOT NULL	COMMENT '스터디 종료일',
 	`appo_time`	DATE	NOT NULL	COMMENT '스터디 진행 약속 시간',
-	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
+	`appo_area`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '게시글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '게시글 수정일자',
 	PRIMARY KEY(`article_id`)
@@ -40,14 +40,14 @@ CREATE TABLE `user` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `chat_contents` (
-	`content_id`	INT	NOT NULL	COMMENT 'auto increment',
+	`content_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`part_id`	INT	NOT NULL	COMMENT 'FK 참여자 index',
 	`message`	VARCHAR(5000)	NOT NULL	COMMENT '채팅방에서 주고받은 메세지',
 	`image`	TEXT	NULL	COMMENT '채팅 이미지url',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '채팅글 생성일자',
 	`updatedAt`	DATETIME	NULL	COMMENT '업데이트 시간',
 	PRIMARY KEY(`content_id`)
-);
+)engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `category` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
@@ -57,23 +57,23 @@ CREATE TABLE `category` (
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `aria` (
-	`aria_id`	INT	NOT NULL	COMMENT '활동지역 Index',
+	`aria_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT '활동지역 Index',
 	`appo_aria`	VARCHAR(100)	NULL	COMMENT '스터디 진행 약속 장소',
 	`Field`	VARCHAR(255)	NULL,
 	PRIMARY KEY(`aria_id`)
 )engine=innodb auto_increment=1 default charset=utf8;
 
 CREATE TABLE `attachment` (
-	`id`	INT	NOT NULL	COMMENT 'auto increment',
+	`id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'auto increment',
 	`data_loc`	TEXT	NOT NULL,
 	`file_name`	VARCHAR(255)	NOT NULL,
 	PRIMARY KEY(`id`)
 )engine=innodb auto_increment=1 default charset=utf8;
 
-CREATE TABLE `participants` (
-	`part_id`	INT	NOT NULL	COMMENT 'PK 참여자table index',
+CREATE TABLE `chat_participants` (
+	`part_id`	INT	NOT NULL	AUTO_INCREMENT	COMMENT 'PK 참여자table index',
 	`room_id`	INT	NOT NULL	COMMENT 'FK 채팅방 index',
-	`user_id`	INT	NOT NULL	COMMENT '회원 index',
+	`user_index`	INT	NOT NULL	COMMENT '회원 index',
 	`pub_status`	INT	NOT NULL	COMMENT '게시자여부(1게시자 2비게시자)',
 	`createdAt`	DATETIME	NOT NULL	COMMENT '생성일',
 	`updatedAt`	DATETIME	NULL	COMMENT '수정일',
@@ -83,5 +83,15 @@ CREATE TABLE `participants` (
 CREATE TABLE `cat_selected` (
 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
 	`article_id`	INT	NOT NULL,
-	PRIMARY KEY(`category_id`)
+	PRIMARY KEY(`category_id`)gi
 )engine=innodb auto_increment=1 default charset=utf8;
+
+
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (1, '', '학교공부');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (2, '', '어학');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (3, '', '취업');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (4, '', '자격증');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (5, '', '공무원/임용');
+INSERT INTO `category` (`category_id`, `category_img`, `category_name`) VALUES (6, '', '아무거나');
+
+INSERT INTO `user` VALUES (1, 'admin', 'admin', 'admin', 'admin@admin.com', '', '', '', '', '');
