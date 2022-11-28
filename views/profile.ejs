@@ -6,99 +6,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보 수정 - 마이페이지</title>
     
-    <link rel="stylesheet" href="./reset.css" />
+    <!--bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+
     <link rel = "stylesheet" href = "/static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/nav.css">
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
+    <%- include('nav.ejs')%>
     <!-- <a href = '/'>Home</a>
     <p>회원정보 수정-마이페이지</p>
 
+    
+
 
     <h1><%= user %>님 환영합니다.</h1>-->
+
+
+
     <div id = "container">
         <h2 id = "profileName">개인정보 수정</h2>
 
 
+
+        <div id = "whole_info">
+            <div id = "profile_img">
     
-        <div id = "profile_img">
-    
-            <div id = "profileImgDiv">
-                <span>프로필 사진</span>
-    
-                <div id = "modalOpen" onclick = "fileUpload();">
-                    <img src = "" id = "divInImg" alt = "선택프로필">
+                <div id = "profileImgDiv">
+                    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                    <div id = "modalOpen" onclick = "">
+                        <img src = "../static/img/profile.png" id = "divInImg" alt = "선택프로필">
+                    </div>
+                    
+                    <!-- Button trigger modal -->
+                    <button type="button" id = "modalBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        프로필 사진 바꾸기
+                    </button>
+        
                 </div>
-    
-            </div>
-    
-            <div id = "resultId">
-                <div id = "twoBox">
-                    <div id = "box1"></div>
-    
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">프로필 사진 지정</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+
+            <div id = "profile">
+                <div id = "circleDiv">
+                    <div id = "circlePicture">
+                        <img src = "../static/img/profile.png" id = "circleImg" alt = "큰 원 사진">
+                    </div> <!-- 프로필 사진 보이기 -->
+                </div>
+                
+                <div id = "deleteAndSelect">
+                    <div id = "imgDelete" class = "deleteFolder correctionDiv" onclick = "imgDelete();">
+                        <img src = "../static/img/trash.png" id = "trash" alt = "삭제버튼">
+                    </div>
+                    
                     <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
-                    <div class = "upload"></div>
+                    <div id = "imgSelect" class = "upload correctionDiv">
+                        <img src = "../static/img/imgFolder.png" id = "folder2" alt = "사진폴더">
+                    </div>
                 </div>
-    
-                <button type = "button" id = "imgEdit" onclick = "editBtn();" style="display:none">수정하기</button> <!-- .uploadBtn -->
+
+                <div id = "btnDiv">
+                    <button type = "button" class = "overlapBtn" id = "imgEdit" onclick = "editBtn();">수정하기</button>
+                </div>
+                
             </div>
-    
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+        
+                <!-- <div id = "resultId">
+
+                    <div id = "contents">
+
+                        <div id = "pictureDiv"></div>
+                        <div id = "twoBox">
+                            <div id = "box1"></div>
+            
+                            <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
+                           <div class = "upload"></div> 
+                        </div>
+            
+                         <button type = "button" class = "overlapBtn" id = "imgEdit" onclick = "editBtn();" style="display:none">수정하기</button> .uploadBtn 
+                        
+                    </div>
+
+                </div> -->
+        
+            </div>
+            
+            <form name = "form_profile">
+                <!-- <input name="name" value="Sean"> -->
+                <input type="hidden" id="user_index" value="<%= data.user_index %>" />
+
+
+
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_email">email *</label><br>
+        
+                    <div class = "overlapInfo">
+                        <input id = "user_email" name = "user_email" type = "email" value = "<%= data.user_email %>" required>
+                        <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
+                    </div>
+                    <div id = "emailTestText"></div>
+                </div>
+                
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_name">NAME *</label><br>
+                    <input id = "user_name" name = "user_name" type = "text" value = "<%= data.user_name %>" required><br>
+                </div>
+                
+                <div class = "user_infoGroup">
+                    <label for = "user_id">ID *</label><br>
+        
+                    <div class = "overlapInfo">
+                        <input id = "user_id" name = "user_id" type = "text" value = "<%= data.user_id %>" required>
+                        <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
+                    </div>
+                    <div id = "idTestText"></div>
+                </div>
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_pw">PW *</label><br>
+                    <input id = "user_pw" name = "user_pw" type = "password" value = "<%= data.user_pw %>" required><br>
+                </div>
+        
+        
+                <div id = "final_info_submit">
+                    <div id = "btns">
+                        <a class = "btnA" href = "/main2">취소</a>
+                        <button type = "button" class = "registerBtn" onclick = "profileEdit();">저장</button>
+                    </div>
+                    <br>
+                </div>
+                
+                <button type = "button" id = "deleteBtn" onclick = "profileDelete();">회원탈퇴</button>
+                <a id = "deleteBtn" href = "/sign/logout">로그아웃</a>
+                <br><br>
+        
+            </form>
         </div>
         
-        <form name = "form_profile">
-            <!-- <input name="name" value="Sean"> -->
-            <input type="hidden" id="user_index" value="<%= data.user_index %>" />
-    
-            <div class = "user_infoGroup">
-                <label for = "user_email">email</label><br>
-    
-                <div class = "overlapInfo">
-                    <input id = "user_email" name = "user_email" type = "email" value = "<%= data.user_email %>" required>
-                    <button type = "button"  onclick = "emailTest();">중복확인</button><br>
-                </div>
-            </div>
-            <div id = "emailTestText"></div>
-            
-    
-            <div class = "user_infoGroup">
-                <label for = "user_name">NAME</label><br>
-                <input id = "user_name" name = "user_name" type = "text" value = "<%= data.user_name %>" required><br>
-            </div>
-            
-            <div class = "user_infoGroup">
-                <label for = "user_id">ID</label><br>
-    
-                <div class = "overlapInfo">
-                    <input id = "user_id" name = "user_id" type = "text" value = "<%= data.user_id %>" required>
-                    <button type = "button" onclick = "idTest();">중복확인</button><br>
-                </div>
-            </div>
-            <div id = "idTestText"></div>
-    
-            <div class = "user_infoGroup">
-                <label for = "user_pw">PW</label><br>
-                <input id = "user_pw" name = "user_pw" type = "password" value = "<%= data.user_pw %>" required><br>
-            </div>
-    
-    
-    
-    
-            <button type = "button" onclick = "profileEdit();">수정완료</button>
-            <button type = "button" onclick = "profileDelete();">회원탈퇴</button>
-            <br>
-    
-            <a href = "/main2">main2(홈)</a>
-            <a href = "/sign/logout">로그아웃</a>
-            <br><br>
-    
-        </form>
+        
     </div>
-    
 
 
     <script>
+        const pictureDiv = document.querySelector('#pictureDiv');
         const resultId = document.querySelector('#resultId');
         const box1 = document.querySelector('#box1');
         const box2 = document.querySelector('.upload');
@@ -115,6 +194,7 @@
         function fileUpload(){ //프로필 수정 버튼을 누르면
             console.log('프로필 사진 선택');
             
+            pictureDiv.classList.toggle('picpure');
             resultId.classList.toggle('result');
             box1.classList.toggle('box1');
             box2.classList.toggle('box2');
@@ -141,7 +221,7 @@
                 form.reportValidity();
                 return;
             }
-
+            
 
             //const form_profile = document.forms['form_profile'];
             const formData = new FormData(); // 폼 객체 생성
@@ -170,8 +250,22 @@
             }).then(function(response){ //res.send(req.file);
                 //1. 사용자가 지정한 사진이 화면에 보이게 하기
                 document.querySelector('#divInImg').src = "/" + response.data.path;
+                document.querySelector('#circleImg').src = "/" + response.data.path;
+                
+                alert('변경되었습니다.');
             }) //'/sign/profile/dynamicFile' axios 끝
         }
+
+        const divInImg = document.querySelector('#divInImg');
+        const trashDiv = document.querySelector('#trash');
+        const circleImg = document.querySelector('#circleImg');
+
+
+        trashDiv.addEventListener('click', function() {
+            circleImg.setAttribute('src', '../static/img/profile.png');
+            divInImg.setAttribute('src', '../static/img/profile.png');
+            alert('기본이미지로 변경되었습니다.');
+        })
 
 
         function profileEdit(){
@@ -300,5 +394,7 @@
     
 
     </script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>

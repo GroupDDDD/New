@@ -1,34 +1,44 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 body{
-    width: 100vw;
+    overflow-x: hidden;
 }
 #container{
+    margin: 0 auto;
+    /* border: 3px solid red; */
+    width: 45%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 }
 #profileName{
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 100px;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
     text-align: center;
 }
+#whole_info{
+    margin: 0 70px;
+    /* border : 3px solid blue; */
+    /* padding-bottom: 100px; */
+}
 #profileImgDiv{
-    width: 540px;
-    border: 2px solid black;
+    /* margin: 0 50px; */
+    /* border: 2px solid black; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
 }
+
 #modalOpen{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border : 1px solid black;
     border-radius: 50%;
     background-color: blue;
@@ -36,15 +46,23 @@ body{
 #modalOpen #divInImg{
     width: 100%;
     height: 100%;
+    border-radius: 50%;
 }
 .result{
-    width: 150px;
-    height : 150px;
+    width: 480px;
+    height : 400px;
     background-color: pink;
 
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+ }
+.picpure{
+    border: 2px solid blue;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto;
  }
  #twoBox{
     display: flex;
@@ -69,4 +87,85 @@ input{
 }
 .overlapInfo{
     display: flex;
+    align-items: start;
+}
+
+.user_infoGroup{
+    /*border: 3px solid orange;*/
+    margin-bottom: 70px;
+}
+span, label{
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+input{
+    width: 85%;
+    /*border: 3px solid green;*/
+    margin-right: 10px;
+    /* margin-bottom: 50px; */
+    margin-top: 10px;
+    padding: 12px 0 10px;
+}
+.overlapBtn{
+    padding: 15px 17px;
+}
+#final_info_submit{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: end;
+}
+#btns{
+    display: flex;
+    flex-direction: row;
+}
+.registerBtn{
+    padding: 10px 55px;
+    margin-left: 20px;
+}
+.btnA{
+    border: 2px solid #cdcdcd;
+    padding: 10px 55px;
+    text-decoration: none;
+    color: black;
+}
+
+#deleteBtn{
+    text-decoration: none;
+    background-color: white;
+    color: #a5a5a5;
+    border: none;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 14px;
+}
+#circleDiv, #btnDiv{
+    display: flex;
+    justify-content: center;
+}
+#deleteAndSelect{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#circlePicture > img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+.correctionDiv{
+    width: 150px;
+    height: 120px;
+    border: 2px solid #b3b1b1
+}
+.deleteFolder > img{
+    width: 150px;
+    height: 140px;
+    border: 1px solid #f9f9f9;
+}
+.upload > img{
+    width: 150px;
+    height: 120px;
+    border: 1px solid #f9f9f9;
 }
