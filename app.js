@@ -36,6 +36,7 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/static/css", express.static(__dirname + "/static/css"));
 app.use("/static/js", express.static(__dirname + "/static/js"));
 app.use("/static/img", express.static(__dirname + "/static/img"));
+app.use("/static/img/favicon", express.static(__dirname + "/static/img/favicon"));
 app.use("/profileImgs", express.static(__dirname + "/profileImgs"));
 
 // 서버 실행시 MYSQL과 연결
@@ -80,11 +81,11 @@ app.use("/chatcont", chatcontRouter); // 기본 경로: localhost:PORT/chatcont
 app.use("/part", partRouter); // 기본 경로: localhost:PORT/part
 
 // unidentified router
-app.use((req, res, next) => {
-    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-    error.status = 404;
-    next(error);
-});
+// app.use((req, res, next) => {
+//     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+//     error.status = 404;
+//     next(error);
+// });
 
 //채팅소켓
 io.on("connection", (socket) => {
