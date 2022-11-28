@@ -6,16 +6,14 @@ function getArticle(id) {
     console.log("url: /study/" + id);
 
     document.location.href = "/study/" + id;
+};
 
-    // axios로 get 요청을 보냄
-    // axios({
-    //         method: "get",
-    //         url: "/study/" + id,
-    //     })
-    //     .then((res) => {
-    //         console.log(res);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-}
+// input tag(class, id, name = search)에 입력된 값을 받아와 keyword에 저장
+// keyword = req.query.keyword;
+// keyword를 통해 Board 테이블에서 title, description에 해당하는 데이터를 조회
+function searchArticle() {
+    let keyword = document.getElementById("search").value;
+    console.log("keyword: " + keyword);
+    console.log("url: /study/search/" + keyword);
+    document.location.href = "/study/search/" + keyword;
+};
