@@ -37,25 +37,25 @@
 
         <div class="category">
             <div class="category-title">
-                <div class="title">
-                    title1
-                    <div class="title-underbox"></div>
+                <div class="title" onclick="selCategory(1);">
+                    학교공부
+                    <div class="title-underbox" onclick="selCategory(1);"></div>
                 </div>
                 <div class="title">
-                    title2
-                    <div class="title-underbox"></div>
+                    어학
+                    <div class="title-underbox" onclick="selCategory(2);"></div>
                 </div>
                 <div class="title">
-                    title3
-                    <div class="title-underbox"></div>
+                    취업
+                    <div class="title-underbox" onclick="selCategory(3);"></div>
                 </div>
                 <div class="title">
-                    title4
-                    <div class="title-underbox"></div>
+                    자격증
+                    <div class="title-underbox" onclick="selCategory(4);"></div>
                 </div>
                 <div class="title">
-                    title5
-                    <div class="title-underbox"></div>
+                    공무원/임용
+                    <div class="title-underbox" onclick="selCategory(5);"></div>
                 </div>
             </div>
             <a href="/study/write" class="remove-line">
@@ -78,7 +78,9 @@
                                         <div class="card-title">
                                             <%= board.title %>
                                         </div>
-                                        <div class="card-badge">배지</div>
+                                        <div class="card-badge">
+                                            <%= board.category_id %>
+                                        </div>
                                         <div class="card-id">
                                             <%= board.user_id %>
                                         </div>

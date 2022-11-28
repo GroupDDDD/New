@@ -38,12 +38,23 @@
                     <div>
                         <span>스터디 형태</span>
                     </div>
-                    <div>
-                        <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" />
-                        <label for="on">온라인</label>
-                        <input type="radio" name="parity" id="off" value="OFF" onclick="showAppo(event);" />
-                        <label for="off">오프라인</label>
+                    <div class="study-how-box">
+                        <input type="checkbox" name="category_id" id="school" value="1">
+                        <label for="school">학교공부</label>
+                        <input type="checkbox" name="category_id" id="lang" value="2">
+                        <label for="lang">어학</label>
+                        <input type="checkbox" name="category_id" id="job" value="3">
+                        <label for="job">취업</label>
+                        <input type="checkbox" name="category_id" id="cert" value="4">
+                        <label for="cert">자격증</label>
+                        <input type="checkbox" name="category_id" id="civil" value="5">
+                        <label for="civil">공무원/임용</label>
                     </div>
+                    <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" />
+                    <label for="on">온라인</label>
+                    <input type="radio" name="parity" id="off" value="OFF" onclick="showAppo(event);" />
+                    <label for="off">오프라인</label>
+                </div>
                 </div>
                 <!-- parity의 value가 OFFLINE이면 appo_time과 appo_aria를 받는 input이 등장 -->
                 <div class="board-date" id="appo-time" style="display: none;">

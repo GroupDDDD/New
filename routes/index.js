@@ -33,7 +33,7 @@ router.get('/study/edit/:id', conBoard.editArticle);
 router.patch('/study/edit/do', conBoard.doEdit);
 
 // DELETE /study/delete/:id => localhost:PORT/study/delete/1
-router.delete('/study/delete', conBoard.deleteArticle);
+router.delete('/study/delete/:id', conBoard.deleteArticle);
 
 // GET /study/search/:keyword => localhost:PORT/study/search
 router.get('/study/search/:keyword', conBoard.searchArticle);
