@@ -8,15 +8,17 @@ body{
 }
 #container{
     margin: 0 auto;
-    /* border: 3px solid red; */
     width: 45%;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+}
+#profile{
+    width: 100%;
+    height: 100%;
 }
 #profileName{
     margin-top: 70px;
-    margin-bottom: 100px;
+    margin-bottom: 120px;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
@@ -24,24 +26,19 @@ body{
 }
 #whole_info{
     margin: 0 70px;
-    /* border : 3px solid blue; */
-    /* padding-bottom: 100px; */
 }
 #profileImgDiv{
-    /* margin: 0 50px; */
-    /* border: 2px solid black; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 #modalOpen{
     width: 70px;
     height: 70px;
-    border : 1px solid black;
+    border : 1px solid #198754;
     border-radius: 50%;
-    background-color: blue;
 }
 #modalOpen #divInImg{
     width: 100%;
@@ -80,10 +77,10 @@ body{
     background-color: green;
  }
 
- /* ######################### */
+
 input{
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #8d8d8d;
 }
 .overlapInfo{
     display: flex;
@@ -91,7 +88,6 @@ input{
 }
 
 .user_infoGroup{
-    /*border: 3px solid orange;*/
     margin-bottom: 70px;
 }
 span, label{
@@ -102,14 +98,14 @@ span, label{
 
 input{
     width: 85%;
-    /*border: 3px solid green;*/
     margin-right: 10px;
-    /* margin-bottom: 50px; */
     margin-top: 10px;
     padding: 12px 0 10px;
 }
 .overlapBtn{
-    padding: 15px 17px;
+    padding: 10px 12px;
+    border: 1px solid #8d8d8d;
+    background-color: white;
 }
 #final_info_submit{
     margin-top: 100px;
@@ -124,6 +120,9 @@ input{
 .registerBtn{
     padding: 10px 55px;
     margin-left: 20px;
+    border: 1px solid #8d8d8d;
+    background-color: #198754;
+    color: white;
 }
 .btnA{
     border: 2px solid #cdcdcd;
@@ -149,23 +148,41 @@ input{
     flex-direction: row;
     justify-content: space-around;
 }
+#circlePicture{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
 #circlePicture > img{
     width: 130px;
     height: 130px;
     border-radius: 50%;
 }
+#twoDivBox{
+    margin-bottom: 50px;
+}
 .correctionDiv{
-    width: 150px;
+    width: 180px;
     height: 120px;
-    border: 2px solid #b3b1b1
+    border: 1px solid #f9f9f9
+}
+.Explanation{
+    border: 1px solid #f9f9f9;
+    width: 100%;
+    text-align: center;
 }
 .deleteFolder > img{
-    width: 150px;
-    height: 140px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #f9f9f9;
 }
 .upload > img{
-    width: 150px;
-    height: 120px;
+    width: 100%;
+    height: 100%;
     border: 1px solid #f9f9f9;
 }
+#btnDiv button{
+    width: 100%;
+}
+
+
+/* 모달 */
