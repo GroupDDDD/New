@@ -18,7 +18,7 @@
     <%- include('./nav.ejs') %>
 
         <div class="searchDiv">
-            <input class="search" id="search" name="search" />
+            <input class="search" id="search" name="search" value="<%= keyword %> " />
             <button onclick="searchArticle()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,61 +39,58 @@
             <div class="category-title">
                 <div class="title">
                     title1
-                    <img src="/static/img/react.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
                 <div class="title">
                     title2
-                    <img src="/static/img/java.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
                 <div class="title">
                     title3
-                    <img src="/static/img/nodejs.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
                 <div class="title">
                     title4
-                    <img src="/static/img/typescript.png" alt="">
                     <div class="title-underbox"></div>
                 </div>
                 <div class="title">
                     title5
-                    <img src="/static/img/spring.png" alt="">
+                    <div class="title-underbox"></div>
                 </div>
             </div>
-            <a href="/write" class="remove-line">
+            <a href="/study/write" class="remove-line">
                 <div class="study-mystudy">내 스터디 만들기</div>
             </a>
         </div>
 
         <div class="article-board" id="article-board">
-            <% let lineCount = 0; %>
-                <% data.forEach((board) => { %>
-                    <% if (lineCount % 3 == 0) { %>
-                        <div class="line">
-                            <% lineCount = 0; %>
+            <% if (data.length == 0) { %>
+                <p>검색결과가 없습니다.</p>
+                <% } %>
+                    <% let lineCount = 0; %>
+                        <% data.forEach((board) => { %>
+                            <% if (lineCount % 3 == 0) { %>
+                                <div class="line">
+                                    <% lineCount = 0; %>
+                                        <% }; %>
+                                            <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
+                                                <div class="card-deadline">
+                                                    <span class="article__info__item__title">모집기간</span>
+                                                    <span class="article__info__item__content"> <%= board.expr_dt %> </span>
+                                                </div>
+                                                <div class="card-title">
+                                                    <%= board.title %>
+                                                </div>
+                                                <div class="card-badge">배지</div>
+                                                <div class="card-id">
+                                                    <%= board.user_id %>
+                                                </div>
+                                            </div>
+                                            <% lineCount++;%>
+                                                <% if (lineCount % 3 == 2) { %>
+                                </div>
                                 <% }; %>
-                                    <div class="card cat-<%= board.category_id %>" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
-                                        <div class="card-deadline">
-                                            <span class="article__info__item__title">모집기간</span>
-                                            <span class="article__info__item__content"> <%= board.expr_dt %> </span>
-                                        </div>
-                                        <div class="card-title">
-                                            <%= board.title %>
-                                        </div>
-                                        <div class="card-badge">
-                                            <%= board.category_id %>
-                                        </div>
-                                        <div class="card-id">
-                                            <%= board.user_id %>
-                                        </div>
-                                    </div>
-                                    <% lineCount++;%>
-                                        <% if (lineCount % 3 == 0) { %>
-                        </div>
-                        <% }; %>
-                            <% }) %>
+                                    <% }) %>
         </div>
 
         <!-- <div class="window-modal">
@@ -102,7 +99,7 @@
         </div>
         <div class="window-modal">
             <div class="card-modal">
-                <a href="/chatlink"> 해당 스터디 그룹장과 채팅하기 </a>
+                <a href="/chat"> 해당 스터디 그룹장과 채팅하기 </a>
             </div>
         </div> -->
         <script src="/static/js/study.js"></script>

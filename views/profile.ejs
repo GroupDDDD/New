@@ -1,277 +1,403 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보 수정 - 마이페이지</title>
+    
+    <!--bootstrap CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <!-- CSS 초기화 -->
+    <!-- <link rel="stylesheet" href="../static/css/reset.css"/> -->
 
+    <link rel = "stylesheet" href = "/static/css/profile.css">
+    <link rel="stylesheet" href="../static/css/nav.css">
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  </head>
-  <style>
-    #modalOpen {
-      width: 50px;
-      height: 50px;
-      border: 1px solid black;
-      border-radius: 50%;
-      background-color: blue;
-    }
-    #modalOpen #divInImg {
-      width: 100%;
-      height: 100%;
-    }
-    .result {
-      width: 150px;
-      height: 150px;
-      background-color: pink;
+</head>
 
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-    }
-    #twoBox {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-    .box1 {
-      width: 50px;
-      height: 50px;
-      background-color: red;
-    }
-    .box2 {
-      width: 50px;
-      height: 50px;
-      background-color: green;
-    }
-  </style>
-  <body>
-    <a href="/">Home</a>
+<body>
+    <%- include('nav.ejs')%>
+    <!-- <h1><%= user %>님 환영합니다.</h1>
+    <h1><%= user_index %>번 입니다</h1> -->
+
+    <!-- <a href = '/'>Home</a>
     <p>회원정보 수정-마이페이지</p>
+
+    
+
 
     <h1><%= user %>님 환영합니다.</h1>
 
-    <div id="profile_img">
-      <p>Axios 동적 파일 업로드</p>
-      <div id="modalOpen" onclick="fileUpload();">
-        <img src="" id="divInImg" alt="선택프로필" />
-      </div>
 
-      <div id="resultId">
-        <div id="twoBox">
-          <div id="box1"></div>
 
-          <input
-            type="file"
-            name="profileImg"
-            id="profileImg"
-            class="real-upload"
-            accept="image/*"
-            style="display: none"
-          />
-          <div class="upload"></div>
+    <div id = "container">
+        <h2 id = "profileName">개인정보 수정</h2>
+
+
+
+        <div id = "whole_info">
+            <div id = "profile_img">
+    
+                <div id = "profileImgDiv">
+                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                    <div id = "modalOpen" onclick = "">
+                        <img src = "../static/img/profile.png" id = "divInImg" alt = "선택프로필">
+                    </div>
+                    
+                    <!-- Button trigger modal -->
+                    <button type="button" id = "modalBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        프로필 사진 바꾸기
+                    </button>
+        
+                </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">프로필 사진 지정</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div id = "profile">
+                <div id = "circleDiv">
+                    <div id = "circlePicture">
+                        <img src = "../static/img/profile.png" id = "circleImg" alt = "큰 원 사진">
+                    </div> <!-- 프로필 사진 보이기 -->
+                </div>
+                
+                <div id = "twoDivBox">
+                    <div id = "deleteAndSelect">
+                        <div id = "imgDelete" class = "deleteFolder correctionDiv" onclick = "imgDelete();">
+                            <img src = "../static/img/trash.png" id = "trash" alt = "삭제버튼">
+                            <div class = "Explanation">삭제</div>
+                        </div>
+                        
+                        <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
+                        <div id = "imgSelect" class = "upload correctionDiv">
+                            <img src = "../static/img/imgFolder.png" id = "folder2" alt = "사진폴더">
+                            <div class = "Explanation">사진선택</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "btnDiv">
+                <button type = "button" class = "overlapBtn" id = "imgEdit" onclick = "editBtn();">수정하기</button>
+            </div>
         </div>
 
-        <button
-          type="button"
-          id="imgEdit"
-          onclick="editBtn();"
-          style="display: none"
-        >
-          수정하기
-        </button>
-        <!-- .uploadBtn -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
       </div>
     </div>
+  </div>
 
-    <form name="form_profile">
-      <!-- <input name="name" value="Sean"> -->
-      <input type="hidden" id="user_index" value="<%= data.user_index %>" />
+        
+                <!-- <div id = "resultId">
 
-      <label for="user_id">ID</label>
-      <input
-        id="user_id"
-        name="user_id"
-        type="text"
-        value="<%= data.user_id %>"
-        required
-      />
-      <button type="button">중복확인</button><br />
+                    <div id = "contents">
 
-      <label for="user_pw">PW</label>
-      <input
-        id="user_pw"
-        name="user_pw"
-        type="password"
-        value="<%= data.user_pw %>"
-        required
-      /><br />
+                        <div id = "pictureDiv"></div>
+                        <div id = "twoBox">
+                            <div id = "box1"></div>
+            
+                            <input type = "file" name = "profileImg" id = "profileImg" class = "real-upload" accept="image/*" style="display:none;">
+                           <div class = "upload"></div> 
+                        </div>
+            
+                         <button type = "button" class = "overlapBtn" id = "imgEdit" onclick = "editBtn();" style="display:none">수정하기</button> .uploadBtn 
+                        
+                    </div>
 
-      <label for="user_name">NAME</label>
-      <input
-        id="user_name"
-        name="user_name"
-        type="text"
-        value="<%= data.user_name %>"
-        required
-      /><br />
+                </div> -->
+        
+            </div>
+            
+            <form name = "form_profile">
+                <!-- <input name="name" value="Sean"> -->
+                <input type="hidden" id="user_index" value="<%= data.user_index %>" />
 
-      <label for="user_email">email</label>
-      <input
-        id="user_email"
-        name="user_email"
-        type="email"
-        value="<%= data.user_email %>"
-        required
-      />
-      <button type="button">중복확인</button><br />
 
-      <button type="button" onclick="profileEdit();">수정완료</button>
-      <button type="button" onclick="profileDelete();">회원탈퇴</button>
-      <br />
 
-      <a href="/main2">main2(홈)</a>
-      <a href="/sign/logout">로그아웃</a>
-      <br /><br />
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_email">email *</label><br>
+        
+                    <div class = "overlapInfo">
+                        <input id = "user_email" name = "user_email" type = "email" value = "<%= data.user_email %>" required>
+                        <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
+                    </div>
+                    <div id = "emailTestText"></div>
+                </div>
+                
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_name">NAME *</label><br>
+                    <input id = "user_name" name = "user_name" type = "text" value = "<%= data.user_name %>" required><br>
+                </div>
+                
+                <div class = "user_infoGroup">
+                    <label for = "user_id">ID *</label><br>
+        
+                    <div class = "overlapInfo">
+                        <input id = "user_id" name = "user_id" type = "text" value = "<%= data.user_id %>" required>
+                        <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
+                    </div>
+                    <div id = "idTestText"></div>
+                </div>
+        
+                <div class = "user_infoGroup">
+                    <label for = "user_pw">PW *</label><br>
+                    <input id = "user_pw" name = "user_pw" type = "password" value = "<%= data.user_pw %>" required><br>
+                </div>
+        
+        
+                <div id = "final_info_submit">
+                    <div id = "btns">
+                        <a class = "btnA" href = "/main2">취소</a>
+                        <button type = "button" class = "registerBtn" onclick = "profileEdit();">저장</button>
+                    </div>
+                    <br>
+                </div>
+                
+                <button type = "button" id = "deleteBtn" onclick = "profileDelete();">회원탈퇴</button>
+                <a id = "deleteBtn" href = "/sign/logout">로그아웃</a>
+                <br><br>
+        
+            </form>
+        </div>
+        
+        
+    </div>
 
-      <button type="button">취소</button>
-      <button type="button" onclick="totalSave();">저장</button>
-    </form>
 
     <script>
-      const resultId = document.querySelector("#resultId");
-      const box1 = document.querySelector("#box1");
-      const box2 = document.querySelector(".upload");
-      const dynamicFile = document.querySelector("#dynamicFile");
-      const modalOpen = document.querySelector("#modalOpen");
-      const imgEdit = document.querySelector("#imgEdit");
+        const pictureDiv = document.querySelector('#pictureDiv');
+        const resultId = document.querySelector('#resultId');
+        const box1 = document.querySelector('#box1');
+        const box2 = document.querySelector('.upload');
+        const dynamicFile = document.querySelector('#dynamicFile');
+        const modalOpen = document.querySelector('#modalOpen');
+        const imgEdit  = document.querySelector('#imgEdit');
 
-      //div태그 클릭 시 파일선택창 뜨게 하기.
-      const realUpload = document.querySelector(".real-upload");
-      const upload = document.querySelector(".upload");
+        //div태그 클릭 시 파일선택창 뜨게 하기.
+        const realUpload = document.querySelector('.real-upload');
+        const upload = document.querySelector('.upload');
+    
+        upload.addEventListener('click', () => realUpload.click());
 
-      upload.addEventListener("click", () => realUpload.click());
+        function fileUpload(){ //프로필 수정 버튼을 누르면
+            console.log('프로필 사진 선택');
+            
+            pictureDiv.classList.toggle('picpure');
+            resultId.classList.toggle('result');
+            box1.classList.toggle('box1');
+            box2.classList.toggle('box2');
+            imgEdit.classList.toggle('uploadBtn'); //버튼을 누르면 uploadBtn 클래스 생성
 
-      function fileUpload() {
-        //프로필 수정 버튼을 누르면
-        console.log("프로필 사진 선택");
+            if(imgEdit.classList.contains('uploadBtn')){
+                imgEdit.style.display = "inline-block"; //버튼 보이게
+            }else{
+                imgEdit.style.display = "none"; //버튼 안보이게
+            }
 
-        resultId.classList.toggle("result");
-        box1.classList.toggle("box1");
-        box2.classList.toggle("box2");
-        imgEdit.classList.toggle("uploadBtn"); //버튼을 누르면 uploadBtn 클래스 생성
-
-        if (imgEdit.classList.contains("uploadBtn")) {
-          imgEdit.style.display = "inline-block"; //버튼 보이게
-        } else {
-          imgEdit.style.display = "none"; //버튼 안보이게
-        }
-      }
-
-      //수정하기 버튼 누르면
-      //1. 사용자가 지정한 사진이 화면에 보이게 하기
-      //2. 사용자가 지정한 사진의 정보를 table에 update하기.
-      function editBtn() {
-        console.log("수정하기 버튼 클릭함");
-
-        const form = document.forms["form_profile"];
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
         }
 
-        const form_profile = document.forms["form_profile"];
-        const formData = new FormData(); // 폼 객체 생성
-        const file = document.querySelector("#profileImg");
 
-        console.log("file 선택>> ", file);
-        console.log("file[0] 선택 >> ", file.files[0]);
+        //수정하기 버튼 누르면
+        //1. 사용자가 지정한 사진이 화면에 보이게 하기
+        //2. 사용자가 지정한 사진의 정보를 table에 update하기.
+        function editBtn(){
+            console.log('수정하기 버튼 클릭함');
 
-        formData.append("user_index", form_profile.user_index.value); // <input name="user_index" value="Sean">
-        formData.append("profileImg", file.files[0]);
+            const form = document.forms['form_profile'];
+        
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
 
-        console.log("*********************************8");
-        console.log("front에서 formData보기 >> ", formData);
-        console.log(
-          "front에서 내가 넣은 formData.get보기 >> ",
-          formData.get("user_index")
-        );
+            //const form_profile = document.forms['form_profile'];
+            const formData = new FormData(); // 폼 객체 생성
+            const file = document.querySelector('#profileImg');
 
-        //axios 통신
-        axios({
-          method: "POST",
-          url: "/sign/profile/dynamicFile",
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data", // enctype="multipart/form-data"
-          },
-        }).then(function (response) {
-          //res.send(req.file);
-          //1. 사용자가 지정한 사진이 화면에 보이게 하기
-          document.querySelector("#divInImg").src = "/" + response.data.path;
-        }); //'/sign/profile/dynamicFile' axios 끝
-      }
+            console.log('file 선택>> ', file);
+            console.log('file[0] 선택 >> ', file.files[0]);
 
-      function profileEdit() {
-        const form = document.forms["form_profile"];
+            //formData.append('user_index', form_profile.user_index.value); // <input name="user_index" value="Sean">
+            formData.append('user_index', form.user_index.value); // <input name="user_index" value="Sean">
+            formData.append('profileImg', file.files[0]);
+            
 
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
+            console.log('*********************************8');
+            console.log('front에서 formData보기 >> ', formData);
+            console.log('front에서 내가 넣은 formData.get보기 >> ', formData.get('user_index'));
+
+            //axios 통신
+            axios({
+                method: 'POST',
+                url: '/sign/profile/dynamicFile',
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data', // enctype="multipart/form-data"
+                },
+            }).then(function(response){ //res.send(req.file);
+                //1. 사용자가 지정한 사진이 화면에 보이게 하기
+                document.querySelector('#divInImg').src = "/" + response.data.path;
+                document.querySelector('#circleImg').src = "/" + response.data.path;
+                
+                alert('변경되었습니다.');
+            }) //'/sign/profile/dynamicFile' axios 끝
         }
 
-        axios({
-          method: "POST",
-          url: "/sign/profile/edit",
-          data: {
-            user_index: form.user_index.value,
-            user_id: form.user_id.value,
-            user_pw: form.user_pw.value,
-            user_name: form.user_name.value,
-            user_email: form.user_email.value,
-            //user_adr: form.user_adr.value,
-          },
+        const divInImg = document.querySelector('#divInImg');
+        const trashDiv = document.querySelector('#trash');
+        const circleImg = document.querySelector('#circleImg');
+
+
+        trashDiv.addEventListener('click', function() {
+            circleImg.setAttribute('src', '../static/img/profile.png');
+            divInImg.setAttribute('src', '../static/img/profile.png');
+            alert('기본이미지로 변경되었습니다.');
         })
-          .then((res) => {
-            return res.data;
-          })
-          .then((data) => {
-            alert(data);
-          });
-      }
 
-      function profileDelete() {
-        const form = document.forms["form_profile"];
-        console.log("delete에서 form>> ", form);
-        console.log("delete에서 form.id.value>> ", form.user_index.value);
 
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
+        function profileEdit(){
+            console.log('수정하기 버튼 프론트에서 확인');
+            const form = document.forms['form_profile'];
+        
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            axios({
+                method: 'POST',
+                url: '/sign/profile/edit',
+                data:{
+                    user_index: form.user_index.value,
+                    user_id: form.user_id.value,
+                    user_pw: form.user_pw.value,
+                    user_name: form.user_name.value,
+                    user_email: form.user_email.value,
+                    //user_adr: form.user_adr.value,
+                },
+            }).then((res) => {
+                return res.data;
+            }).then((data) => {
+                alert(data);
+            });
         }
 
-        axios({
-          method: "POST",
-          url: "/sign/profile/delete",
-          data: {
-            user_index: form.user_index.value,
-          },
-        })
-          .then((res) => {
-            console.log("delete에서 axios res>> ", res);
-            return res.data;
-          })
-          .then((data) => {
-            alert("회원 탈퇴 성공");
+        function profileDelete(){
+            const form = document.forms['form_profile'];
+            console.log('delete에서 form>> ', form);
+            console.log('delete에서 form.id.value>> ', form.user_index.value);
 
-            document.location.href = "/";
-          });
-      }
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
 
-      //최종 수정 후 저장하기 버튼
-      function totalSave() {}
+            axios({
+                method: 'POST',
+                url: '/sign/profile/delete',
+                data: {
+                    user_index: form.user_index.value,
+                }
+            }).then((res) => {
+                console.log('delete에서 axios res>> ', res);
+                return res.data;
+            }).then((data) => {
+                alert('회원 탈퇴 성공');
+                
+                document.location.href = "/";
+            })
+        }
+
+        const idTestText = document.querySelector('#idTestText');
+        const emailTestText = document.querySelector('#emailTestText');
+
+        function idTest(){
+            const form = document.forms['form_profile'];
+            console.log('form.user_id', form.user_id);
+            console.log('form.user_id.value', form.user_id.value)
+
+            /*if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }*/
+
+            if(form.user_id.checkValidity() === true){
+                axios({
+                    method: 'POST',
+                    url: '/sign/signup/id',
+                    data:{
+                        user_id: form.user_id.value,
+                    },
+                }).then((res) => {
+                    return res.data;
+                }).then((data) => {
+                    console.log('data>> ', data);
+                     if(!data){ //data = false
+                        idTestText.textContent = `"${form.user_id.value}"는 존재하는 아이디입니다.`
+                        idTestText.style.color = 'red';
+                    }
+                    else{
+                        idTestText.textContent = `"${form.user_id.value}"는 사용 가능한 아이디입니다.`
+                        idTestText.style.color = 'red';
+                    }
+                }) // axios 끝
+
+            }
+
+        }
+
+        function emailTest(){
+            const form = document.forms['form_profile'];
+            console.log('form of emailTest >> ', form);
+
+            /*if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }*/
+
+            if(form.user_email.checkValidity() === true){
+                axios({
+                    method: 'POST',
+                    url: '/sign/signup/email',
+                    data: {
+                        user_email: form.user_email.value
+                    }
+                }).then((res) => {
+                    return res.data;
+                }).then((data) => {
+                    if(!data){ //data == false
+                        emailTestText.textContent = '가입되어 있는 이메일입니다.';
+                        emailTestText.style.color = "red";
+                    }
+                    else{ //data == true
+                        emailTestText.textContent = '사용 가능한 이메일입니다.';
+                        emailTestText.style.color = "red";
+                    }
+                })
+
+            }
+
+        }
+    
+
     </script>
-  </body>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
 </html>

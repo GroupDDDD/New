@@ -1,4 +1,4 @@
-// 현재 /stury:id 페이지의 id를 가져오는 함수
+// 현재 /study:id 페이지의 id를 가져오는 함수
 function getArticleId() {
     console.log('getArticleId() called');
     const url = location.href;
@@ -19,29 +19,23 @@ function editArticle() {
 
 // [삭제] 버튼 클릭 시
 // axios로 delete 요청을 보내는 함수
-// /board로 리디렉션
+// /study로 리디렉션
 function deleteArticle() {
     console.log("deleteArticle() called");
     const article_id = getArticleId();
-    console.log(article_id);
+    console.log("delete article index: " + article_id);
 
     if (!confirm("정말 삭제하시겠습니까?")) {
         return;
     };
 
-    axios({
-            method: "delete",
-            url: "/study/delete",
-            data: {
-                article_id: article_id,
-            },
-        })
-        .then((res) => {
-            console.log(res);
-            alert("글이 삭제되었습니다.");
+    axios.delete("/study/delete/" + article_id)
+        .then(function(response) {
+            console.log(response);
+            alert("삭제되었습니다.");
             document.location.href = "/study";
         })
-        .catch((err) => {
-            console.log(err);
+        .catch(function(error) {
+            console.log(error);
         });
 }

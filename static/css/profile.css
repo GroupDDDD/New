@@ -1,0 +1,188 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+}
+#container{
+    margin: 0 auto;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+#profile{
+    width: 100%;
+    height: 100%;
+}
+#profileName{
+    margin-top: 70px;
+    margin-bottom: 120px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+}
+#whole_info{
+    margin: 0 70px;
+}
+#profileImgDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#modalOpen{
+    width: 70px;
+    height: 70px;
+    border : 1px solid #198754;
+    border-radius: 50%;
+}
+#modalOpen #divInImg{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.result{
+    width: 480px;
+    height : 400px;
+    background-color: pink;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+ }
+.picpure{
+    border: 2px solid blue;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto;
+ }
+ #twoBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+ }
+ .box1{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+ }
+ .box2{
+    width: 50px;
+    height: 50px;
+    background-color: green;
+ }
+
+
+input{
+    border: none;
+    border-bottom: 1px solid #8d8d8d;
+}
+.overlapInfo{
+    display: flex;
+    align-items: start;
+}
+
+.user_infoGroup{
+    margin-bottom: 70px;
+}
+span, label{
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+input{
+    width: 85%;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 12px 0 10px;
+}
+.overlapBtn{
+    padding: 10px 12px;
+    border: 1px solid #8d8d8d;
+    background-color: white;
+}
+#final_info_submit{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: end;
+}
+#btns{
+    display: flex;
+    flex-direction: row;
+}
+.registerBtn{
+    padding: 10px 55px;
+    margin-left: 20px;
+    border: 1px solid #8d8d8d;
+    background-color: #198754;
+    color: white;
+}
+.btnA{
+    border: 2px solid #cdcdcd;
+    padding: 10px 55px;
+    text-decoration: none;
+    color: black;
+}
+
+#deleteBtn{
+    text-decoration: none;
+    background-color: white;
+    color: #a5a5a5;
+    border: none;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 14px;
+}
+#circleDiv, #btnDiv{
+    display: flex;
+    justify-content: center;
+}
+#deleteAndSelect{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#circlePicture{
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+#circlePicture > img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+#twoDivBox{
+    margin-bottom: 50px;
+}
+.correctionDiv{
+    width: 180px;
+    height: 120px;
+    border: 1px solid #f9f9f9
+}
+.Explanation{
+    border: 1px solid #f9f9f9;
+    width: 100%;
+    text-align: center;
+}
+.deleteFolder > img{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f9f9f9;
+}
+.upload > img{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f9f9f9;
+}
+#btnDiv button{
+    width: 100%;
+}
+
+
+/* 모달 */

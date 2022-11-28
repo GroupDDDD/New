@@ -5,7 +5,7 @@ const router = express.Router();
 
 // GET / => localhost:PORT/
 // part_id받아오기
-router.get("/getpartid", controller.getPartid);
+router.get("/getpartid", controller.getpartid);
 
-router.post("/postPart", controller.getPartid);
+router.post("/postPart", controller.postPart);
 module.exports = router;
