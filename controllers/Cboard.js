@@ -1,4 +1,11 @@
 const models = require('../models/index');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const operatorsAliases = {
+    $eq: Op.eq,
+    $or: Op.or,
+    $like: Op.like,
+}
 
 // GET /study : 게시글 전체 조회 (페이징)
 // getBoard 함수는 models의 Board 테이블에서 모든 데이터를 조회
@@ -137,30 +144,29 @@ exports.doEdit = (req, res) => {
     });
 };
 
-// GET /study/search : 게시글 검색
+// GET /study/:keyword : 게시글 검색
 // searchArticle 함수는 models의 Board 테이블에서 title, description에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 통해 해당 조건에 부합하는 게시글을 조회
+// Op.
 exports.searchArticle = (req, res) => {
-    let keyword = req.query.keyword;
+    console.dir('searchArticle: ', req.body);
     models.Board.findAll({
         where: {
             [Op.or]: [{
-                    title: {
-                        [Op.like]: '%' + keyword + '%'
-                    }
-                },
-                {
-                    description: {
-                        [Op.like]: '%' + keyword + '%'
-                    }
+                title: {
+                    [Op.like]: '%' + req.params.keyword + '%'
                 }
-            ]
+            }, {
+                description: {
+                    [Op.like]: '%' + req.params.keyword + '%'
+                }
+            }]
         }
-    }).then((result) => {
-        console.dir('board controller: \nfindAll >> ', result); // [ {}, {}, {}, {} ]
-        res.send(result);
-    }).catch((err) => {
-        console.dir('board controller: ' + err);
+    }).then((articles) => {
+        res.render('search', {
+            data: articles,
+            keyword: req.params.keyword
+        });
     });
 };
 
