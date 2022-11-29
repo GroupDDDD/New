@@ -152,9 +152,19 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
     })
 })
 
-// exports.getProfile = (req, res) => {
-//     res.render('profile', );
-// }
+exports.getProfile = (req, res) => {
+    // res.render('profile', );
+    models.Sign.findOne({
+        where: { user_id: req.body.user_id }
+    }).then((result) => {
+        console.log('(((((((())))))))()()()(())');
+        console.log('result확인 >> findOne >>', result);
+
+        if (result != null) {
+            res.render('profile', { data: result, user: req.body.user_id, user_index: result.user_index });
+        }
+    })
+}
 
 exports.postProfile = (req, res) => {
     //select * from user where user_id = `${data.user_id}`
