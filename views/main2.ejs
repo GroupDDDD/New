@@ -1,93 +1,90 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Study Town</title>
-    <%- include('./favicon.ejs') %>
-
-        <!-- google -->
-        <!-- <meta name ="google-signin-client_id" content="389276646904-dvflpeo02hnoqjft0anhntu72gtvloig.apps.googleusercontent.com"> -->
-        <!-- kakao -->
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- google -->
+    <!-- <meta name ="google-signin-client_id" content="389276646904-dvflpeo02hnoqjft0anhntu72gtvloig.apps.googleusercontent.com"> -->
+    <!-- kakao -->ㄴ
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
-
 <body>
     <h1>메인창</h1>
 
     <!-- isLogin === true라면 로그인 된 거. 됐으ㅁ니 로그아웃 a 태그 -->
     <% if(isLogin) { %>
-        <h3>
-            <%= user %>님 환영합니다.</h3>
-        <a href="/sign/logout">로그아웃</a>
-        <% } else { %>
-            <a href="/sign/signin">로그인</a>
-            <a href="/sign/signup">회원가입</a>
-            <% } %>
+      <h3><%= user %>님 환영합니다.</h3>
+      <a href = "/sign/logout">로그아웃</a>
+    <% } else { %>
+      <a href = "/sign/signin">로그인</a>
+      <a href = "/sign/signup">회원가입</a>
+    <% } %>
 
-                <!-- <a href = "/sign/signin">로그인</a> -->
-                <!-- <a href = "/sign/kakao" id = "kakao">카카오톡</a> -->
+    <!-- <a href = "/sign/signin">로그인</a> -->
+    <!-- <a href = "/sign/kakao" id = "kakao">카카오톡</a> -->
 
-                <ul>
-                    <li onclick="kakaoLogin();">
-                        <a href="javascript:void(0)"><span>카카오 로그인</span></a>
-                    </li>
+    <ul>
+        <li onclick = "kakaoLogin();">
+            <a href="javascript:void(0)"><span>카카오 로그인</span></a>
+        </li>
 
-                    <li onclick="kakaoLogout();">
-                        <a href="javascript:void(0)"><span>카카오 로그아웃</span></a>
-                    </li>
-                </ul>
+        <li onclick = "kakaoLogout();">
+            <a href="javascript:void(0)"><span>카카오 로그아웃</span></a>
+        </li>
+    </ul>
 
-                <ul>
-                    <li id="GgCustomLogin">
-                        <a href="javascript:void(0)"><span>구글 로그인</span></a>
-                    </li>
-                </ul>
+    <ul>
+        <li id = "GgCustomLogin">
+            <a href="javascript:void(0)"><span>구글 로그인</span></a>
+        </li>
+    </ul>
 
-                <!-- 카카오 스크립트 -->
-                <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-                <script>
-                    Kakao.init('966cd89e4a2aec000f0c186e68244c89');
-                    console.log(Kakao.isInitialized()); //sdk 초기화 여부 판단
+    <!-- 카카오 스크립트 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        Kakao.init('966cd89e4a2aec000f0c186e68244c89'); 
+        console.log(Kakao.isInitialized()); //sdk 초기화 여부 판단
 
-                    //kakao 로그인
-                    function kakaoLogin() {
-                        Kakao.Auth.login({
-                            success: function(response) {
-                                Kakao.API.request({
-                                    url: '/sign/kakao',
-                                    success: function(response) {
-                                        console.log(response)
-                                    },
-                                    fail: function(error) {
-                                        console.log(error)
-                                    },
-                                })
-                            },
-                            fail: function(error) {
-                                console.log(error)
-                            },
-                        })
-                    }
+        //kakao 로그인
+        function kakaoLogin() {
+            Kakao.Auth.login({
+              success: function (response) {
+                Kakao.API.request({
+                  url: '/sign/kakao',
+                  success: function (response) {
+                      console.log(response)
+                  },
+                  fail: function (error) {
+                    console.log(error)
+                  },
+                })
+              },
+              fail: function (error) {
+                console.log(error)
+              },
+            })
+          }
 
-                    //kakao 로그아웃
-                    function kakaoLogout() {
-                        if (Kakao.Auth.getAccessToken()) {
-                            Kakao.API.request({
-                                url: '/sign/kakao',
-                                success: function(response) {
-                                    console.log(response)
-                                },
-                                fail: function(error) {
-                                    console.log(error)
-                                },
-                            })
-                            Kakao.Auth.setAccessToken(undefined)
-                        }
-                    }
-                </script>
+          //kakao 로그아웃
+          function kakaoLogout() {
+            if (Kakao.Auth.getAccessToken()) {
+              Kakao.API.request({
+                url: '/sign/kakao',
+                success: function (response) {
+                    console.log(response)
+                },
+                fail: function (error) {
+                  console.log(error)
+                },
+              })
+              Kakao.Auth.setAccessToken(undefined)
+            }
+          }  
+    </script>
+
+
 </body>
-
 </html>

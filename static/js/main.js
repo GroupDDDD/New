@@ -78,3 +78,4 @@ function slideShow() {
   x[index - 1].style.display = "block"; //해당 인덱스는 block으로
   setTimeout(slideShow, 4000); //함수를 4초마다 호출
 }
+

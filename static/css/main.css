@@ -189,3 +189,32 @@ body {
     border-radius: 10px;
   }
 }
+#btns{
+  display: flex;
+  /* align-items: center; */
+  /* text-align: center; */
+}
+#sessionName{
+  padding-left: 10px;
+}
+.btn{
+  width: 100px;
+  height: 30px;
+  /* background-color: #f9f9f9; */
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+.btn1{
+  background-color: #FFD900;
+}
+.btn2{
+  background-color: #00C3A9;
+}
+.btn a{
+  text-decoration: none;
+  color : #757575;
+}
