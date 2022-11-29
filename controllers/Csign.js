@@ -131,7 +131,7 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
     //SELECT * FROM user WHERE user_id = `${data.user_id} AND user_pw = `${data.user_pw}` LIMIT 1`
     models.Sign.findOne({ //비밀번호와 아이디 비교.
         where: {
-            user_email: req.body.user_email,
+            // user_email: req.body.user_email,
             user_id: req.body.user_id, //req.body.user_id는 사용자가 입력한 값
             user_pw: req.body.user_pw,
         }
