@@ -85,7 +85,8 @@ exports.writeArticle = (req, res) => {
 exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
     models.Board.create({
-        user_index: req.session.user_index,
+        // user_index: req.session.user_index,
+        user_index: 1,
         title: req.body.title,
         category_id: req.body.category_id,
         parity: req.body.parity,
