@@ -20,29 +20,14 @@
 
 <body>
     <%- include('nav.ejs')%>
-    <!-- <h1><%= user %>님 환영합니다.</h1>
-    <h1><%= user_index %>번 입니다</h1> -->
-
-    <!-- <a href = '/'>Home</a>
-    <p>회원정보 수정-마이페이지</p>
-
-    
-
-
-    <h1><%= user %>님 환영합니다.</h1>
-
-
 
     <div id = "container">
         <h2 id = "profileName">개인정보 수정</h2>
-
-
 
         <div id = "whole_info">
             <div id = "profile_img">
     
                 <div id = "profileImgDiv">
-                    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
                     <div id = "modalOpen" onclick = "">
                         <img src = "../static/img/profile.png" id = "divInImg" alt = "선택프로필">
                     </div>
@@ -74,7 +59,7 @@
                 
                 <div id = "twoDivBox">
                     <div id = "deleteAndSelect">
-                        <div id = "imgDelete" class = "deleteFolder correctionDiv" onclick = "imgDelete();">
+                        <div id = "imgDelete" class = "deleteFolder correctionDiv">
                             <img src = "../static/img/trash.png" id = "trash" alt = "삭제버튼">
                             <div class = "Explanation">삭제</div>
                         </div>
@@ -122,8 +107,7 @@
             </div>
             
             <form name = "form_profile">
-                <!-- <input name="name" value="Sean"> -->
-                <input type="hidden" id="user_index" value="<%= data.user_index %>" />
+                <input type="hidden" id="user_index" value="<%= data.user_index %>"/>
 
 
 
@@ -365,11 +349,6 @@
         function emailTest(){
             const form = document.forms['form_profile'];
             console.log('form of emailTest >> ', form);
-
-            /*if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }*/
 
             if(form.user_email.checkValidity() === true){
                 axios({

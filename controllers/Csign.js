@@ -152,6 +152,10 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
     })
 })
 
+// exports.getProfile = (req, res) => {
+//     res.render('profile', );
+// }
+
 exports.postProfile = (req, res) => {
     //select * from user where user_id = `${data.user_id}`
     models.Sign.findOne({
@@ -279,7 +283,7 @@ exports.getLogout = (req, res) => {
             if (err) {
                 throw err;
             }
-            res.redirect('/main2');
+            res.redirect('/main');
         })
     } else {
         // 유저가 브라우저에서 /logout 경로로 직접 접근

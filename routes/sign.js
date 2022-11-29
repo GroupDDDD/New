@@ -42,6 +42,7 @@ router.post('/position/update', controller.postPositionUpdate); //위치정보 u
 router.post('/signup/id', controller.postIdTest);
 router.post('/signup/email', controller.postEmailTest);
 
+// router.get('/profile', controller.getProfile);
 router.post('/profile', controller.postProfile); //true가 뜨면 next() 실행. -> true이면 profile로 이동
 router.post('/profile/edit', controller.postProfileEdit);
 router.post('/profile/delete', controller.postProfileDelete);

@@ -6,8 +6,16 @@ exports.start = (req, res) => {
 };
 
 exports.main = (req, res) => {
-  res.render("main");
+  const user = req.session.user;
+
+  if(req.session.user !== undefined){
+    res.render('main', {isLogin: true, user: req.session.user});
+  }else{
+    res.render('main', {isLogin: false});
+  }
+  // res.render("main");
 };
+
 
 exports.main2 = (req, res) => {
   const user = req.session.user;
