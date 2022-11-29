@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Town</title>
     <%- include('./favicon.ejs') %>
 
-        <link rel="stylesheet" href="/static/css/nav.css" />
-        <link rel="stylesheet" href="/static/css/study.css" />
+    <link rel="stylesheet" href="/static/css/nav.css" />
+    <link rel="stylesheet" href="/static/css/study.css" />
 
-        <!-- axios cdn -->
-        <!-- <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
+    <!-- axios cdn -->
+    <!-- <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
     <script src=“https://unpkg.com/axios/dist/axios.min.js”></script> -->
-</head>
+  </head>
 
-<body style="overflow-x: hidden">
+  <body style="overflow-x: hidden">
     <%- include('./nav.ejs') %>
 
-        <div class="example">
-            <div class="searchDiv">
-                <div class="searchDiv-first">
-                    <input class="search" id="search" name="search" />
-                    <button onclick="searchArticle()" id="searchBtn">
+    <div class="example">
+      <div class="searchDiv">
+        <div class="searchDiv-first">
+          <input class="search" id="search" name="search" />
+          <button onclick="searchArticle()" id="searchBtn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -37,53 +36,56 @@
               />
             </svg>
           </button>
-                </div>
-            </div>
-            <a href="/study/write" class="remove-line">
-                <div class="study-mystudy">내 스터디 만들기</div>
-            </a>
         </div>
+      </div>
+      <a href="/study/write" class="remove-line">
+        <div class="study-mystudy">내 스터디 만들기</div>
+      </a>
+    </div>
 
-        <div class="article-board" id="article-board">
-            <% let lineCount = 0; %>
-                <% data.forEach((board) => { %>
-                    <% if (lineCount % 3 == 0) { %>
-                        <div class="line">
-                            <% lineCount = 0; %>
-                                <% }; %>
-                                    <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
-                                        <div class="card-deadline">
-                                            <span class="article__info__item__title">모집기간:</span>
-                                            <span class="article__info__item__content"> ~ <%= board.expr_dt %></span>
-                                        </div>
-                                        <div class="card-title">
-                                            <%= board.title %>
-                                        </div>
-                                        <div class="card-badge">
-                                            <img class="card-badge-img" src="<%=board.Category.category_img%>" alt="<%=board.Category.category_name%>" />
-                                        </div>
-                                        <div class="card-id">
-                                            <%= board.user.user_id %>
-                                        </div>
-                                    </div>
-                                    <% lineCount++;%>
-                                        <% if (lineCount % 3 == 0) { %>
-                        </div>
-                        <% }; %>
-                            <% }) %>
+    <div class="article-board" id="article-board">
+      <% let lineCount = 0; %> <% data.forEach((board) => { %> <% if (lineCount
+      % 3 == 0) { %>
+      <div class="line">
+        <% lineCount = 0; %> <% }; %>
+        <div
+          class="card"
+          id="card<%= board.article_id %> "
+          onclick="getArticle(<%= board.article_id %>); "
+        >
+          <div class="card-deadline">
+            <span class="article__info__item__title">모집기간:</span>
+            <span class="article__info__item__content">
+              ~ <%= board.expr_dt %></span
+            >
+          </div>
+          <div class="card-title"><%= board.title %></div>
+          <div class="card-badge">
+            <img
+              class="card-badge-img"
+              src="<%=board.Category.category_img%>"
+              alt="<%=board.Category.category_name%>"
+            />
+          </div>
+          <div class="card-id"><%= board.user.user_id %></div>
         </div>
+        <% lineCount++;%> <% if (lineCount % 3 == 0) { %>
+      </div>
+      <% }; %> <% }) %>
+    </div>
 
-        <script src="/static/js/study.js"></script>
-        <script src="/static/js/board.js"></script>
-        <script>
-            // enter key 누르면 searchArticle() 실행
-            document.getElementById("search").addEventListener("keyup", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    document.getElementById("searchBtn").click();
-                }
-            });
-        </script>
-</body>
-
+    <script src="/static/js/study.js"></script>
+    <script src="/static/js/board.js"></script>
+    <script>
+      // enter key 누르면 searchArticle() 실행
+      document
+        .getElementById("search")
+        .addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("searchBtn").click();
+          }
+        });
+    </script>
+  </body>
 </html>
