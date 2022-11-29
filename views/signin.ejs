@@ -46,9 +46,9 @@
             <div id = "signupName">로그인</div>
 
             <form name="form_login">
-                <div class = "userInfos">
+                <!-- <div class = "userInfos">
                     <input id = "user_email" name = "user_email" type = "email" placeholder="이메일"><br>
-                </div>
+                </div> -->
 
                 <div class = "userInfos">
                     <input id = "user_id" name = "user_id" type = "text" placeholder="아이디"><br>
@@ -95,7 +95,7 @@
             data: {
                 user_id: form_login.user_id.value,
                 user_pw: form_login.user_pw.value,
-                user_email: form_login.user_email.value,
+                //user_email: form_login.user_email.value,
             },
         }).then((res) => {
             return res.data;
