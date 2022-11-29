@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/css/front-board.css" />
-    <link rel="stylesheet" href="/static/css/nav.css" />
+    <title>Study Town</title>
+    <%- include('./favicon.ejs') %>
 
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="/static/css/front-board.css" />
+        <link rel="stylesheet" href="/static/css/nav.css" />
 
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- axios cdn -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <!-- jquery cdn -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -62,9 +64,8 @@
                     </div>
                 </div>
 
-                <!-- parity의 value가 OFFLINE이면 appo_time과 appo_aria를 받는 input이 등장 -->
-                <div class="board-date" id="appo-time" style="display: none"></div>
-                <div class="write-title" id="appo-area" style="display: none">
+                <!-- parity의 value가 OFFLINE이면 appo_time과 appo_area를 받는 input이 등장 -->
+                <div class="write-title" id="appo-area">
                     <input type="text" name="appo_area" placeholder="약속 장소" />
                 </div>
 
@@ -81,38 +82,11 @@
                     <input type="date" name="end_dt" id="end_dt" />
                 </div>
 
-                <<<<<<<<< Temporary merge branch 1 <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요.">
+                <textarea name="description" id="description" class="write-content" type="text" placeholder="본인이 원하는 스터디에 대한 설명을 쓰고 원하는 팀원의 조건 등 스터디에 관한 정보를 적어주세요.">
                     </textarea>
             </form>
 
-        </form>
-
-        <!-- <select class="write-category">
-        <option value="">카테고리 설정</option>
-        <option value="프로그래밍">프로그래밍</option>
-        <option value="공모전" selected="selected">공모전</option>
-        <option value="자격증">자격증</option>
-      </select> -->
-        <!-- <div class="insert-img">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="45"
-          height="45"
-          fill="currentColor"
-          class="bi bi-camera"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"
-          />
-          <path
-            d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
-          />
-        </svg>
-        <img src="" alt="" />
-      </div> -->
-
-        <script src="/static/js/post.js"></script>
+            <script src="/static/js/post.js"></script>
 </body>
 
 </html>

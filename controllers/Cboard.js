@@ -44,14 +44,22 @@ exports.getArticleById = (req, res) => {
         },
         include: [{
             model: models.Sign,
-            attributes: ['user_id']
+            attributes: ['user_id', 'user_index'],
         }, {
             model: models.Category,
             attributes: ['category_img', 'category_name']
         }]
     }).then((result) => {
+        console.log('login user: ', req.session.user);
+        let userInfo = req.session.user;
+        if (req.session.user === undefined) {
+            userInfo = {
+                user_index: 0,
+            };
+        };
         res.render('article', {
-            article: result
+            article: result,
+            user: userInfo
         });
     }).catch((err) => {
         console.log(err);
@@ -63,23 +71,21 @@ exports.getArticleById = (req, res) => {
 // 로그인이 되지 않았으면 로그인 페이지로 이동
 exports.writeArticle = (req, res) => {
     console.dir('writeArticle: ', req.body);
-    res.render('write');
-    // if (req.session.user) {
-    //     res.render('write');
-    // } else {
-    //     res.redirect('/login');
-    // };
+    console.dir('writeArticle: ', req.session.user);
+    if (req.session.user !== undefined) {
+        res.render('write');
+    } else {
+        res.redirect('/login');
+    };
 };
 
 // POST /study/post : 게시글 하나 추가
 // postArticle 함수는 models의 Board 테이블에 데이터를 추가
-// 추가한 데이터의 article_id를 통해 SCategory 테이블에 데이터를 추가
 // 추가한 후, 방금 생성한 게시글의 id를 따와 /study/:id 라우트로 이동
 exports.postArticle = (req, res) => {
     console.dir('postArticle: ', req.body);
     models.Board.create({
-        // user_index: req.session.user.user_index,
-        user_index: 1, // 임시
+        user_index: req.session.user.user_index,
         title: req.body.title,
         category_id: req.body.category_id,
         parity: req.body.parity,
@@ -97,7 +103,7 @@ exports.postArticle = (req, res) => {
 };
 
 // GET /study/edit/:id : 수정할 게시물 input페이지
-// editArticle 함수는 먼저 요청이 들어온 id를 참조하여 edit.ejs를 렌더링
+// editArticle 함수는 먼저 요청이 들어온 id를 참조
 // res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 input에 기본값으로 설정
 exports.editArticle = (req, res) => {
@@ -107,9 +113,15 @@ exports.editArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        res.render('edit', {
-            article: article
-        });
+        if (article.user.user_index === req.session.user_index) {
+            res.render('edit', {
+                article: article
+            });
+        } else {
+            res.redirect('/study/' + req.params.id);
+        }
+    }).catch((err) => {
+        console.log(err);
     });
 };
 
@@ -183,7 +195,7 @@ exports.deleteArticle = (req, res) => {
             article_id: req.params.id
         }
     }).then((article) => {
-        if (article.user_id === req.user.user_id) {
+        if (article.user_index === req.session.user.user_index) {
             models.Board.destroy({
                 where: {
                     article_id: req.params.id

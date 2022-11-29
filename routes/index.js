@@ -48,8 +48,4 @@ router.get("/mypage", controller.mypage);
 
 router.get("/profile", controller.profile);
 
-router.get("/article", controller.article);
-
-router.get("/write", controller.write);
-
 module.exports = router;
