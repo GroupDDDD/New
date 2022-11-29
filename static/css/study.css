@@ -73,6 +73,8 @@
   width: 90%;
   height: 3vw;
   margin: 0 0 2vw 0;
+  display: flex;
+  justify-content: center;
 }
 
 .card-badge-img {
