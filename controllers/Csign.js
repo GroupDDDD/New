@@ -142,8 +142,11 @@ exports.postSignin = (isNotLoggedIn, (req, res) => { //로그인
         if (result == null) { // 로그인 실패
             res.send({ data: result, isLogin: false });
         } else { //로그인 정보 일치한다면
-            req.session.user = req.body.user_id;
-            req.session.user_index = result.user_index;
+            req.session.user = {
+                user_id: result.user_id,
+                user_index: result.user_index,
+                isLogin: true
+            }
 
             console.log('콘솔에서 sessiong확인 >> ', req.session.user_index);
             console.log('콘솔에서 session 확인 - id .>> ', req.session.user)
@@ -161,7 +164,7 @@ exports.postProfile = (req, res) => {
         console.log('result확인 >> findOne >>', result);
 
         if (result != null) {
-            res.render('profile', { data: result, user: req.body.user_id, user_index: result.user_index, isLogin: true});
+            res.render('profile', { data: result, user: req.body.user_id, user_index: result.user_index, isLogin: true });
         }
     })
 }

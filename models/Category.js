@@ -1,12 +1,3 @@
-// TODO: category 모델(테이블 구조) 정의
-
-// CREATE TABLE `category` (
-// 	`category_id`	INT	NOT NULL	COMMENT '카테고리 Index값',
-// 	`board_id`	INT	NOT NULL	COMMENT 'auto increment',
-// 	`category_img`	TEXT	NULL	COMMENT '카테고리 이미지',
-// 	`category_name`	VARCHAR(20)	NOT NULL	COMMENT '카테고리이름'
-// );
-
 const Category = function(Sequelize, DataTypes) {
     const model = Sequelize.define(
         'Category', {
