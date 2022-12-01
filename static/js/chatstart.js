@@ -4,10 +4,6 @@ let roomExistsOrnot;
 let roomId;
 let partId;
 // div에 나타나도록
-const roomResult = document.querySelector(".room-result");
-roomResult.textContent = `채팅방존재여부: ${roomExistsOrnot}`;
-const publisherResult = document.querySelector(".publisher-result");
-publisherResult.textContent = `게시자여부: ${publisherOrnot}`;
 // 로그인 아이디 확인용 div class login-result
 const loginResult = document.querySelector(".login-result");
 let socket = io.connect(); // socket 사용을 위한 객체 생성
@@ -28,7 +24,6 @@ async function chatStart(id, articleId, pubId, publisherOrnot) {
       return res.data;
     });
     console.log("'게시자용 채팅방 조회 결과: ", result);
-    loginResult.textContent = `채팅방개수: ${result.length}`;
     // 채팅방존재여부값에 true
     if (result.data.length > 0) {
       roomExistsOrnot = true;
@@ -77,7 +72,6 @@ async function chatStart(id, articleId, pubId, publisherOrnot) {
       return res.data;
     });
     console.log("'2 part 조회 결과: ", result3);
-    loginResult.textContent = `part_id값: ${result3.part_id}`;
     // partid값 넣기
     partId = result3.part_id;
     console.log("'3 part 입력 결과: ", partId);
