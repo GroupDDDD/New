@@ -10,8 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <link rel="stylesheet" href="../static/css/nav.css" />
-    <link rel = "stylesheet" href = "../static/css/signin.css">
+    <link rel="stylesheet" href="../static/css/signin.css">
 </head>
+
 <body>
     <%- include('./nav.ejs') %>
 
@@ -55,8 +56,7 @@
             if (!form_login.checkValidity()) {
                 form_login.reportValidity();
                 return;
-            }
-
+        }
             axios({
                 method: 'POST',
                 url: '/sign/signin',
