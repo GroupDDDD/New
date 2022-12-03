@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,112 +15,72 @@
 
 <body>
     <%- include('./nav.ejs') %>
-        <!-- <h1>로그인</h1> -->
 
-        <form name="form_info" action="/sign/profile" method="POST">
-            <input type="hidden" name="user_id">
-            <input type="hidden" name="user_index">
-        </form>
+    <form name = "form_info" action = "/sign/profile" method = "POST">
+        <input type = "hidden" name = "user_id">
+        <input type = "hidden" name = "user_index">
+    </form>
 
-        <form name="form_info2" action="/sign/profile" method="GET">
-            <input type="hidden" name="user_id">
-            <input type="hidden" name="user_index">
-        </form>
-
-
-        <div id="container">
-
-            <div id="square">
-                <div id="text1">
-                    Make<br> your own
-                </div>
-                <div id="text2">
-                    study group!
-                </div>
-
+    <div id = "container">
+        <div id = "square">
+            <div id = "text1">
+                Make<br>your own
             </div>
-            <div id="parallelogram"></div>
-
-            <div id="inputInfo">
-
-                <div id="signupName">로그인</div>
-
-                <form name="form_login">
-                    <!-- <div class = "userInfos">
-                    <input id = "user_email" name = "user_email" type = "email" placeholder="이메일"><br>
-                </div> -->
-
-                    <div class="userInfos">
-                        <input id="user_id" name="user_id" type="text" placeholder="아이디"><br>
-                    </div>
-
-                    <div class="userInfos">
-                        <input id="user_pw" name="user_pw" type="password" placeholder="비밀번호"><br>
-                    </div>
-
-                    <button type="button" class="loginBtn" onclick="login();">로그인</button>
-
-                    <div class="signupBtn">
-                        <a href="signup">회원가입</a>
-                    </div>
-                </form>
-
+            <div id = "text2">
+                study group!
             </div>
+        </div>
+        <div id = "parallelogram"></div>
+        <div id = "inputInfo">
+            <div id = "signupName">로그인</div>
+            <form name="form_login">
+                <div class = "userInfos">
+                    <input id = "user_id" name = "user_id" type = "text" placeholder="아이디"><br>
+                </div>
+                <div class = "userInfos">
+                    <input id = "user_pw" name = "user_pw" type = "password" placeholder="비밀번호"><br>
+                </div>
+                <button type = "button" class = "loginBtn" onclick = "login();">로그인</button>
+                <div class = "signupBtn">
+                    <a href = "signup">회원가입</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <script>
+        async function login(){
+            const form_login = document.forms["form_login"];
+            console.log(form_login);
 
+            if (!form_login.checkValidity()) {
+                form_login.reportValidity();
+                return;
+        }
+            axios({
+                method: 'POST',
+                url: '/sign/signin',
+                data: {
+                    user_id: form_login.user_id.value,
+                    user_pw: form_login.user_pw.value,
+                },
+            }).then((res) => {
+                return res.data;
+            }).then((data) => {
+                if(data.isLogin === true){//data = true라면 => res.send(true)라면
+                    console.log('data확인!>')
+                    alert('로그인 성공');
 
-            <!-- <div class="kakaoLogo">
-            <img id="kakaoBtn" onclick="kakaoLogin()" src="/static/img/kakaoLoginLogo.png" alt="카카오로그인">
-        </div> -->
-
-
+                    const form_info = document.forms['form_info'];
+                    form_info.user_id.value = form_login.user_id.value;
+                    form_info.submit(); //POST /sign/profile 요청을 수행
+                }
+                else{ //data = false라면 => res.send(false);
+                    alert('로그인 실패');
+                    form_login.reset();
+                }
+            })
+        }
+    </script>
 </body>
-</div>
-
-
-
-<script>
-    async function login() {
-        const form_login = document.forms["form_login"];
-        console.log(form_login);
-
-        if (!form_login.checkValidity()) {
-            form_login.reportValidity();
-            return;
-        }
-
-        axios({
-            method: 'POST',
-            url: '/sign/signin',
-            data: {
-                user_id: form_login.user_id.value,
-                user_pw: form_login.user_pw.value,
-                //user_email: form_login.user_email.value,
-            },
-        }).then((res) => {
-            return res.data;
-        }).then((data) => {
-            if (data.isLogin === true) { //data = true라면 => res.send(true)라면
-                console.log('data확인!>')
-                alert('로그인 성공');
-
-                const form_info = document.forms['form_info'];
-                form_info.user_id.value = form_login.user_id.value;
-                form_info.submit(); //POST /sign/profile 요청을 수행
-            } else { //data = false라면 => res.send(false);
-                alert('로그인 실패');
-                form_login.reset();
-            }
-        })
-    }
-
-    //enter키 누르면 로그인
-    document.onkeydown = function(e) {
-        if (e.keyCode == 13) {
-            login();
-        }
-    }
-</script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
 </html>

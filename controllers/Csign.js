@@ -52,54 +52,6 @@ exports.postSignup =
                 });
         });
 
-exports.getPosition = (req, res) => {
-    // res.render('position', {user: req.session.user});
-    const user = req.session.user;
-    const user_index = result.session.user_index;
-    console.log("user_index", user_index);
-    console.log("user", user);
-
-    if (req.session.user !== undefined) {
-        console.log("&&&&&&&&&&&&&&&&&&&&&&&!");
-        console.log(
-            "!= 일때, req.session.user>> ",
-            req.session.user,
-            req.session.user_index
-        );
-        res.render("position", {
-            user: req.session.user,
-            user_index: req.session.user_index,
-        });
-    }
-};
-
-//사용자가 입력한 장소 테이블에 update 하기
-exports.postPositionUpdate = (req, res) => {
-    console.log(
-        "position의 req.body.user_sido 정보 보기 >> ",
-        req.body.user_sido
-    );
-    console.log(
-        "position의 req.body.user_sigungu 정보 보기 >> ",
-        req.body.user_sigungu
-    );
-
-    //UPDATE user SET user_Lat = 14.44 WHERE user_index = 1;
-    //UPDATE user SET user_Lon = 14.44 WHERE user_index = 1;
-    models.Sign.update({
-        user_sido: req.body.user_sido,
-        user_sigungu: req.body.user_sigungu,
-        user_bename: req.body.user_bename,
-        user_roadname: req.body.user_roadname,
-    }, {
-        where: {},
-    }).then((result) => {
-        console.log("update >>", result);
-
-        res.send("update 성공");
-    });
-};
-
 exports.postIdTest = (req, res) => {
     console.log("Csign에서 req.user_id", req.body.user_id);
     models.Sign.findOne({
@@ -139,6 +91,7 @@ exports.postEmailTest = (req, res) => {
 };
 
 //로그인
+//?코드
 exports.postSignin =
     (isNotLoggedIn,
         (req, res) => {
@@ -211,9 +164,10 @@ exports.postAdmin = (req, res) => {
 };
 
 exports.postProfileEdit = (req, res) => {
-    console.log("수정완료에서 !!!!!!!!!!!!!!!!!!!!!");
-    console.log("수정완료에서 req.body 보기 >> ", req.body);
-    console.log("req.file >> ", req.file);
+
+    console.log('수정완료에서 req.body 보기 >> ', req.body);
+    console.log('req.file >> ', req.file);
+
     //console.log('req.file.path >> ',req.file.path);
     console.log(
         "수정완료에서 req_index 보기 - user_index 보기 >> ",
@@ -227,7 +181,6 @@ exports.postProfileEdit = (req, res) => {
         user_pw: req.body.user_pw,
         user_name: req.body.user_name,
         user_email: req.body.user_email,
-        // user_adr: req.body.user_adr,
     }, {
         where: { user_index: req.body.user_index },
     }).then((result) => {
@@ -254,9 +207,9 @@ exports.postProfileDelete = (req, res) => {
                 if (err) {
                     throw err;
                 }
+                res.redirect('/main2');
+            })
 
-                res.redirect("/main2");
-            });
         } else {
             // 유저가 브라우저에서 /logout 경로로 직접 접근
             // res.send()
@@ -269,51 +222,48 @@ exports.postProfileDelete = (req, res) => {
             </script>`
             );
         }
-
-        //res.send('탈퇴성공');
-    });
-};
+    })
+}
 
 exports.postProfileImg = (req, res) => {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log("req 보기> >> ", req.body);
-    console.log("req.file >> ", req.file);
-    console.log("req.file.path >> ", req.file.path);
-    console.log("***************************");
-    console.log("req 보기 - user_index보기 >> ", req.body.user_index);
+    console.log('req 보기> >> ', req.body);
+    console.log('req.file >> ', req.file)
+    console.log('req.file.path >> ', req.file.path);
+    console.log('req.file.originalname >> ', req.file.originalname);
+    console.log('req 보기 - user_index보기 >> ', req.body.user_index);
 
     console.log(req.file);
-    console.log(req.file.path);
+    console.log(req.file.path)
+    console.log(req.file.originalname);
+
     res.send(req.file);
 
     //update user set prof_img_url = ${data.prof_img_url}
-
     models.Sign.update({
         prof_img_url: req.file.filename,
     }, {
-        where: { user_index: req.body.user_index },
+        where: { user_index: req.body.user_index }
     }).then((result) => {
-        console.log("img update >> ", result);
-
+        console.log('img update >> ', result);
         //res.send(req.file);
         //res.send('사진 db 업로드 완료');
-    });
-};
+    })
+}
 
-//req.logout메서드는 req.user 객체를 제거하고,
+//req.logout메서드는 req.user 객체를 제거하고, 
 //req.session.destroy는 req.session의 내용의 제거한다.
 //세션 정보를 지운 후 메인 페이지로 되돌아간다. 로그인이 헤제되어 있다.
 exports.getLogout = (req, res) => {
     const user = req.session.user;
-    console.log("req.session.user >> ", user);
+    console.log('req.session.user >> ', user);
 
     if (user !== undefined) {
         req.session.destroy((err) => {
             if (err) {
                 throw err;
             }
-            res.redirect("/main");
-        });
+            res.redirect('/main');
+        })
     } else {
         // 유저가 브라우저에서 /logout 경로로 직접 접근
         // res.send()
@@ -326,4 +276,4 @@ exports.getLogout = (req, res) => {
         </script>`
         );
     }
-};
+}

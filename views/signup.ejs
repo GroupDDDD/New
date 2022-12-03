@@ -11,76 +11,53 @@
 
      <!-- kakao 주소 검색 -->
      <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
      <link rel="stylesheet" href="../static/css/nav.css" />
      <link rel = "stylesheet" href = "../static/css/signup.css">
 </head>
 <body>
     <%- include('./nav.ejs') %>
-    <!-- <div>회원가입</div> -->
-
     <form name = "form_position" action = "/main" method = "GET">
         <input type = "hidden" name = "user_id">
     </form>
 
-        
-
     <div id = "container">
-            <div id = "square">
-                <div id = "text1">
-                    Make<br>
-                    your own
-                </div>
-                <div id = "text2">
-                    study group!
-                </div>
-                
+        <div id = "square">
+            <div id = "text1">
+                Make<br>your own
             </div>
-            <div id = "parallelogram"></div>
-
-
+            <div id = "text2">
+                study group!
+            </div>
+        </div>
+        <div id = "parallelogram"></div>
         <div id = "inputInfo">
             <div id = "infoName">회원가입</div>
-
             <form name="form_register">
                 <div id = "id" class = "userInfos">
-                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디">
+                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디" autocomplete="off">
                     <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
                     <div id = "idTestText"></div>
                 </div>
-        
                 <div id = "pw" class = "userInfos">
-                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호"><br>
+                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호" autocomplete="off"><br>
                 </div>
-        
                 <div id = "name" class = "userInfos">
-                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름"><br>
+                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름" autocomplete="off"><br>
                 </div>
-        
                 <div id = "email" class = "userInfos">
-                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일">
+                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일" autocomplete="off">
                     <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
                     <div id = "emailTestText"></div>
                 </div>
-        
-
-                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소"><br><br>
+                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소" autocomplete="off"><br><br>
                 <div id = "addressInfo" class = "userInfos">
-                    <input type="text" name="address_detail" placeholder="상세주소"/>
+                    <input type="text" name="address_detail" placeholder="상세주소" autocomplete="off"/>
                 </div>
-        
             </form>
-            
             <button type = "button" class = "registerBtn" onclick = "register();">회원가입</button>
-
-            <!-- <div class = "registerBtn">
-                <a id = "Atag" href = "/sign/signin">로그인</a>
-            </div> -->
-            
         </div>
-        
     </div>
-
-
 
     <script>
         const idTestText = document.querySelector('#idTestText');
@@ -119,13 +96,11 @@
                     }
                 }).open();
             });
-
             return getAddrInfo;
         }
 
         //kakao 주소 검색
         window.onload = address();
-
 
         function register(){
             const form = document.forms['form_register'];
@@ -136,12 +111,6 @@
 
             console.log('form.id의 true확인 : ', form.user_id.checkValidity())
             console.log('form.pw의 true확인 : ', form.user_pw.checkValidity())
-
-            //폼 유효성 검사
-            /*if (!form.checkValidity()) { //!false -> true
-                form.reportValidity(); // 주황색 입력란을 뜨게 만들 수 있다.
-                return;
-              }*/
 
             //return된 getAddInfo 객체의 값이 나온다.
             console.log('다른 함수에서 가져온 address()함수 >> ', address());
@@ -176,27 +145,18 @@
                     const form_position = document.forms['form_position'];
                     form_position.user_id.value = form.user_id.value;
                     form_position.submit(data.user_index); //position으로 넘어간다.
-    
-                    //document.location.href = '/sign/position';
-                    //document.location.href = '/sign/signin';
                 }).catch((data) => { //이메일 중복O -> catch
-                    // alert('이미 가입된 이메일입니다.');
                 })
             } //if문 끝
             else{
                 alert('입력을 마쳐주세요');
             }
-            
         }
 
         function idTest(){
             const form = document.forms['form_register'];
             console.log('form.user_id', form.user_id);
             console.log('form.user_id.value', form.user_id.value)
-            /*if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }*/
 
             if(form.user_id.checkValidity() === true){
                 axios({
@@ -223,17 +183,11 @@
                 idTestText.textContent = '값이 입력되지 않았습니다.';
                 idTestText.style.color = 'red';
             }
-            
         }
 
         function emailTest(){
             const form = document.forms['form_register'];
             console.log('form of emailTest >> ', form);
-
-            /*if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }*/
 
             if(form.user_email.checkValidity() === true){
                 axios({
@@ -259,7 +213,6 @@
                 emailTestText.textContent = '제대로 된 값이 입력되지 않았습니다.';
                 emailTestText.style.color = "red";
             }
-
         }
     </script>
 </body>
