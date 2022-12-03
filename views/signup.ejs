@@ -35,24 +35,24 @@
             <div id = "infoName">회원가입</div>
             <form name="form_register">
                 <div id = "id" class = "userInfos">
-                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디">
+                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디" autocomplete="off">
                     <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
                     <div id = "idTestText"></div>
                 </div>
                 <div id = "pw" class = "userInfos">
-                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호"><br>
+                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호" autocomplete="off"><br>
                 </div>
                 <div id = "name" class = "userInfos">
-                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름"><br>
+                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름" autocomplete="off"><br>
                 </div>
                 <div id = "email" class = "userInfos">
-                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일">
+                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일" autocomplete="off">
                     <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
                     <div id = "emailTestText"></div>
                 </div>
-                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소"><br><br>
+                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소" autocomplete="off"><br><br>
                 <div id = "addressInfo" class = "userInfos">
-                    <input type="text" name="address_detail" placeholder="상세주소"/>
+                    <input type="text" name="address_detail" placeholder="상세주소" autocomplete="off"/>
                 </div>
             </form>
             <button type = "button" class = "registerBtn" onclick = "register();">회원가입</button>
