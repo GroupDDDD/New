@@ -75,7 +75,7 @@ app.use(passport.session());
 // router setting
 app.use("/", indexRouter);
 app.use("/sign", signRouter);
-app.use("/study", boardRouter);
+app.use("/study/", boardRouter);
 app.use("/chat", chatRouter); // 기본 경로: localhost:PORT/chat
 app.use("/chatcont", chatcontRouter); // 기본 경로: localhost:PORT/chatcont
 app.use("/part", partRouter); // 기본 경로: localhost:PORT/part
