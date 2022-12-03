@@ -24,19 +24,19 @@
                 <div class="searchDiv-first">
                     <input class="search" id="search" name="search" value="<%= keyword %> " />
                     <button onclick="searchArticle()">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          fill="currentColor"
-          class="bi bi-search"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-          />
-        </svg>
-      </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-search"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
+            </svg>
+          </button>
                 </div>
             </div>
             <a href="/study/write" class="remove-line">
@@ -46,18 +46,21 @@
 
         <div class="article-board" id="article-board">
             <% if (data.length == 0) { %>
-                <p>검색결과가 없습니다.</p>
+                <h2 class="no-result">검색결과가 없습니다.</h2>
                 <% } %>
                     <% let lineCount = 0; %>
                         <% data.forEach((board) => { %>
-                            <% if (lineCount % 3 == 0) { %>
+                            <% if
+      (lineCount % 3 == 0) { %>
                                 <div class="line">
                                     <% lineCount = 0; %>
                                         <% }; %>
                                             <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
                                                 <div class="card-deadline">
                                                     <span class="article__info__item__title">모집기간:</span>
-                                                    <span class="article__info__item__content"> ~ <%= board.expr_dt %> </span>
+                                                    <span class="article__info__item__content">
+              ~ <%= board.expr_dt %>
+            </span>
                                                 </div>
                                                 <div class="card-title">
                                                     <%= board.title %>
@@ -79,13 +82,15 @@
         <script src="/static/js/study.js"></script>
         <script src="/static/js/board.js"></script>
         <script>
-            // enter key 누르면 searchArticle() 실행
-            document.getElementById("search").addEventListener("keyup", function(event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault();
-                    document.getElementById("searchBtn").click();
-                }
-            });
+            // enter key 누르면 검색
+            document
+                .getElementById("search")
+                .addEventListener("keyup", function(event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("searchBtn").click();
+                    }
+                });
         </script>
 </body>
 

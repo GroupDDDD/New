@@ -36,20 +36,20 @@
                     <input name="title" class="title" type="text" placeholder="제목 입력" />
                 </div>
                 <div class="write-title">
-                    <input type="text" name="member_num" placeholder="모집인원" />
+                    <input type="number" name="member_num" placeholder="모집인원" />
                 </div>
                 <div class="study-how">
                     <div class="study-how-box">
-                        <input type="radio" name="category_id" id="school" value="1">
-                        <label for="school">학교공부</label>
-                        <input type="radio" name="category_id" id="lang" value="2">
-                        <label for="lang">어학</label>
-                        <input type="radio" name="category_id" id="job" value="3">
-                        <label for="job">취업</label>
-                        <input type="radio" name="category_id" id="cert" value="4">
-                        <label for="cert">자격증</label>
-                        <input type="radio" name="category_id" id="civil" value="5">
-                        <label for="civil">공무원/임용</label>
+                        <input type="radio" name="category_id" id="react" value="1">
+                        <label for="school">React</label>
+                        <input type="radio" name="category_id" id="java" value="2">
+                        <label for="lang">Java</label>
+                        <input type="radio" name="category_id" id="node" value="3">
+                        <label for="job">Node.js</label>
+                        <input type="radio" name="category_id" id="ts" value="4">
+                        <label for="cert">Typescript</label>
+                        <input type="radio" name="category_id" id="spr" value="5">
+                        <label for="civil">Spring</label>
                     </div>
                 </div>
                 <div class="study-how">
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- parity의 value가 OFFLINE이면 appo_time과 appo_area를 받는 input이 등장 -->
-                <div class="write-title" id="appo-area">
+                <div class="write-title" id="appo-area" style="display: none;">
                     <input type="text" name="appo_area" placeholder="약속 장소" />
                 </div>
 

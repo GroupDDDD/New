@@ -1,162 +1,172 @@
 .category {
-  display: flex;
-  align-items: center;
-  width: 80vw;
-  justify-content: space-between;
-  margin: 100px 10vw 0 10vw;
+    display: flex;
+    align-items: center;
+    width: 80vw;
+    justify-content: space-between;
+    margin: 100px 10vw 0 10vw;
 }
 
-.title > img {
-  width: 30px;
-  height: 30px;
+.title>img {
+    width: 30px;
+    height: 30px;
 }
 
 .title-underbox {
-  width: 100%;
-  height: 5px;
-  background-color: rgb(255, 229, 121);
-  opacity: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgb(255, 229, 121);
+    opacity: 0;
 }
 
 .title:hover {
-  opacity: 100%;
+    opacity: 100%;
 }
 
 .title-opacity {
-  opacity: 100%;
+    opacity: 100%;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .study {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .line {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  margin: 8vh 0 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 8vh 0 0 0;
 }
 
 .card {
-  width: 25vw;
-  height: 30vw;
-  border: solid 2px rgb(167, 165, 165);
-  border-radius: 7%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  cursor: pointer;
+    width: 25vw;
+    height: 30vw;
+    border: solid 2px rgb(167, 165, 165);
+    border-radius: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    cursor: pointer;
 }
 
 .card-deadline {
-  color: rgb(167, 165, 165);
-  margin: 3vw 0 2vw 0;
-  font-size: 1.5vw;
+    color: rgb(167, 165, 165);
+    margin: 3vw 0 2vw 0;
+    font-size: 1.5vw;
 }
 
 .card-title {
-  margin: 0 1vw 3vw 1vw;
-  font-size: 2vw;
-  display: flex;
-  justify-content: center;
+    margin: 0 1vw 3vw 1vw;
+    font-size: 2vw;
+    display: flex;
+    justify-content: center;
 }
 
 .card-badge {
-  width: 90%;
-  height: 3vw;
-  margin: 0 0 2vw 0;
-  display: flex;
-  justify-content: center;
+    width: 90%;
+    height: 3vw;
+    margin: 0 0 2vw 0;
+    display: flex;
+    justify-content: center;
 }
 
 .card-badge-img {
-  width: 18%;
+    width: 18%;
 }
 
 .card-id {
-  width: 90%;
-  /* display: flex; */
-  font-size: 1.5vw;
-  font-weight: 700;
-  border-top: solid 1px rgb(167, 165, 165);
-  padding: 1vw 0 0 0;
+    width: 90%;
+    /* display: flex; */
+    font-size: 1.5vw;
+    font-weight: 700;
+    border-top: solid 1px rgb(167, 165, 165);
+    padding: 1vw 0 0 0;
 }
 
 .window-modal {
-  display: none;
-  justify-content: center;
-  align-content: center;
-  position: fixed;
-  top: 30vh;
-  left: 25vw;
+    display: none;
+    justify-content: center;
+    align-content: center;
+    position: fixed;
+    top: 30vh;
+    left: 25vw;
 }
 
 .card-modal {
-  width: 50vw;
-  height: 70vh;
-  border: solid 2px black;
-  background-color: white;
+    width: 50vw;
+    height: 70vh;
+    border: solid 2px black;
+    background-color: white;
 }
 
 .visible {
-  display: block;
+    display: block;
 }
 
 .searchDiv-first {
-  display: flex;
-  width: 80%;
+    display: flex;
+    width: 80%;
 }
 
 .searchDiv {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .search {
-  width: 100%;
+    width: 100%;
 }
 
 .study-mystudy {
-  background-color: yellowgreen;
-  border-radius: 5px;
-  margin: 0 0 0 3vw;
-  width: 10vw;
-  height: 3vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1vw;
-  color: white;
-  font-weight: bold;
+    background-color: yellowgreen;
+    border-radius: 5px;
+    margin: 0 0 0 3vw;
+    width: 10vw;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1vw;
+    color: white;
+    font-weight: bold;
 }
 
 .remove-line {
-  text-decoration-line: none;
-  display: flex;
-  align-items: center;
+    text-decoration-line: none;
+    display: flex;
+    align-items: center;
 }
 
 .study-mystudy:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .decoration-none {
-  text-decoration-line: none;
-  color: black;
+    text-decoration-line: none;
+    color: black;
 }
 
 .example {
-  width: 80vw;
-  display: flex;
-  margin: 10vh 10vw 10vw 10vh;
-  align-items: center;
-  /* justify-content: space-between; */
+    width: 80vw;
+    display: flex;
+    margin: 10vh 10vw 10vw 10vh;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.no-result {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    font-weight: 700;
+    margin: 10vh 0 0 0;
 }
