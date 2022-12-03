@@ -23,7 +23,7 @@ let sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 // db = { sequelize: sequelize, Sequelize: Sequelize }
-// 잠깐주석처리!!!
+
 db.Sign = require("./Sign")(sequelize, Sequelize);
 db.Board = require("./Board")(sequelize, Sequelize);
 db.Category = require("./Category")(sequelize, Sequelize);
@@ -91,4 +91,4 @@ db.Chatcont.belongsTo(db.Part, {
 });
 
 module.exports = db;
-// db 변수 내보냄 -> 다른 파일에서 사용하기 때문
+// db 변수 내보냄
