@@ -1,219 +1,281 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-     <!-- kakao 주소 검색 -->
-     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- kakao 주소 검색 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-     <link rel="stylesheet" href="../static/css/nav.css" />
-     <link rel = "stylesheet" href = "../static/css/signup.css">
+    <link rel="stylesheet" href="../static/css/nav.css" />
+    <link rel="stylesheet" href="../static/css/signup.css" />
 </head>
+
 <body>
     <%- include('./nav.ejs') %>
-    <form name = "form_position" action = "/main" method = "GET">
-        <input type = "hidden" name = "user_id">
-    </form>
+        <form name="form_position" action="/main" method="GET">
+            <input type="hidden" name="user_id" />
+        </form>
 
-    <div id = "container">
-        <div id = "square">
-            <div id = "text1">
-                Make<br>your own
+        <div id="container">
+            <div id="square">
+                <div id="text1">Make<br />your own</div>
+                <div id="text2">study group!</div>
             </div>
-            <div id = "text2">
-                study group!
+            <div id="parallelogram"></div>
+            <div id="inputInfo">
+                <div id="infoName">회원가입</div>
+                <form name="form_register">
+                    <div id="id" class="userInfos">
+                        <input id="user_id" name="user_id" type="text" required placeholder="아이디" autocomplete="off" />
+                        <button type="button" class="overlapBtn" onclick="idTest();">
+              중복확인</button
+            ><br />
+            <div id="idTestText"></div>
+          </div>
+          <div id="pw" class="userInfos">
+            <input
+              id="user_pw"
+              name="user_pw"
+              type="password"
+              required
+              placeholder="비밀번호"
+              autocomplete="off"
+            /><br />
+          </div>
+          <div id="name" class="userInfos">
+            <input
+              id="user_name"
+              name="user_name"
+              type="text"
+              required
+              placeholder="이름"
+              autocomplete="off"
+            /><br />
+          </div>
+          <div id="email" class="userInfos">
+            <input
+              id="user_email"
+              name="user_email"
+              type="email"
+              required
+              placeholder="이메일"
+              autocomplete="off"
+            />
+            <button type="button" class="overlapBtn" onclick="emailTest();">
+              중복확인</button
+            ><br />
+            <div id="emailTestText"></div>
+          </div>
+          <input
+            type="text"
+            id="address_kakao"
+            name="address"
+            readonly
+            placeholder="주소"
+            autocomplete="off"
+          /><br /><br />
+          <div id="addressInfo" class="userInfos">
+            <input
+              type="text"
+              name="address_detail"
+              placeholder="상세주소"
+              autocomplete="off"
+            />
+          </div>
+        </form>
+        <button type="button" class="registerBtn" onclick="register();">
+          회원가입
+        </button>
+                    </div>
             </div>
-        </div>
-        <div id = "parallelogram"></div>
-        <div id = "inputInfo">
-            <div id = "infoName">회원가입</div>
-            <form name="form_register">
-                <div id = "id" class = "userInfos">
-                    <input id = "user_id" name = "user_id" type = "text" required placeholder="아이디" autocomplete="off">
-                    <button type = "button" class = "overlapBtn" onclick = "idTest();">중복확인</button><br>
-                    <div id = "idTestText"></div>
-                </div>
-                <div id = "pw" class = "userInfos">
-                    <input id = "user_pw" name = "user_pw" type = "password" required placeholder="비밀번호" autocomplete="off"><br>
-                </div>
-                <div id = "name" class = "userInfos">
-                    <input id = "user_name" name = "user_name" type = "text" required placeholder="이름" autocomplete="off"><br>
-                </div>
-                <div id = "email" class = "userInfos">
-                    <input id = "user_email" name = "user_email" type = "email" required placeholder="이메일" autocomplete="off">
-                    <button type = "button"  class = "overlapBtn" onclick = "emailTest();">중복확인</button><br>
-                    <div id = "emailTestText"></div>
-                </div>
-                <input type = "text" id = "address_kakao" name = "address" readonly placeholder="주소" autocomplete="off"><br><br>
-                <div id = "addressInfo" class = "userInfos">
-                    <input type="text" name="address_detail" placeholder="상세주소" autocomplete="off"/>
-                </div>
-            </form>
-            <button type = "button" class = "registerBtn" onclick = "register();">회원가입</button>
-        </div>
-    </div>
 
-    <script>
-        const idTestText = document.querySelector('#idTestText');
-        const emailTestText = document.querySelector('#emailTestText');
+            <script>
+                const idTestText = document.querySelector("#idTestText");
+                const emailTestText = document.querySelector("#emailTestText");
 
-        console.log('idTestTest: ', idTestText);
-        console.log('emailTestTExt', emailTestText);
+                console.log("idTestTest: ", idTestText);
+                console.log("emailTestTExt", emailTestText);
 
-        let getAddrInfo = {
-            address: '',
-            sido: '',
-            sigungu: '',
-            bename2: '',
-            roadname: ''
-        };
+                let getAddrInfo = {
+                    address: "",
+                    sido: "",
+                    sigungu: "",
+                    bename2: "",
+                    roadname: "",
+                };
 
-        function address(){
-            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-                //카카오 지도 발생
-                new daum.Postcode({
-                    oncomplete: function(info) {
-                        document.getElementById("address_kakao").value = info.address; // 주소 넣기
-                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-                        console.log('info>>', info);
-                        console.log('전체 주소: ', info.address);
-                        console.log('도: ', info.sido);
-                        console.log('시: ', info.sigungu);
-                        console.log('동2: ', info.bname2);
-                        console.log('로: ', info.roadname);
-                        
-                        getAddrInfo.address = info.address;
-                        getAddrInfo.sido = info.sido;
-                        getAddrInfo.sigungu = info.sigungu;
-                        getAddrInfo.bename2 = info.bname2;
-                        getAddrInfo.roadname = info.roadname;
+                function address() {
+                    document
+                        .getElementById("address_kakao")
+                        .addEventListener("click", function() {
+                            //주소입력칸을 클릭하면
+                            //카카오 지도 발생
+                            new daum.Postcode({
+                                oncomplete: function(info) {
+                                    document.getElementById("address_kakao").value = info.address; // 주소 넣기
+                                    document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                                    console.log("info>>", info);
+                                    console.log("전체 주소: ", info.address);
+                                    console.log("도: ", info.sido);
+                                    console.log("시: ", info.sigungu);
+                                    console.log("동2: ", info.bname2);
+                                    console.log("로: ", info.roadname);
+
+                                    getAddrInfo.address = info.address;
+                                    getAddrInfo.sido = info.sido;
+                                    getAddrInfo.sigungu = info.sigungu;
+                                    getAddrInfo.bename2 = info.bname2;
+                                    getAddrInfo.roadname = info.roadname;
+                                },
+                            }).open();
+                        });
+                    return getAddrInfo;
+                }
+
+                //kakao 주소 검색
+                window.onload = address();
+
+                function register() {
+                    const form = document.forms["form_register"];
+
+                    console.log(form);
+                    console.log("pw확인>>", form.user_pw);
+                    console.log("form.ceckValidity() : ", form.checkValidity());
+
+                    console.log("form.id의 true확인 : ", form.user_id.checkValidity());
+                    console.log("form.pw의 true확인 : ", form.user_pw.checkValidity());
+
+                    //return된 getAddInfo 객체의 값이 나온다.
+                    console.log("다른 함수에서 가져온 address()함수 >> ", address());
+                    console.log("도 >> ", address().sido);
+                    console.log("시 >> ", address().sigungu);
+                    console.log("동 >> ", address().bename2);
+                    console.log("로 >> ", address().roadname);
+
+                    if (
+                        form.user_id.checkValidity() === true &&
+                        form.user_pw.checkValidity() === true &&
+                        form.user_name.checkValidity() === true &&
+                        form.user_email.checkValidity() === true
+                    ) {
+                        axios({
+                                method: "POST",
+                                url: "/sign/signup",
+                                data: {
+                                    user_id: form.user_id.value,
+                                    user_pw: form.user_pw.value,
+                                    user_name: form.user_name.value,
+                                    user_email: form.user_email.value,
+
+                                    user_sido: address().sido, //도
+                                    user_sigungu: address().sigungu, //시
+                                    user_bename: address().bename2, //구
+                                    user_roadname: address().roadname, //동
+                                },
+                            })
+                            .then((res) => {
+                                console.log("res", res);
+                                return res.data;
+                            })
+                            .then((data) => {
+                                //이메일 중복X->then
+                                console.log("data", data);
+                                alert("회원가입 성공");
+
+                                const form_position = document.forms["form_position"];
+                                form_position.user_id.value = form.user_id.value;
+                                form_position.submit(data.user_index); //position으로 넘어간다.
+                            })
+                            .catch((data) => {
+                                //이메일 중복O -> catch
+                            });
+                    } //if문 끝
+                    else {
+                        alert("입력을 마쳐주세요");
                     }
-                }).open();
-            });
-            return getAddrInfo;
-        }
+                }
 
-        //kakao 주소 검색
-        window.onload = address();
+                function idTest() {
+                    const form = document.forms["form_register"];
+                    console.log("form.user_id", form.user_id);
+                    console.log("form.user_id.value", form.user_id.value);
 
-        function register(){
-            const form = document.forms['form_register'];
-            
-            console.log(form)
-            console.log('pw확인>>', form.user_pw);
-            console.log('form.ceckValidity() : ', form.checkValidity())
-
-            console.log('form.id의 true확인 : ', form.user_id.checkValidity())
-            console.log('form.pw의 true확인 : ', form.user_pw.checkValidity())
-
-            //return된 getAddInfo 객체의 값이 나온다.
-            console.log('다른 함수에서 가져온 address()함수 >> ', address());
-            console.log('도 >> ', address().sido);
-            console.log('시 >> ', address().sigungu);
-            console.log('동 >> ', address().bename2);
-            console.log('로 >> ', address().roadname);
-
-            if(form.user_id.checkValidity() === true && form.user_pw.checkValidity() === true &&
-            form.user_name.checkValidity() === true && form.user_email.checkValidity() === true){
-                axios({
-                    method: 'POST',
-                    url: '/sign/signup',
-                    data: {
-                        user_id: form.user_id.value,
-                        user_pw: form.user_pw.value,
-                        user_name: form.user_name.value,
-                        user_email: form.user_email.value,
-    
-                        user_sido: address().sido, //도
-                        user_sigungu: address().sigungu,//시
-                        user_bename: address().bename2,//구
-                        user_roadname: address().roadname //동
-                    },
-                }).then((res) => {
-                    console.log('res', res);
-                    return res.data;
-                }).then((data) => { //이메일 중복X->then
-                    console.log('data', data);
-                    alert('회원가입 성공');
-    
-                    const form_position = document.forms['form_position'];
-                    form_position.user_id.value = form.user_id.value;
-                    form_position.submit(data.user_index); //position으로 넘어간다.
-                }).catch((data) => { //이메일 중복O -> catch
-                })
-            } //if문 끝
-            else{
-                alert('입력을 마쳐주세요');
-            }
-        }
-
-        function idTest(){
-            const form = document.forms['form_register'];
-            console.log('form.user_id', form.user_id);
-            console.log('form.user_id.value', form.user_id.value)
-
-            if(form.user_id.checkValidity() === true){
-                axios({
-                    method: 'POST',
-                    url: '/sign/signup/id',
-                    data:{
-                        user_id: form.user_id.value,
-                    },
-                }).then((res) => {
-                    return res.data;
-                }).then((data) => {
-                    console.log('data>> ', data);
-                     if(!data){ //data = false
-                        idTestText.textContent = `"${form.user_id.value}"는 존재하는 아이디입니다.`
-                        idTestText.style.color = 'red';
+                    if (form.user_id.checkValidity() === true) {
+                        axios({
+                                method: "POST",
+                                url: "/sign/signup/id",
+                                data: {
+                                    user_id: form.user_id.value,
+                                },
+                            })
+                            .then((res) => {
+                                return res.data;
+                            })
+                            .then((data) => {
+                                console.log("data>> ", data);
+                                if (!data) {
+                                    //data = false
+                                    idTestText.textContent = `"${form.user_id.value}"는 존재하는 아이디입니다.`;
+                                    idTestText.style.color = "red";
+                                } else {
+                                    idTestText.textContent = `"${form.user_id.value}"는 사용 가능한 아이디입니다.`;
+                                    idTestText.style.color = "red";
+                                }
+                            }); //exios 끝
+                    } // if문
+                    else {
+                        idTestText.textContent = "값이 입력되지 않았습니다.";
+                        idTestText.style.color = "red";
                     }
-                    else{
-                        idTestText.textContent = `"${form.user_id.value}"는 사용 가능한 아이디입니다.`
-                        idTestText.style.color = 'red';
-                    }
-                }) //exios 끝
-            } // if문
-            else{
-                idTestText.textContent = '값이 입력되지 않았습니다.';
-                idTestText.style.color = 'red';
-            }
-        }
+                }
 
-        function emailTest(){
-            const form = document.forms['form_register'];
-            console.log('form of emailTest >> ', form);
+                function emailTest() {
+                    const form = document.forms["form_register"];
+                    console.log("form of emailTest >> ", form);
 
-            if(form.user_email.checkValidity() === true){
-                axios({
-                    method: 'POST',
-                    url: '/sign/signup/email',
-                    data: {
-                        user_email: form.user_email.value
-                    }
-                }).then((res) => {
-                    return res.data;
-                }).then((data) => {
-                    if(!data){ //data == false
-                        emailTestText.textContent = '이미 가입한 이메일입니다.';
+                    if (form.user_email.checkValidity() === true) {
+                        axios({
+                                method: "POST",
+                                url: "/sign/signup/email",
+                                data: {
+                                    user_email: form.user_email.value,
+                                },
+                            })
+                            .then((res) => {
+                                return res.data;
+                            })
+                            .then((data) => {
+                                if (!data) {
+                                    //data == false
+                                    emailTestText.textContent = "이미 가입한 이메일입니다.";
+                                    emailTestText.style.color = "red";
+                                } else {
+                                    //data == true
+                                    emailTestText.textContent = "사용 가능한 이메일입니다.";
+                                    emailTestText.style.color = "red";
+                                }
+                            }); // exios 끝
+                    } //if문 끝
+                    else {
+                        emailTestText.textContent = "제대로 된 값이 입력되지 않았습니다.";
                         emailTestText.style.color = "red";
                     }
-                    else{ //data == true
-                        emailTestText.textContent = '사용 가능한 이메일입니다.';
-                        emailTestText.style.color = "red";
+                }
+                // enter키 누르면 submit
+                function enterkey() {
+                    if (window.event.keyCode == 13) {
+                        // 엔터키가 눌렸을 때 실행할 내용
+                        register();
                     }
-                }) // exios 끝
-            } //if문 끝
-            else{
-                emailTestText.textContent = '제대로 된 값이 입력되지 않았습니다.';
-                emailTestText.style.color = "red";
-            }
-        }
-    </script>
+                }
+            </script>
 </body>
+
 </html>
