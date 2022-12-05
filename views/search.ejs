@@ -23,7 +23,7 @@
             <div class="searchDiv">
                 <div class="searchDiv-first">
                     <input class="search" id="search" name="search" value="<%= keyword %> " />
-                    <button onclick="searchArticle()">
+                    <button onclick="searchArticle()" id="searchBtn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -87,8 +87,12 @@
                 .getElementById("search")
                 .addEventListener("keyup", function(event) {
                     if (event.keyCode === 13) {
-                        event.preventDefault();
-                        document.getElementById("searchBtn").click();
+                        if (document.getElementById("search").value == "") {
+                            alert("검색어를 입력해주세요.");
+                        } else {
+                            event.preventDefault();
+                            document.getElementById("searchBtn").click();
+                        }
                     }
                 });
         </script>

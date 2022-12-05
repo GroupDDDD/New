@@ -58,10 +58,12 @@ exports.getArticleById = (req, res) => {
         })
         .then((result) => {
             console.log("login user: ", req.session.user);
-            let userInfo = req.session.user_index;
+            let userInfo = req.session.user;
             if (req.session.user === undefined) {
                 userInfo = {
+                    user_id: "unidentified",
                     user_index: 0,
+                    isLogin: false,
                 };
             }
             res.render("article", {

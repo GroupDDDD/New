@@ -107,7 +107,8 @@
             가입희망자와 채팅
           </button>
                     </div>
-                    <% } else if { user.user_index != article.user_index } { %>
+                    <% } else if ( user.user_index != article.user_index && user.user_index
+        != 0 ) { %>
                         <div class="article-btn">
                             <button class="article-chat" type="button" onclick="chatStart(<%=user.user_index%> , <%=article.article_id%>, <%= article.user_index%>, false);">
             그룹장과 채팅
@@ -115,7 +116,7 @@
                         </div>
                         <% } else { %>
                             <div class="article-btn">
-                                <button class="article-chat" type="button" onclick="location.href='/signin';">
+                                <button class="article-chat" type="button" onclick="location.href='/sign/signin'" ;>
             로그인 후 채팅 가능
           </button>
                             </div>
