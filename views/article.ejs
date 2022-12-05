@@ -34,7 +34,7 @@
               >
               <!-- 수정, 삭제 버튼 -->
               <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
-              <!-- 나중에 js function으로 구현할 예정 -->
+              <% if (user.user_index == article.user_index) { %>
               <div class="article-btn">
                 <button
                   class="article-modify"
@@ -51,6 +51,7 @@
                   삭제
                 </button>
               </div>
+              <% } %>
             </div>
           </div>
           <div class="article-info">
