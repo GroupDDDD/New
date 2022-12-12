@@ -46,16 +46,22 @@
 
         <div class="article-board" id="article-board">
             <% let lineCount = 0; %>
-                <% data.forEach((board) => { %>
-                    <% if (lineCount
-      % 3 == 0) { %>
-                        <div class="line">
-                            <% lineCount = 0; %>
-                                <% }; %>
-                                    <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
-                                        <div class="card-deadline">
-                                            <span class="article__info__item__title">모집기간:</span>
-                                            <span class="article__info__item__content">
+                <% let lineNumber = 0; %>
+                    <%
+      data.forEach((board)=> { %>
+                        <% if (lineCount % 3 == 0) { %>
+                            <% lineNumber
+      += 1; %>
+                                <div class="line line-<%= lineNumber %>">
+                                    <% if (lineNumber > 3 ) {
+        document.querySelector(`.line-${lineNumber}`).classList.add("line-hidden")
+        } %>
+                                        <% lineCount = 0; %>
+                                            <% }; %>
+                                                <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
+                                                    <div class="card-deadline">
+                                                        <span class="article__info__item__title">모집기간:</span>
+                                                        <span class="article__info__item__content">
               ~ <%= board.expr_dt %></span
             >
           </div>

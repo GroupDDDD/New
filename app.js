@@ -116,12 +116,12 @@ io.on("connection", (socket) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-  res.status(err.status || 500);
-  res.render("error");
-});
+// app.use((err, req, res, next) => {
+//   res.locals.message = err.message;
+//   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+//   res.status(err.status || 500);
+//   res.render("error");
+// });
 
 // session 사용을 위해서는 http-socket 연결
 http.listen(app.get("port"), () => {
