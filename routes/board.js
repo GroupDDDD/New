@@ -52,4 +52,13 @@ router.delete("/delete/:id", controller.deleteArticle);
 // searchArticle 함수는 models의 Board 테이블에서 title, description에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
 // view에서는 전달받은 데이터를 통해 해당 조건에 부합하는 게시글을 조회
 router.get("/search/:keyword", controller.searchArticle);
+
+// GET /study/category/:id => localhost:PORT/study/category/1
+// study 라우트에 대한 요청이 들어오면, controller의 getBoardByCategory 함수를 호출
+router.get("/category/:id", controller.getBoardByCategory);
+
+// GET /study/category/:id/search/:keyword => localhost:PORT/study/category/1/search/keyword
+// study 라우트에 대한 요청이 들어오면, controller의 searchArticleByCategory 함수를 호출
+router.get("/category/:id/search/:keyword", controller.searchArticleByCategory);
+
 module.exports = router;

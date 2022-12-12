@@ -50,15 +50,9 @@ exports.getBoard = (req, res) => {
       }).format(result.end_dt);
 
       // render시 세션쿠키 전달
-      if (req.session.user === undefined) {
-        req.session.user = {
-          user_id: "unidentified",
-          user_index: 0,
-          isLogin: false,
-        };
-      }
       res.render("study", {
         data: result,
+        category_id: null,
         user: req.session.user.user_id,
         isLogin: req.session.user.isLogin,
       });
@@ -92,26 +86,6 @@ exports.getArticleById = (req, res) => {
     .then((result) => {
       console.log("login user: ", req.session.user);
       let userInfo = req.session.user;
-      new Intl.DateTimeFormat("ko-KR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }).format(result.createdAt);
-      // new Intl.DateTimeFormat("ko-KR", {
-      //     year: "numeric",
-      //     month: "long",
-      //     day: "numeric",
-      // }).format(result.expr_dt);
-      // new Intl.DateTimeFormat("ko-KR", {
-      //     year: "numeric",
-      //     month: "long",
-      //     day: "numeric",
-      // }).format(result.start_dt);
-      // new Intl.DateTimeFormat("ko-KR", {
-      //     year: "numeric",
-      //     month: "long",
-      //     day: "numeric",
-      // }).format(result.end_dt);
       res.render("article", {
         article: result,
         userInfo: userInfo,
@@ -261,6 +235,7 @@ exports.searchArticle = (req, res) => {
   }).then((articles) => {
     res.render("search", {
       data: articles,
+      category_id: null,
       keyword: req.params.keyword,
       user: req.session.user.user_id,
       isLogin: req.session.user.isLogin,
@@ -290,5 +265,112 @@ exports.deleteArticle = (req, res) => {
     } else {
       res.send("작성자만 삭제할 수 있습니다.");
     }
+  });
+};
+
+// GET /study/category/:id : 카테고리별 게시글 조회
+// getBoardByCategory 함수는 models의 Board 테이블에서 category_id에 해당하는 데이터를 조회
+// 조회한 후, 해당 데이터를 view에 렌더
+exports.getBoardByCategory = (req, res) => {
+  models.Board.findAll({
+    where: {
+      category_id: req.params.id,
+    },
+    include: [
+      {
+        model: models.Sign,
+        attributes: ["user_id"],
+        required: true,
+      },
+      {
+        model: models.Category,
+        attributes: ["category_name", "category_img"],
+        required: true,
+      },
+    ],
+  })
+    .then((result) => {
+      new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(result.createdAt);
+      new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(result.expr_dt);
+      new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(result.start_dt);
+      new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(result.end_dt);
+
+      // render시 세션쿠키 전달
+      res.render("study", {
+        data: result,
+        category_id: req.params.id,
+        user: req.session.user.user_id,
+        isLogin: req.session.user.isLogin,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// GET /study/category/:id/search/:keyword : 카테고리별 게시글 검색
+// searchArticleByCategory 함수는 models의 Board 테이블에서 category_id에 해당하는 데이터를 조회
+// 조회한 후, 해당 데이터 중에서 keyword에 해당하는 데이터를 view에 렌더
+exports.searchArticleByCategory = (req, res) => {
+  console.dir("searchArticleByCategory: ", req.body);
+  if (req.params.keyword === "") {
+    alert("검색어를 입력해주세요.");
+    res.redirect("/study/category/" + req.params.id);
+  }
+  models.Board.findAll({
+    where: {
+      category_id: req.params.id,
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: "%" + req.params.keyword + "%",
+          },
+        },
+        {
+          description: {
+            [Op.like]: "%" + req.params.keyword + "%",
+          },
+        },
+        {
+          appo_area: {
+            [Op.like]: "%" + req.params.keyword + "%",
+          },
+        },
+      ],
+    },
+    include: [
+      {
+        model: models.Sign,
+        attributes: ["user_id"],
+      },
+      {
+        model: models.Category,
+        attributes: ["category_name", "category_img"],
+      },
+    ],
+  }).then((articles) => {
+    res.render("search", {
+      data: articles,
+      keyword: req.params.keyword,
+      category_id: req.params.id,
+      user: req.session.user.user_id,
+      isLogin: req.session.user.isLogin,
+    });
   });
 };

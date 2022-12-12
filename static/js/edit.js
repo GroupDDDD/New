@@ -136,7 +136,7 @@ function showAppo(event) {
   const parity = event.target.value;
   const appo_area = document.getElementById("appo-area");
 
-  if (parity == "OFF") {
+  if (parity == "ONLINE") {
     appo_area.style.display = "";
   } else {
     appo_area.style.display = "none";

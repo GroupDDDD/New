@@ -23,7 +23,11 @@
             <div class="searchDiv">
                 <div class="searchDiv-first">
                     <input class="search" id="search" name="search" value="<%= keyword %> " />
-                    <button onclick="searchArticle()" id="searchBtn">
+                    <% if (category_id == null) { %>
+                        <button onclick="searchArticle()" id="searchBtn">
+                      <% } else { %>
+                        <button onclick="searchArticleByCategory(<%= category_id %>)" id="searchBtn">
+                        <% } %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -43,6 +47,7 @@
                 <div class="study-mystudy">내 스터디 만들기</div>
             </a>
         </div>
+
 
         <div class="article-board" id="article-board">
             <% if (data.length == 0) { %>
