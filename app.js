@@ -12,7 +12,7 @@ const passport = require("passport");
 const { sequelize } = require("./models/index"); // 시퀄라이즈
 const indexRouter = require("./routes/index");
 const boardRouter = require("./routes/board");
-const signRouter = require("./routes/sign"); //localhost:8000/sign
+const signRouter = require("./routes/sign");
 const chatRouter = require("./routes/chat");
 const chatcontRouter = require("./routes/chatcont");
 const partRouter = require("./routes/part");
@@ -21,7 +21,9 @@ const passportConfig = require("./passport");
 // app
 const app = express();
 
-passportConfig(); // 패스포트 설정
+// 패스포트 설정
+passportConfig();
+
 // socket
 const http = require("http").Server(app);
 const io = require("socket.io")(http); // http-socket 연결
@@ -36,6 +38,10 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/static/css", express.static(__dirname + "/static/css"));
 app.use("/static/js", express.static(__dirname + "/static/js"));
 app.use("/static/img", express.static(__dirname + "/static/img"));
+app.use(
+  "/static/img/favicon",
+  express.static(__dirname + "/static/img/favicon")
+);
 app.use("/profileImgs", express.static(__dirname + "/profileImgs"));
 
 // 서버 실행시 MYSQL과 연결
@@ -57,9 +63,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
     resave: false,
-    saveUninitialized: false,
-    // secret: process.env.COOKIE_SECRET,
-    secret: "secret",
+    saveUninitialized: true, // 세션에 저장할 내역이 없더라도 세션을 저장할지에 대한 여부
+    secret: process.env.COOKIE_SECRET,
+    // secret: "secret",
+    store: new session.MemoryStore(),
     cookie: {
       httpOnly: true,
       secure: false,
@@ -109,15 +116,14 @@ io.on("connection", (socket) => {
 });
 
 // error handler
-// app.use((err, req, res, next) => {
-//     res.locals.message = err.message;
-//     res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-//     res.status(err.status || 500);
-//     res.render("error");
-// });
+app.use((err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+  res.status(err.status || 500);
+  res.render("error");
+});
 
-// 주의!!!) 소켓을 사용하기 위해서는 http.listen()으로 포트를 열어야 함
-
+// session 사용을 위해서는 http-socket 연결
 http.listen(app.get("port"), () => {
   let p = app.get("port");
   console.log(p, "번 포트에서 대기 중");

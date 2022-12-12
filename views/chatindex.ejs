@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>채팅방입장 버튼</title>
+    <title>Study Town</title>
+    <%- include('./favicon.ejs') %>
+
     <!-- axios cdn -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -21,6 +23,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
+
   <body>
     <!-- 버튼누를 때 user 아이디값, article_id값, 게시자 아이디값, 로그인한사람이 게시자인지 아닌지값 받아오기추가요(임시데이터 '1' 하드코딩상태) -->
     <button type="button" onclick="chatStart('1', '1', '1', true);">

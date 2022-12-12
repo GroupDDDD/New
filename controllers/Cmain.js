@@ -1,4 +1,3 @@
-// TODO: 컨트롤러 코드
 // Path: study_group/controllers/Cmain.js
 
 exports.start = (req, res) => {
@@ -6,7 +5,13 @@ exports.start = (req, res) => {
 };
 
 exports.main = (req, res) => {
-  res.render("main");
+  const user = req.session.user;
+
+  if (req.session.user !== undefined) {
+    res.render("main", { isLogin: true, user: req.session.user });
+  } else {
+    res.render("main", { isLogin: false });
+  }
 };
 
 exports.main2 = (req, res) => {
@@ -21,23 +26,10 @@ exports.main2 = (req, res) => {
     //세션 값이 없으면
     res.render("main2", { isLogin: false });
   }
-  // res.render('main2');
-};
-
-// exports.study = (req, res) => {
-//     res.render("study");
-// };
-
-exports.login = (req, res) => {
-  res.render("login");
 };
 
 exports.chat = (req, res) => {
   res.render("chat");
-};
-
-exports.frontBoard = (req, res) => {
-  res.render("front-board");
 };
 
 exports.mypage = (req, res) => {
@@ -46,12 +38,4 @@ exports.mypage = (req, res) => {
 
 exports.profile = (req, res) => {
   res.render("profile");
-};
-
-exports.article = (req, res) => {
-  res.render("article");
-};
-
-exports.write = (req, res) => {
-  res.render("write");
 };

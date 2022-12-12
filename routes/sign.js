@@ -2,9 +2,14 @@ const express = require("express");
 const controller = require("../controllers/Csign");
 const passport = require("passport");
 const router = express.Router();
+<<<<<<< HEAD
 
 const path = require("path");
 const multer = require("multer");
+=======
+const path = require('path');
+const multer = require('multer');
+>>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b
 
 //multer 설정
 const uploadDetail = multer({
@@ -21,10 +26,18 @@ const uploadDetail = multer({
       console.log("basename: ", path.basename(file.originalname, ext));
       // console.log('아이디로 붙이기', req.body.user_id);
 
+<<<<<<< HEAD
       done(null, path.basename(file.originalname, ext) + Date.now() + ext);
     },
   }),
 });
+=======
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+            // done(null, path.basename(req.body.user_id, ext) + Date.now() + ext);
+        }
+    }),
+})
+>>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b
 
 //localhost:8000/sign
 // router.get('/', controller.main);
@@ -36,11 +49,16 @@ router.post("/signin", controller.postSignin);
 router.get("/signup", controller.getSignup);
 router.post("/signup", controller.postSignup);
 
+<<<<<<< HEAD
 router.get("/position", controller.getPosition);
 router.post("/position/update", controller.postPositionUpdate); //위치정보 update
 
 router.post("/signup/id", controller.postIdTest);
 router.post("/signup/email", controller.postEmailTest);
+=======
+router.post('/signup/id', controller.postIdTest);
+router.post('/signup/email', controller.postEmailTest);
+>>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b
 
 router.post("/profile", controller.postProfile); //true가 뜨면 next() 실행. -> true이면 profile로 이동
 router.post("/profile/edit", controller.postProfileEdit);
@@ -58,6 +76,7 @@ router.post("/profile/admin", controller.postAdmin);
 // GET /sign/logout
 router.get("/logout", controller.getLogout);
 
+<<<<<<< HEAD
 //[카카오 로그인]
 //GET /sign/kakao로 접근하면 카카오 로그인 과정이 시작된다.
 //main.ejs의 카카오톡 버튼에 /sign/kakao 링크가 붙어있다.
@@ -101,3 +120,6 @@ router.get("/getUsername", controller.getUsername);
 module.exports = router;
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b

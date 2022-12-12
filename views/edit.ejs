@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Study Town</title>
     <link rel="stylesheet" href="/static/css/front-board.css" />
     <link rel="stylesheet" href="/static/css/nav.css" />
+    <%- include('./favicon.ejs') %>
 
-    <!-- axios cdn -->
-    <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
-    <script src=“https://unpkg.com/axios/dist/axios.min.js”></script>
+        <!-- axios cdn -->
+        <script src=“https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js”></script>
+        <script src=“https://unpkg.com/axios/dist/axios.min.js”></script>
 
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- jquery cdn -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                     </div>
                 </div>
                 <!-- parity의 value가 OFFLINE이면 appo_area를 받는 input이 등장 -->
-                <div class="write-title" id="appo-area" style="display: none;">
+                <div class="write-title" id="appo-area">
                     <input type="text" name="appo_area" placeholder="약속 장소" value="<%= article.appo_area %>" />
                 </div>
 
@@ -87,7 +88,7 @@
 
         <script>
             // 선택된 스터디 카테고리값을 가져와서 해당하는 라디오버튼을 체크해준다.
-            const category_id = <%= article.category_id %>;
+            const category_id = <%= article.Category.category_id %>;
             const radio1 = document.getElementsByName("category_id ");
             for (let i = 0; i < radio1.length; i++) {
                 if (radio1[i].value == category_id) {
@@ -98,10 +99,10 @@
             const parity = "<%=article.parity %>
             ";
             const radio2 = document.getElementsByName("parity ");
-            for (let i = 0; i < radio2.length; i++) {
-                if (radio2[i].value == parity) {
-                    radio2[i].checked = true;
-                }
+            if (parity == "ONLINE") {
+                radio2[0].checked = true;
+            } else {
+                radio2[1].checked = true;
             };
         </script>
 </body>

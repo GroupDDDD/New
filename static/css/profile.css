@@ -8,7 +8,7 @@ body{
 }
 #container{
     margin: 0 auto;
-    width: 45%;
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
@@ -103,7 +103,9 @@ input{
     padding: 12px 0 10px;
 }
 .overlapBtn{
-    padding: 10px 12px;
+    width: 6.5vw;
+    font-size: 0.9rem;
+    padding: 15px 0px;
     border: 1px solid #8d8d8d;
     background-color: white;
 }
@@ -113,9 +115,11 @@ input{
     display: flex;
     justify-content: end;
 }
-#btns{
+#btns{ 
+    width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: end;
 }
 .registerBtn{
     padding: 10px 55px;
@@ -183,6 +187,46 @@ input{
 #btnDiv button{
     width: 100%;
 }
+#sessionName2{
+    font-size: 16px;
+}
+#btns{
+    display: flex;
+    /* align-items: center; */
+    /* text-align: center; */
+  }
+.btn1{
+    width: 100px;
+    height: 30px;
+    /* background-color: #f9f9f9; */
+    border: 1px solid black;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+  }
+  #sessionName2{
+    padding-left: 10px;
+  }
+.btn11{
+    background-color: #FFD900;
+  }
+  .btn1 a{
+    text-decoration: none;
+    color : #757575;
+  }
 
-
-/* 모달 */
+/* 미디어쿼리 - 반응형 적용 */
+@media(max-width: 1200px){
+    #container{
+        width: 70%;
+    }
+    #profileImgDiv {
+        flex-direction: column;
+    }
+    #modalOpen{
+        margin-bottom: 40px;
+    }
+    
+}

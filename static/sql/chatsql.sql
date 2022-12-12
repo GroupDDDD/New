@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- DB생성:project2
 
 CREATE DATABASE project2 DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
@@ -292,3 +293,5 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 
 
 
+=======
+>>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b

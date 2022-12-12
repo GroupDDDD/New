@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,106 +11,130 @@
     <link rel="stylesheet" href="../static/css/main.css" />
     <link rel="stylesheet" href="../static/css/footer.css" />
     <link rel="stylesheet" href="../static/css/nav.css" />
-  </head>
-  <body>
-    <%- include('./nav.ejs') %>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="first-content">
+            <a href="/">
+                <div class="logo">
+                    <img src="/static/img/logo.jpg" alt="" class="logo" />
+                </div>
+            </a>
+            <div class="nav-button">
+                <a href="/main"><span>홈</span></a>
+            </div>
+            <div class="nav-button">
+                <a href="/study"><span>스터디</span></a>
+            </div>
+        </div>
+        <div>
+            <a href="/main">
+                <img src="/static/img/StudyTown.png" alt="" class="main-logo" />
+            </a>
+        </div>
+        <% if(!isLogin) { %>
+            <div>
+                <a href="/sign/signin">
+                    <button class="login signin"><span>로그인</span></button>
+                </a>
+                <a href="/sign/signup">
+                    <button class="login signup"><span>회원가입</span></button>
+                </a>
+            </div>
+            <% } else { %>
+                <div id="successUser">
+                    <h4 id="sessionName">
+                        <%= user %>님 반갑습니다.</h4>
+
+                    <div id="btns">
+                        <div class="btn btn1">
+                            <a href="/sign/logout">로그아웃</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <% } %>
+    </nav>
 
     <img src="../static/img/Slide1.jpg" class="Slide1" alt="" />
     <img src="../static/img/Slide2.jpg" class="Slide1" alt="" />
     <img src="../static/img/Slide3.jpg" class="Slide1" alt="" />
 
     <div class="slide-button-group">
-      <button class="slide-button button-1"></button>
-      <button class="slide-button button-2"></button>
-      <button class="slide-button button-3"></button>
+        <button class="slide-button button-1"></button>
+        <button class="slide-button button-2"></button>
+        <button class="slide-button button-3"></button>
     </div>
     <div>
-      <div class="slide-describe">
-        <p>같은 동네에 살고 있는</p>
-        <p>팀원들과 함께 공부하세요!</p>
-        <a href="/study">
-          <button class="start-study">
+        <div class="slide-describe">
+            <p>같은 동네에 살고 있는</p>
+            <p>팀원들과 함께 공부하세요!</p>
+            <a href="/study">
+                <button class="start-study">
             <span>스터디 시작하기</span>
           </button>
-        </a>
-      </div>
+            </a>
+        </div>
     </div>
 
     <div class="main-describe">
-      <div class="main-describe-left">
-        <div class="main-describe-left-letter">
-          이제 혼자하지 마세요<br />원하는 스터디에 참여하세요<br /><br />
-        </div>
-        <a href="/study">
-          <button class="describe-start-study">
+        <div class="main-describe-left">
+            <div class="main-describe-left-letter">
+                이제 혼자하지 마세요<br />원하는 스터디에 참여하세요<br /><br />
+            </div>
+            <a href="/study">
+                <button class="describe-start-study">
             <span>스터디 시작하기</span>
           </button>
-        </a>
-      </div>
-      <div class="main-describe-right">
-        <div class="main-describe-right-content">
-          <div>
-            <img
-              src="../static/img/example.png"
-              alt=""
-              class="describe-content"
-            />
-            <div class="content-title">공부방-수능</div>
-          </div>
-          <div>
-            <img
-              src="../static/img/example.png"
-              alt=""
-              class="describe-content"
-            />
-            <div class="content-title">공시생</div>
-          </div>
+            </a>
         </div>
-        <div class="main-describe-right-content">
-          <div>
-            <img
-              src="../static/img/example.png"
-              alt=""
-              class="describe-content"
-            />
-            <div class="content-title">영어공부</div>
-          </div>
-          <div>
-            <img
-              src="../static/img/example.png"
-              alt=""
-              class="describe-content"
-            />
-            <div class="content-title">취업준비반</div>
-          </div>
+        <div class="main-describe-right">
+            <div class="main-describe-right-content">
+                <div>
+                    <img src="../static/img/example.png" alt="" class="describe-content" />
+                    <div class="content-title">공부방-수능</div>
+                </div>
+                <div>
+                    <img src="../static/img/example.png" alt="" class="describe-content" />
+                    <div class="content-title">공시생</div>
+                </div>
+            </div>
+            <div class="main-describe-right-content">
+                <div>
+                    <img src="../static/img/example.png" alt="" class="describe-content" />
+                    <div class="content-title">영어공부</div>
+                </div>
+                <div>
+                    <img src="../static/img/example.png" alt="" class="describe-content" />
+                    <div class="content-title">취업준비반</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="main-describe second">
-      <div class="main-describe2-first">
-        <img
-          src="../static/img/example.png"
-          alt=""
-          class="main-describe2-img"
-        />
-      </div>
-      <div class="main-describe-left">
-        <div class="main-describe-left-letter">
-          같은 목적의 팀원들을 모아 <br />목표를 이루세요!<br /><br />
+        <div class="main-describe2-first">
+            <img src="../static/img/example.png" alt="" class="main-describe2-img" />
         </div>
-        <a href="/front-board">
-          <button class="describe-start-study">
+        <div class="main-describe-left">
+            <div class="main-describe-left-letter">
+                같은 목적의 팀원들을 모아 <br />목표를 이루세요!<br /><br />
+            </div>
+            <a href="/front-board">
+                <button class="describe-start-study">
             <span>스터디 만들기</span>
           </button>
-        </a>
-      </div>
+            </a>
+        </div>
     </div>
 
     <%- include('./footer.ejs') %>
-  </body>
-  <!-- js적용 -->
-  <script src="../static/js/main.js"></script>
-  <!-- nav.js없어서 에러나서 주석처리 -->
-  <!-- <script src="../static/js/nav.js"></script> -->
+</body>
+<!-- js적용 -->
+<script src="../static/js/main.js"></script>
+<!-- nav.js없어서 에러나서 주석처리 -->
+<!-- <script src="../static/js/nav.js"></script> -->
+
 </html>
