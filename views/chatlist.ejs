@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Town</title>
     <%- include('./favicon.ejs') %>
 
-        <!-- axios cdn -->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-        <!-- jquery cdn -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <!-- socket.io cdn -->
-        <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../static/css/chatlist.css" />
-        <link rel="stylesheet" href="../static/css/nav.css" />
-</head>
-
-<body>
+    <!-- jquery cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- socket.io cdn -->
+    <script
+      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/css/chatlist.css" />
+    <link rel="stylesheet" href="../static/css/nav.css" />
+  </head>
+  <body>
     <%- include('./nav.ejs') %>
 
-        <h2>채팅목록</h2>
-        <table border="1" cellspacing="0">
-            <!-- <thead>
+    <h2>채팅목록</h2>
+    <table border="1" cellspacing="0">
+      <!-- <thead>
         <tr>
           <th>스터디원프로필</th>
           <th>스터디원</th>
@@ -32,21 +35,27 @@
           <th>임시채팅방입장</th>
         </tr>
       </thead> -->
-            <tbody>
-                <!-- data: db에서 가지고 오는 데이터 => 새로고침해도 데이터 남아있음 -->
-                <% for (let i = 0; i < data.length; i++) { %>
-                    <!-- <tr id="tr_<%= data[i].id %>"> -->
-                    <tr id="userid">
-                        <td onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');">
-                            <img src="<%= data[i].prof_img_url %>" class="img" />
-                        </td>
-                        <td onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');">
-                            <%= data[i].user_name %>
-                        </td>
-                        <td onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');">
-                            <%= data[i].title %>
-                        </td>
-                        <!-- <td>
+      <tbody>
+        <!-- data: db에서 가지고 오는 데이터 => 새로고침해도 데이터 남아있음 -->
+        <% for (let i = 0; i < data.length; i++) { %>
+        <!-- <tr id="tr_<%= data[i].id %>"> -->
+        <tr id="userid">
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <img src="<%= data[i].prof_img_url %>" class="img" />
+          </td>
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <%= data[i].user_name %>
+          </td>
+          <td
+            onClick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
+          >
+            <%= data[i].title %>
+          </td>
+          <!-- <td>
             <button
               type="button"
               onclick="chatEntry('<%= data[i].user_index %>', '<%= pubId %>', '<%= data[i].room_id %>');"
@@ -54,32 +63,31 @@
               Go
             </button>
           </td> -->
-                    </tr>
-                    <% } %>
-                        <!-- 추가되어야할 tr 위치 -> 종료태그의 앞(beforeend) -->
-            </tbody>
-        </table>
+        </tr>
+        <% } %>
+        <!-- 추가되어야할 tr 위치 -> 종료태그의 앞(beforeend) -->
+      </tbody>
+    </table>
 
-        <script>
-            let partId;
-            // 채팅창 입장
-            async function chatEntry(user_index, id, room_id) {
-                console.log("chatEntry user_index id room_id", user_index, id, room_id);
-                // part_id조회
-                let result = await axios({
-                    method: "GET",
-                    url: `/part/getpartid?roomId=${room_id}&id=${id}`,
-                }).then((res) => {
-                    console.log("1: ", res.data);
-                    return res.data;
-                });
-                console.log("'2 part 조회 결과: ", result);
-                // partid값 넣기
-                partId = result.part_id;
-                console.log("'3 part 입력 결과: ", partId);
-                window.location.href = `/chatcont/getChatcont?roomId=${room_id}&pubId=${user_index}&thisId=${id}&partId=${partId}`;
-            }
-        </script>
-</body>
-
+    <script>
+      let partId;
+      // 채팅창 입장
+      async function chatEntry(user_index, id, room_id) {
+        console.log("chatEntry user_index id room_id", user_index, id, room_id);
+        // part_id조회
+        let result = await axios({
+          method: "GET",
+          url: `/part/getpartid?roomId=${room_id}&id=${id}`,
+        }).then((res) => {
+          console.log("1: ", res.data);
+          return res.data;
+        });
+        console.log("'2 part 조회 결과: ", result);
+        // partid값 넣기
+        partId = result.part_id;
+        console.log("'3 part 입력 결과: ", partId);
+        window.location.href = `/chatcont/getChatcont?roomId=${room_id}&pubId=${user_index}&thisId=${id}&partId=${partId}`;
+      }
+    </script>
+  </body>
 </html>
