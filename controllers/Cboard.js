@@ -27,6 +27,27 @@ exports.getBoard = (req, res) => {
             ],
         })
         .then((result) => {
+            new Intl.DateTimeFormat("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }).format(result.createdAt);
+            new Intl.DateTimeFormat("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }).format(result.expr_dt);
+            new Intl.DateTimeFormat("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }).format(result.start_dt);
+            new Intl.DateTimeFormat("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }).format(result.end_dt);
+
             res.render("study", {
                 data: result,
             });
@@ -34,6 +55,51 @@ exports.getBoard = (req, res) => {
         .catch((err) => {
             console.log(err);
         });
+};
+
+// GET /study/page:page => localhost:PORT/study/page:1
+// study/page:params로 접근 시 params에 해당하는 페이지를 조회
+// params에 해당하는 페이지가 없을 시 1페이지로 이동
+// params에 해당하는 페이지가 있을 시 해당 페이지를 조회
+// getBoard 함수와 동일한 방식으로 데이터를 조회
+// lastId 방식으로 페이징 처리
+
+exports.getBoardPage = async(req, res) => {
+    try {
+        const page = req.params.page;
+        await models.Board.findAll({
+                include: [{
+                        model: models.Sign,
+                        attributes: ["user_id"],
+                        required: true,
+                    },
+                    {
+                        model: models.Category,
+                        attributes: ["category_img", "category_name"],
+                        required: true,
+                    },
+                ],
+                limit: 9, // 가져올 게시글 개수
+                offset: (page - 1) * limit,
+                order: [
+                    ["createdAt", "DESC"], // 최신순으로 정렬
+                ],
+            })
+            .then((result) => {
+                if (result.length == 0) {
+                    res.redirect("/study/page:1");
+                } else {
+                    res.render("study", {
+                        data: result,
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 // GET /study/:id : 게시글 하나 조회
@@ -66,6 +132,26 @@ exports.getArticleById = (req, res) => {
                     isLogin: false,
                 };
             }
+            new Intl.DateTimeFormat("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }).format(result.createdAt);
+            // new Intl.DateTimeFormat("ko-KR", {
+            //     year: "numeric",
+            //     month: "long",
+            //     day: "numeric",
+            // }).format(result.expr_dt);
+            // new Intl.DateTimeFormat("ko-KR", {
+            //     year: "numeric",
+            //     month: "long",
+            //     day: "numeric",
+            // }).format(result.start_dt);
+            // new Intl.DateTimeFormat("ko-KR", {
+            //     year: "numeric",
+            //     month: "long",
+            //     day: "numeric",
+            // }).format(result.end_dt);
             res.render("article", {
                 article: result,
                 user: userInfo,

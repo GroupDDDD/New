@@ -33,14 +33,14 @@
             </div>
             <form action="/study/write/post" method="post" name="article-form">
                 <div class="write-title">
-                    <input name="title" class="title" type="text" placeholder="제목 입력" />
+                    <input name="title" class="title" type="text" placeholder="제목 입력" required/>
                 </div>
                 <div class="write-title">
-                    <input type="number" name="member_num" placeholder="모집인원" />
+                    <input type="number" name="member_num" placeholder="모집인원" min="1" max="30" required/>
                 </div>
                 <div class="study-how">
                     <div class="study-how-box">
-                        <input type="radio" name="category_id" id="react" value="1">
+                        <input type="radio" name="category_id" id="react" value="1" required>
                         <label for="school">React</label>
                         <input type="radio" name="category_id" id="java" value="2">
                         <label for="lang">Java</label>
@@ -57,7 +57,7 @@
                         <span>스터디 형태</span>
                     </div>
                     <div>
-                        <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" />
+                        <input type="radio" name="parity" id="on" value="ON" onclick="showAppo(event);" required/>
                         <label for="on">온라인</label>
                         <input type="radio" name="parity" id="off" value="OFF" onclick="showAppo(event);" />
                         <label for="off">오프라인</label>
@@ -66,7 +66,7 @@
 
                 <!-- parity의 value가 OFFLINE이면 appo_area를 받는 input이 등장 -->
                 <div class="write-title" id="appo-area" style="display: none;">
-                    <input type="text" name="appo_area" placeholder="약속 장소" />
+                    <input type="text" name="appo_area" placeholder="약속 장소" maxlength="100" />
                 </div>
 
                 <div class="board-date">

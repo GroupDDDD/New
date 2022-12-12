@@ -88,7 +88,8 @@
 
         <script>
             // 선택된 스터디 카테고리값을 가져와서 해당하는 라디오버튼을 체크해준다.
-            const category_id = <%= article.Category.category_id %>;
+            const category_id = "<%=article.category_id %>
+            ";
             const radio1 = document.getElementsByName("category_id ");
             for (let i = 0; i < radio1.length; i++) {
                 if (radio1[i].value == category_id) {
@@ -96,8 +97,7 @@
                 }
             };
             // 선택된 온라인/오프라인값을 가져와서 해당하는 라디오버튼을 체크해준다.
-            const parity = "<%=article.parity %>
-            ";
+            const parity = "<%=article.parity %>";
             const radio2 = document.getElementsByName("parity ");
             if (parity == "ONLINE") {
                 radio2[0].checked = true;

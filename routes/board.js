@@ -11,11 +11,11 @@ const router = express.Router();
 // view에서는 전달받은 데이터를 통해 게시글 전체를 조회
 router.get("/", controller.getBoard);
 
-// GET /study/:id => localhost:PORT/study/1
-// study 라우트에 대한 요청이 들어오면, controller의 getArticleById 함수를 호출
-// getArticleById 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
-// view에서는 전달받은 데이터를 통해 게시글 하나를 조회해서 보여줌
-router.get("/:id", controller.getArticleById);
+// GET /study/page:page => localhost:PORT/study/page:1
+// study 라우트에 대한 요청이 들어오면, controller의 getBoardPage 함수를 호출
+// getBoardPage 함수는 models의 Board 테이블에서 모든 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
+// view에서는 전달받은 데이터를 통해 게시글 전체를 조회
+router.get("/page:page", controller.getBoardPage);
 
 // GET /study/write => localhost:PORT/study/write
 // study 라우트에 대한 요청이 들어오면, controller의 writeArticle 함수를 호출
@@ -27,6 +27,12 @@ router.get("/write", controller.writeArticle);
 // postArticle 함수는 models의 Board 테이블에 데이터를 추가
 // 추가한 후, res.redirect()로 /study 라우트로 이동
 router.post("/post", controller.postArticle);
+
+// GET /study/:id => localhost:PORT/study/1
+// study 라우트에 대한 요청이 들어오면, controller의 getArticleById 함수를 호출
+// getArticleById 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 조회한 후, res.send()로 전달받은 데이터를 view에 전달
+// view에서는 전달받은 데이터를 통해 게시글 하나를 조회해서 보여줌
+router.get("/:id", controller.getArticleById);
 
 // GET /study/edit/:id => localhost:PORT/study/edit/1
 // study 라우트에 대한 요청이 들어오면, controller의 editArticle 함수를 호출
