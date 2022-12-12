@@ -1,22 +1,26 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     overflow-x: hidden;
 }
-#container{
+
+#container {
     margin: 0 auto;
     width: 50%;
     display: flex;
     flex-direction: column;
 }
-#profile{
+
+#profile {
     width: 100%;
     height: 100%;
 }
-#profileName{
+
+#profileName {
     margin-top: 70px;
     margin-bottom: 120px;
     font-size: 24px;
@@ -24,118 +28,132 @@ body{
     line-height: 28px;
     text-align: center;
 }
-#whole_info{
+
+#whole_info {
     margin: 0 70px;
 }
-#profileImgDiv{
+
+#profileImgDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 100px;
 }
 
-#modalOpen{
+#modalOpen {
     width: 70px;
     height: 70px;
-    border : 1px solid #198754;
+    border: 1px solid #198754;
     border-radius: 50%;
 }
-#modalOpen #divInImg{
+
+#modalOpen #divInImg {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-.result{
-    width: 480px;
-    height : 400px;
-    background-color: pink;
 
+.result {
+    width: 480px;
+    height: 400px;
+    background-color: pink;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
- }
-.picpure{
+}
+
+.picpure {
     border: 2px solid blue;
     width: 90px;
     height: 90px;
     border-radius: 50%;
     margin: 0 auto;
- }
- #twoBox{
+}
+
+#twoBox {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
- }
- .box1{
+}
+
+.box1 {
     width: 50px;
     height: 50px;
     background-color: red;
- }
- .box2{
+}
+
+.box2 {
     width: 50px;
     height: 50px;
     background-color: green;
- }
+}
 
-
-input{
+input {
     border: none;
     border-bottom: 1px solid #8d8d8d;
 }
-.overlapInfo{
+
+.overlapInfo {
     display: flex;
     align-items: start;
 }
 
-.user_infoGroup{
+.user_infoGroup {
     margin-bottom: 70px;
 }
-span, label{
+
+span,
+label {
     font-size: 17px;
     font-weight: 700;
     line-height: 22px;
 }
 
-input{
+input {
     width: 85%;
     margin-right: 10px;
     margin-top: 10px;
     padding: 12px 0 10px;
 }
-.overlapBtn{
+
+.overlapBtn {
     width: 6.5vw;
     font-size: 0.9rem;
     padding: 15px 0px;
     border: 1px solid #8d8d8d;
     background-color: white;
 }
-#final_info_submit{
+
+#final_info_submit {
     margin-top: 100px;
     margin-bottom: 100px;
     display: flex;
     justify-content: end;
 }
-#btns{ 
+
+#btns {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
-.registerBtn{
+
+.registerBtn {
     padding: 10px 55px;
     margin-left: 20px;
     border: 1px solid #8d8d8d;
     background-color: #198754;
     color: white;
 }
-.btnA{
+
+.btnA {
     border: 2px solid #cdcdcd;
     padding: 10px 55px;
     text-decoration: none;
     color: black;
 }
 
-#deleteBtn{
+#deleteBtn {
     text-decoration: none;
     background-color: white;
     color: #a5a5a5;
@@ -143,90 +161,77 @@ input{
     border-bottom: 1px solid #cdcdcd;
     font-size: 14px;
 }
-#circleDiv, #btnDiv{
+
+#circleDiv,
+#btnDiv {
     display: flex;
     justify-content: center;
 }
-#deleteAndSelect{
+
+#deleteAndSelect {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-#circlePicture{
+
+#circlePicture {
     margin-top: 30px;
     margin-bottom: 60px;
 }
-#circlePicture > img{
+
+#circlePicture>img {
     width: 130px;
     height: 130px;
     border-radius: 50%;
 }
-#twoDivBox{
+
+#twoDivBox {
     margin-bottom: 50px;
 }
-.correctionDiv{
+
+.correctionDiv {
     width: 180px;
     height: 120px;
-    border: 1px solid #f9f9f9
+    border: 1px solid #f9f9f9;
 }
-.Explanation{
+
+.Explanation {
     border: 1px solid #f9f9f9;
     width: 100%;
     text-align: center;
 }
-.deleteFolder > img{
+
+.deleteFolder>img {
     width: 100%;
     height: 100%;
     border: 1px solid #f9f9f9;
 }
-.upload > img{
+
+.upload>img {
     width: 100%;
     height: 100%;
     border: 1px solid #f9f9f9;
 }
-#btnDiv button{
+
+#btnDiv button {
     width: 100%;
 }
-#sessionName2{
+
+#sessionName2 {
     font-size: 16px;
 }
-#btns{
-    display: flex;
-    /* align-items: center; */
-    /* text-align: center; */
-  }
-.btn1{
-    width: 100px;
-    height: 30px;
-    /* background-color: #f9f9f9; */
-    border: 1px solid black;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
-  }
-  #sessionName2{
-    padding-left: 10px;
-  }
-.btn11{
-    background-color: #FFD900;
-  }
-  .btn1 a{
-    text-decoration: none;
-    color : #757575;
-  }
+
 
 /* 미디어쿼리 - 반응형 적용 */
-@media(max-width: 1200px){
-    #container{
+
+@media (max-width: 1200px) {
+    #container {
         width: 70%;
     }
     #profileImgDiv {
         flex-direction: column;
     }
-    #modalOpen{
+    #modalOpen {
         margin-bottom: 40px;
     }
-    
 }

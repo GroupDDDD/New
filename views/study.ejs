@@ -23,7 +23,11 @@
             <div class="searchDiv">
                 <div class="searchDiv-first">
                     <input class="search" id="search" name="search" />
-                    <button onclick="searchArticle()" id="searchBtn">
+                    <% if (category_id == null) { %>
+                        <button onclick="searchArticle()" id="searchBtn">
+                      <% } else { %>
+                        <button onclick="searchArticleByCategory(<%= category_id %>)" id="searchBtn">
+                        <% } %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -44,18 +48,35 @@
             </a>
         </div>
 
+        <div class="category-select">
+            <a href="/study/category/1">React</a>
+            <a href="/study/category/2">Java</a>
+            <a href="/study/category/3">Node.js</a>
+            <a href="/study/category/4">Typescript</a>
+            <a href="/study/category/5">Spring</a>
+        </div>
+
         <div class="article-board" id="article-board">
             <% let lineCount = 0; %>
-                <% data.forEach((board) => { %>
-                    <% if (lineCount
-      % 3 == 0) { %>
-                        <div class="line">
-                            <% lineCount = 0; %>
-                                <% }; %>
-                                    <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
-                                        <div class="card-deadline">
-                                            <span class="article__info__item__title">모집기간:</span>
-                                            <span class="article__info__item__content">
+                <% let lineNumber = 0; %>
+                    <% if (data.length ==
+      0) { %>
+                        <h2 class="no-result">검색결과가 없습니다.</h2>
+                        <% } %>
+                            <% data.forEach((board)=> { %>
+                                <% if (lineCount % 3 == 0) { %>
+                                    <%
+      lineNumber += 1; %>
+                                        <div class="line line-<%= lineNumber %>">
+                                            <% if (lineNumber > 3 ) {
+        document.querySelector(`.line-${lineNumber}`).classList.add("line-hidden")
+        } %>
+                                                <% lineCount = 0; %>
+                                                    <% }; %>
+                                                        <div class="card" id="card<%= board.article_id %> " onclick="getArticle(<%= board.article_id %>); ">
+                                                            <div class="card-deadline">
+                                                                <span class="article__info__item__title">모집기간:</span>
+                                                                <span class="article__info__item__content">
               ~ <%= board.expr_dt %></span
             >
           </div>

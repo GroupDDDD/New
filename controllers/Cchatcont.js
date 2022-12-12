@@ -29,6 +29,8 @@ exports.getChatcont = (req, res) => {
         partId: req.query.partId,
         roomId: req.query.roomId,
         thisId: req.query.thisId,
+        user: req.session.user.user_id,
+        isLogin: req.session.user.isLogin,
       });
     });
 };

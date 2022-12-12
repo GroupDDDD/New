@@ -7,11 +7,13 @@ exports.start = (req, res) => {
 exports.main = (req, res) => {
   const user = req.session.user;
 
-  if (req.session.user !== undefined) {
-    res.render("main", { isLogin: true, user: req.session.user });
-  } else {
-    res.render("main", { isLogin: false });
-  }
+  res.render("main", { user: user.user_id, isLogin: user.isLogin });
+
+  // if (req.session.user !== undefined) {
+  //   res.render("main", { isLogin: true, user: req.session.user });
+  // } else {
+  //   res.render("main", { isLogin: false });
+  // }
 };
 
 exports.main2 = (req, res) => {
@@ -28,14 +30,13 @@ exports.main2 = (req, res) => {
   }
 };
 
-exports.chat = (req, res) => {
-  res.render("chat");
-};
-
 exports.mypage = (req, res) => {
   res.render("mypage");
 };
 
-exports.profile = (req, res) => {
-  res.render("profile");
-};
+// exports.profile = (req, res) => {
+//   res.render("profile", {
+//     user: req.session.user.user_id,
+//     isLogin: req.session.user.isLogin,
+//   });
+// };
