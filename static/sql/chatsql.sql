@@ -286,6 +286,8 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
   
   WHERE article_id ='1'
   and contactor_id='2';
+
+  UPDATE board SET title = 'MySQL스터디모집' WHERE article_id ='1';
   
 
 
