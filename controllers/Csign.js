@@ -8,11 +8,17 @@ exports.main = (req, res) => {
 };
 
 exports.getSignup = (req, res) => {
-  res.render("signup");
+  res.render("signup", {
+    user: req.session.user.user_id,
+    isLogin: req.session.user.isLogin,
+  });
 };
 
 exports.getSignin = (req, res) => {
-  res.render("signin");
+  res.render("signin", {
+    user: req.session.user.user_id,
+    isLogin: req.session.user.isLogin,
+  });
 };
 
 //회원가입
@@ -96,8 +102,8 @@ exports.postSignin =
   (isNotLoggedIn,
   (req, res) => {
     //로그인
-    console.log("postSingin의 req.body>>", req.body);
-    console.log("postSigin의 user_id", req.body.user_id);
+    console.log("postSignin의 req.body>>", req.body);
+    console.log("postSignin의 user_id", req.body.user_id);
     console.log("user_pw", req.body.user_pw);
     console.log("user_email", req.body.user_email);
     // console.log('user_adr', req.body.user_adr);
@@ -129,8 +135,11 @@ exports.postSignin =
           isLogin: true,
         };
 
-        console.log("콘솔에서 session 확인 >> ", req.session.user_index);
-        console.log("콘솔에서 session 확인 - id .>> ", req.session.user);
+        console.log("콘솔에서 session 확인 >> ", req.session.user.user_index);
+        console.log(
+          "콘솔에서 session 확인 - id .>> ",
+          req.session.user.user_id
+        );
         res.send({ isLogin: true });
       }
     });
@@ -143,15 +152,13 @@ exports.postProfile = (req, res) => {
   }).then((result) => {
     console.log("(((((((())))))))()()()(())");
     console.log("result확인 >> findOne >>", result);
+    console.log("req.session.user >> ", req.session.user);
 
-    if (result != null) {
-      res.render("profile", {
-        data: result,
-        user: req.body.user_id,
-        user_index: result.user_index,
-        isLogin: true,
-      });
-    }
+    res.render("profile", {
+      data: result,
+      user: req.session.user.user_id,
+      isLogin: req.session.user.isLogin,
+    });
   });
 };
 
@@ -159,7 +166,10 @@ exports.postAdmin = (req, res) => {
   models.Sign.findOne({
     where: { user_id: 59 },
   }).then((result) => {
-    res.render("profile", { user: req.body.user_id });
+    res.render("profile", {
+      user: req.body.user_id,
+      isLogin: req.session.user.isLogin,
+    });
   });
 };
 

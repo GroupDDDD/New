@@ -45,7 +45,7 @@ router.patch("/edit/:id", controller.doEdit);
 // study 라우트에 대한 요청이 들어오면, controller의 deleteArticle 함수를 호출
 // deleteArticle 함수는 models의 Board 테이블에서 id에 해당하는 데이터를 삭제
 // 삭제한 후, res.redirect()로 /study 라우트로 이동
-router.delete("/delete", controller.deleteArticle);
+router.delete("/delete/:id", controller.deleteArticle);
 
 // GET /study/search => localhost:PORT/study/search
 // study 라우트에 대한 요청이 들어오면, controller의 searchArticle 함수를 호출

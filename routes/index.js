@@ -11,12 +11,12 @@ router.get("/main", controller.main);
 //김예나 메인 코드
 router.get("/main2", controller.main2);
 
-router.get("/chat", controller.chat);
+// router.get("/chat", controller.chat);
 
 router.get("/mypage", controller.mypage);
 
 // router.get("/chatlink", controller.chatStart);
 
-router.get("/profile", controller.profile);
+// router.get("/profile", controller.profile);
 
 module.exports = router;

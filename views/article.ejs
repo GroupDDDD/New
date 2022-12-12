@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,37 +11,30 @@
     <link rel="stylesheet" href="/static/css/article.css" />
     <%- include('./favicon.ejs') %>
 
-    <!-- axios cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- axios cdn -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- jquery cdn -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    <!-- socket.io cdn -->
-    <script
-      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
-      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+        <!-- jquery cdn -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- socket.io cdn -->
+        <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+</head>
 
-  <body>
+<body>
     <%- include('./nav.ejs') %>
-    <div class="article-form">
-      <div class="article">
-        <div class="article-title">
-          <div class="article-title-name">
-            <div><%= article.title %></div>
-            <div class="article-title-element">
-              <span class="article-id"
-                >작성자 : <%= article.user.user_id %></span
+        <div class="article-form">
+            <div class="article">
+                <div class="article-title">
+                    <div class="article-title-name">
+                        <div>
+                            <%= article.title %>
+                        </div>
+                        <div class="article-title-element">
+                            <span class="article-id">작성자 : <%= article.user.user_id %></span
               >
               <!-- 수정, 삭제 버튼 -->
               <!-- 로그인 했을 때 user_index값이 같아야 보임 -->
-              <% if (user.user_index == article.user_index) { %>
+              <% if (userInfo.user_index == article.user_index) { %>
               <div class="article-btn">
                 <button
                   class="article-modify"
@@ -65,90 +59,78 @@
               <span class="article-parity article-db-style"
                 >진행 방식 &nbsp &nbsp &nbsp &nbsp &nbsp</span
               ><span class="article-db-value"><%= article.parity %>LINE</span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-member article-db-style"
-                >모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span
+                        </div>
+                        <div class="article-info-inside">
+                            <span class="article-member article-db-style">모집 인원 &nbsp &nbsp &nbsp &nbsp &nbsp</span
               ><span class="article-db-value"><%= article.member_num %>명</span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-date article-db-style"
-                >모집 마감 &nbsp &nbsp &nbsp &nbsp &nbsp</span
+                        </div>
+                        <div class="article-info-inside">
+                            <span class="article-date article-db-style">모집 마감 &nbsp &nbsp &nbsp &nbsp &nbsp</span
               ><span class="article-db-value"><%= article.expr_dt%></span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-db-style"
-                >예상 일정 &nbsp &nbsp &nbsp &nbsp &nbsp</span
+                        </div>
+                        <div class="article-info-inside">
+                            <span class="article-db-style">예상 일정 &nbsp &nbsp &nbsp &nbsp &nbsp</span
               ><span class="article-db-value"
                 ><%= article.start_dt %> <span>~</span>
-                <%= article.end_dt %>
-              </span>
-            </div>
-            <div class="article-info-inside">
-              <span class="article-db-style"
-                >스터디 장소 &nbsp &nbsp &nbsp</span
+                            <%= article.end_dt %>
+                                </span>
+                        </div>
+                        <% if ( article.appo_area != '' ) { %>
+                            <div class="article-info-inside">
+                                <span class="article-db-style">스터디 장소 &nbsp &nbsp &nbsp</span
               >
-              <span class="article-db-value">ddd<%= article.appo_area %></span>
+              <span class="article-db-value"><%= article.appo_area %></span>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="article-appo">
-        <!-- <div class="article-info-inside">
+            <div class="article-appo">
+                <!-- <div class="article-info-inside">
           <span class="article-db-style"
             >스터디 장소 &nbsp &nbsp &nbsp&nbsp</span
           >
           <span class="article-db-value">ddd<%= article.appo_area %></span>
         </div> -->
-      </div>
-      <div class="article-content-title">프로젝트 소개</div>
-      <div class="article-content"><%= article.description %></div>
+            </div>
+            <div class="article-content-title">프로젝트 소개</div>
+            <div class="article-content">
+                <%= article.description %>
+            </div>
 
-      <div class="article-btn-zone">
-        <!-- 그룹장과 채팅 버튼 -->
-        <!-- 로그인 하지 않았을 때는 채팅 버튼 disable -->
-        <!-- 로그인하면 게시글 작성자와 채팅 가능 -->
-        <!-- 나중에 js function으로 구현할 예정 -->
-        <% if ( user.user_index == article.user_index) {%>
-        <div class="article-btn">
-          <!-- chatStart([session.user_index], [article.article_id], [article.user_index], [true: pram1 == pram2 | false: pram1 != pram2]) -->
-          <button
-            class="article-chat"
-            type="button"
-            onclick="chatStart(<%= article.user_index%>, <%=article.article_id%>, <%= article.user_index%>, true);"
-          >
+            <div class="article-btn-zone">
+                <!-- 그룹장과 채팅 버튼 -->
+                <!-- 로그인 하지 않았을 때는 채팅 버튼 disable -->
+                <!-- 로그인하면 게시글 작성자와 채팅 가능 -->
+                <!-- 나중에 js function으로 구현할 예정 -->
+                <% if ( userInfo.user_index == article.user_index) {%>
+                    <div class="article-btn">
+                        <!-- chatStart([session.user_index], [article.article_id], [article.user_index], [true: pram1 == pram2 | false: pram1 != pram2]) -->
+                        <button class="article-chat" type="button" onclick="chatStart(<%= article.user_index%>, <%=article.article_id%>, <%= article.user_index%>, true);">
             가입희망자와 채팅
           </button>
-        </div>
-        <% } else if ( user.user_index != article.user_index && user.user_index
-        != 0 ) { %>
-        <div class="article-btn">
-          <button
-            class="article-chat"
-            type="button"
-            onclick="chatStart(<%=user.user_index%> , <%=article.article_id%>, <%= article.user_index%>, false);"
-          >
+                    </div>
+                    <% } else if ( userInfo.user_index != article.user_index &&
+        userInfo.user_index != 0 ) { %>
+                        <div class="article-btn">
+                            <button class="article-chat" type="button" onclick="chatStart(<%=userInfo.user_index%> , <%=article.article_id%>, <%= article.user_index%>, false);">
             그룹장과 채팅
           </button>
-        </div>
-        <% } else { %>
-        <div class="article-btn">
-          <button
-            class="article-chat"
-            type="button"
-            onclick="location.href='/sign/signin'"
-            ;
-          >
+                        </div>
+                        <% } else { %>
+                            <div class="article-btn">
+                                <button class="article-chat" type="button" onclick="location.href='/sign/signin'" ;>
             로그인 후 채팅 가능
           </button>
+                            </div>
+                            <% } %>
+            </div>
         </div>
-        <% } %>
-      </div>
-    </div>
 
-    <!-- 일단테스트용 삭제 -->
+        <!-- 일단테스트용 삭제 -->
 
-    <script src="/static/js/article.js"></script>
-    <script src="/static/js/chatstart.js"></script>
-  </body>
+        <script src="/static/js/article.js"></script>
+        <script src="/static/js/chatstart.js"></script>
+</body>
+
 </html>

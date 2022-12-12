@@ -74,6 +74,19 @@ app.use(
     },
   })
 );
+
+// 세션 초기 세팅
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    req.session.user = {
+      user_index: "",
+      user_id: "",
+      isLogin: false,
+    };
+  }
+  next();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 

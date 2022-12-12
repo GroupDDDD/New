@@ -108,3 +108,37 @@ function validation(formData) {
   }
   return true;
 }
+
+// 인자로 받은 date 타입 데이터가 현재 시간보다 미래인지 검증하는 함수
+function isFutureDate(date) {
+  const now = new Date();
+  const future = new Date(date);
+  return now < future;
+}
+
+// form에서 parity가 OFFLINE으로 선택되면, appo_area가 보이도록 함
+// 반대로 ONLINE으로 선택되면, appo_area가 안보이도록 함
+// 즉시실행함수
+(function () {
+  const parity = event.target.value;
+  const appo_area = document.getElementById("appo-area");
+
+  if (parity == "OFF") {
+    appo_area.style.display = "";
+  } else {
+    appo_area.style.display = "none";
+  }
+})();
+
+// form에서 parity가 OFFLINE으로 선택되면, appo_area가 보이도록 함
+// 반대로 ONLINE으로 선택되면, appo_area가 안보이도록 함
+function showAppo(event) {
+  const parity = event.target.value;
+  const appo_area = document.getElementById("appo-area");
+
+  if (parity == "OFF") {
+    appo_area.style.display = "";
+  } else {
+    appo_area.style.display = "none";
+  }
+}
