@@ -1,7 +1,7 @@
 // form 등록 버튼 클릭 시
 // form에 입력된 데이터를 가져와서 axios로 post 요청을 보내는 함수
 
-const { ValidationError } = require("sequelize");
+// const { ValidationError } = require("sequelize");
 
 // board table에 데이터를 추가하는 함수
 function postArticle() {
@@ -22,7 +22,7 @@ function postArticle() {
   };
   console.dir(formData);
 
-  validation(formData);
+  // validation(formData);
 
   // axios로 post 요청을 보냄
   axios({
