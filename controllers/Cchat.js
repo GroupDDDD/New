@@ -21,7 +21,12 @@ exports.getChatlistpage = (req, res) => {
       // * Chrome 브라우저의 경우, JSONVue 확장프로그램 설치시 데이터 출력 결과를 가독성있게 볼 수 있음
       // https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
 
-      res.render("chatlist", { data: result, pubId: req.query.id });
+      res.render("chatlist", {
+        data: result,
+        pubId: req.query.id,
+        user: req.session.user.user_id,
+        isLogin: req.session.user.isLogin,
+      });
     });
 };
 

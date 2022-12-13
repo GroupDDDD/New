@@ -17,12 +17,25 @@
             <img src="/static/img/StudyTown.png" alt="" class="main-logo" />
         </a>
     </div>
-    <div>
-        <a href="/sign/signin">
-            <button class="login signin"><span>로그인</span></button>
-        </a>
-        <a  href = "/sign/signup">
-            <button class = "login signup"><span>회원가입</span></button>
-        </a>
-    </div>
+    <% if( isLogin == false ) { %>
+        <div>
+            <a href="/sign/signin">
+                <button class="login signin"><span>로그인</span></button>
+            </a>
+            <a href="/sign/signup">
+                <button class="login signup"><span>회원가입</span></button>
+            </a>
+        </div>
+        <% } else if ( isLogin == true ) { %>
+            <div id="successUser">
+                <h4 id="sessionName2">
+                    <%= user %>님 반갑습니다.</h4>
+
+                <div id="btns">
+                    <div class="btn1 btn11">
+                        <a href="/sign/logout">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
 </nav>
