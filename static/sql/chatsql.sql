@@ -265,7 +265,8 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
   JOIN user AS u
   ON r.contactor_id = u.user_index
   
-  WHERE b.user_index = '1';
+  WHERE b.user_index = '1'
+  and r.article_id ='1';
 
 
 --   채팅방 있는지 여부조회 게시자용
