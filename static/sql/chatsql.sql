@@ -265,7 +265,8 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
   JOIN user AS u
   ON r.contactor_id = u.user_index
   
-  WHERE b.user_index = '1';
+  WHERE b.user_index = '1'
+  and r.article_id ='1';
 
 
 --   채팅방 있는지 여부조회 게시자용
@@ -295,3 +296,8 @@ UPDATE chat_participants SET pub_status='2' WHERE part_id ='2';
 
 =======
 >>>>>>> 61cd1c9c49c0eb11aebc56c1a19298581f33714b
+
+
+ALTER TABLE user ADD user_email VARCHAR(35) UNIQUE NOT NUL;
+
+UPDATE user SET user_email = 'ddd@ddd.com'  WHERE id=7;
