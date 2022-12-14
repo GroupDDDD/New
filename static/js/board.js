@@ -24,7 +24,7 @@ function searchArticle() {
   }
 }
 
-// /study.category/:id일 때 검색하면 동작
+// /study/category/:id일 때 검색하면 동작
 function searchArticleByCategory(category) {
   let keyword = document.getElementById("search").value;
   if (keyword == "") {
