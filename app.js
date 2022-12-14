@@ -122,7 +122,7 @@ io.on("connection", (socket) => {
       //{ myNick: '333', msg: 'fff' }
       // 전체 메세지 전송
       // [실습45] 채팅창 메세지 전송 Step2
-      const sendData = { nick: data.myNick, msg: data.msg };
+      const sendData = { nick: data.myNick, msg: data.msg, prof: data.prof };
       io.emit("newMessage", sendData);
     });
   });

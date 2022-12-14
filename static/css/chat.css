@@ -20,6 +20,7 @@ body {
 
 .chat-list div {
   margin-top: 3px;
+  font-size: 3vw 3vw;
 }
 
 .chat-list div div {
@@ -30,10 +31,11 @@ body {
 .my-chat {
   text-align: right;
   display: flex;
+  align-items: center;
 }
 
 .my-chat div {
-  background-color: rgb(251, 248, 103);
+  /* background-color: rgb(243, 243, 219); */
   border-radius: 10%;
   margin: 2px;
   flex-direction: column;
@@ -44,6 +46,11 @@ body {
 
 .other-chat div {
   background-color: white;
+  align-items: center;
+}
+
+.other-chat {
+  align-items: center;
 }
 
 .notice {
@@ -131,3 +138,10 @@ body {
 /* .login-id {
   display: none;
 } */
+
+img {
+  border-radius: 50%;
+  width: 3vw;
+  height: 3vw;
+  text-align: center;
+}
