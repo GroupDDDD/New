@@ -1,105 +1,105 @@
 .nav {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    background-color: white;
-    align-items: center;
-    float: top;
-    height: 120px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  float: top;
+  height: 120px;
 }
 
-.nav>div>div {
-    margin: 0 20px 0 0;
-    font-weight: 800;
+.nav > div > div {
+  margin: 0 20px 0 0;
+  font-weight: 800;
 }
 
 .first-content {
-    display: flex;
-    align-items: center;
-    width: 300px;
+  display: flex;
+  align-items: center;
+  width: 300px;
 }
 
 .logo {
-    width: 110px;
-    height: 75px;
+  width: 110px;
+  height: 75px;
 }
 
 .logo:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .main-logo {
-    width: 150px;
-    height: 100px;
-    position: absolute;
-    left: 44vw;
-    top: 15px;
+  width: 150px;
+  height: 100px;
+  position: absolute;
+  left: 44vw;
+  top: 15px;
 }
 
-.nav-button>a {
-    text-decoration: none;
-    color: inherit;
-    margin-left: 20px;
+.nav-button > a {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 20px;
 }
 
-.nav-button>a>span:hover {
-    color: skyblue;
+.nav-button > a > span:hover {
+  color: skyblue;
 }
 
-.nav-button>a>span:active {
-    color: rgb(75, 72, 72);
+.nav-button > a > span:active {
+  color: rgb(75, 72, 72);
 }
 
-.login>span {
-    color: white;
-    font-weight: 800;
+.login > span {
+  color: white;
+  font-weight: 800;
 }
 
 .login {
-    border-radius: 15px;
-    width: 100px;
-    height: 35px;
-    background-color: rgb(85, 153, 255);
-    border: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 35px;
+  background-color: rgb(85, 153, 255);
+  border: none;
 }
 
 .login:hover {
-    background-color: rgb(85, 120, 255);
-    cursor: pointer;
+  background-color: rgb(85, 120, 255);
+  cursor: pointer;
 }
 
 @media (max-width: 650px) {
-    .main-logo {
-        display: none;
-    }
+  .main-logo {
+    display: none;
+  }
 }
 
 #sessionName2 {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .btn11 {
-    background-color: #ffd900;
+  background-color: #ffd900;
 }
 
 .btn1 a {
-    text-decoration: none;
-    color: #757575;
+  text-decoration: none;
+  color: #757575;
 }
 
 #btns {
-    display: flex;
-    /* align-items: center; */
-    /* text-align: center; */
+  display: flex;
+  /* align-items: center; */
+  /* text-align: center; */
 }
 
 .btn1 {
-    width: 100px;
-    height: 30px;
-    /* background-color: #f9f9f9; */
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
+  width: 100px;
+  height: 30px;
+  /* background-color: #f9f9f9; */
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
 }

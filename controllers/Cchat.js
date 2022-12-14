@@ -12,7 +12,9 @@ exports.getChatlistpage = (req, res) => {
   JOIN user AS u
   ON r.contactor_id = u.user_index
   
-  WHERE b.user_index =${req.query.id};`;
+  WHERE b.user_index =${req.query.id}
+  and r.article_id =${req.query.articleId}
+  ;`;
   models.sequelize
     .query(query, { type: models.sequelize.QueryTypes.SELECT })
     .then((result) => {

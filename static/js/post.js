@@ -1,6 +1,7 @@
 // form 등록 버튼 클릭 시
 // form에 입력된 데이터를 가져와서 axios로 post 요청을 보내는 함수
 
+
 // board table에 데이터를 추가하는 함수
 function postArticle() {
   console.log("postArticle() called");
@@ -19,6 +20,7 @@ function postArticle() {
     appo_area: form.appo_area.value,
   };
   console.dir(formData);
+
 
   if (validation(formData)) {
     // form에 입력된 데이터를 검증

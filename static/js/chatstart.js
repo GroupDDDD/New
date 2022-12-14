@@ -57,7 +57,7 @@ async function chatStart(id, articleId, pubId, publisherOrnot) {
   console.log("채팅신청자용 채팅방존재여부조회room존재여부:", roomExistsOrnot);
   // 게시자이고 채팅방 존재하면 채팅방리스트 조회페이지로 이동
   if (publisherOrnot === true && roomExistsOrnot === true) {
-    window.location.href = `/chat/getChatlistpage?id=${id}`;
+    window.location.href = `/chat/getChatlistpage?id=${id}&articleId=${articleId}`;
   }
   // 게시자가 아니고 채팅방 존재하면 채팅창페이지로 이동
   else if (publisherOrnot === false && roomExistsOrnot === true) {

@@ -1,87 +1,91 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-body{
-    width: 100vw;
-    height: 100vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
-#container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
-#square{
-    background-color: rgb(85, 153, 255);
-    width: 45%;
-    height: 100%;
-    position: relative;
+#square {
+  background-color: rgb(85, 153, 255);
+  width: 45%;
+  height: 100%;
+  position: relative;
 }
-#text1{
-    position: absolute;
-    top: 200px;
-    left: 130px;
-    font-size: 5vw;
-    font-weight: 700;
-    color: white;
+#text1 {
+  position: absolute;
+  top: 200px;
+  left: 130px;
+  font-size: 5vw;
+  font-weight: 700;
+  color: white;
 }
-#text2{
-    font-size: 5vw;
-    font-weight: 700;
-    top: 420px;
-    left: 130px;
-    position: absolute;
-    color: #198754;
+#text2 {
+  font-size: 5vw;
+  font-weight: 700;
+  top: 420px;
+  left: 130px;
+  position: absolute;
+  color: #198754;
 }
-#parallelogram{
-    width: 0px;
-    height: 0px;
-    border-top: 850px solid transparent;
-    border-right: 180px solid rgb(85, 153, 255);
-    transform: rotate(180deg);
+#parallelogram {
+  width: 0px;
+  height: 0px;
+  border-top: 850px solid transparent;
+  border-right: 180px solid rgb(85, 153, 255);
+  transform: rotate(180deg);
 }
-#signupName{
-    margin: 0 auto;
-    margin-top: 150px;
-    margin-bottom: 50px;
-    font-size: 20px;
-    font-weight: 600;
+#signupName {
+  margin: 0 auto;
+  margin-top: 150px;
+  margin-bottom: 50px;
+  font-size: 20px;
+  font-weight: 600;
 }
-#inputInfo{
-    display: flex;
-    flex-direction: column;
-    width: 45%;
+#inputInfo {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
 }
-form{
- margin: 0 auto;   
+form {
+  margin: 0 auto;
 }
-input{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 200px;
-    margin-bottom: 30px;
+input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 200px;
+  margin-bottom: 30px;
 }
-.loginBtn{
-    width: 100%;
-    padding: 6px 0;
-    margin-bottom: 20px;
-    background-color: #00C3A9;
-    border: none;
-    border: 2px solid #8d8d8d;
+.loginBtn {
+  width: 100%;
+  padding: 6px 0;
+  margin-bottom: 20px;
+  background-color: #00c3a9;
+  border: none;
+  border: 2px solid #8d8d8d;
 }
-.signupBtn{
-    width: 100%;
-    background-color: #FFD900;
-    border : 2px solid #8d8d8d;
-    padding: 6px 0;
-    text-align: center;
+.signupBtn {
+  width: 100%;
+  background-color: #ffd900;
+  border: 2px solid #8d8d8d;
+  padding: 6px 0;
+  text-align: center;
 }
-.signupBtn a{
-    text-decoration: none;
-    color: black;
-    font-size: 14px;
+.signupBtn a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.signup {
+  margin: 0 10px 0 0;
 }
