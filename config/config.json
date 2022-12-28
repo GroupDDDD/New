@@ -3,7 +3,7 @@
     "username": "user",
     "password": "1234",
     "database": "project2",
-    "host": "localhost",
+    "host": "118.67.132.183",
     "port": 3306,
     "dialect": "mysql"
   },
