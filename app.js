@@ -29,7 +29,7 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http); // http-socket 연결
 
 // port number setting
-app.set("port", process.env.PORT || 8500);
+app.set("port", process.env.PORT || 8007);
 // view engine setting
 app.set("view engine", "ejs");
 // static file setting
@@ -141,6 +141,6 @@ http.listen(app.get("port"), () => {
   let p = app.get("port");
   console.log(p, "번 포트에서 대기 중");
   console.log("~~~~~~~~~~~~~~~~~~~~~");
-  console.log(`http://localhost:${p}`);
+  console.log(`http://118.67.132.183:${p}`);
   console.log("~~~~~~~~~~~~~~~~~~~~~");
 });
