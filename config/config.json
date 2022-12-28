@@ -4,7 +4,7 @@
     "password": "1234",
     "database": "project2",
     "host": "118.67.132.183",
-    "port": 3306,
+    "port": 8007,
     "dialect": "mysql"
   },
   "test": {},
